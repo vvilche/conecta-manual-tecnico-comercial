@@ -107,10 +107,14 @@ def bloque_fuentes(fuentes):
     filas = []
     for k in sorted(fuentes):
         v = fuentes[k]
+        # repo:// = fuente interna sin URL publica: se muestra como texto, no como enlace roto.
+        if v["url"].startswith("repo://"):
+            titulo = f'{v["titulo"]}<div class="frepo">{v["url"]}</div>'
+        else:
+            titulo = (f'<a href="{v["url"]}" target="_blank" rel="noopener">{v["titulo"]}</a>')
         filas.append(
             f'<tr id="f-{k}"><td class="fid">{k}</td>'
-            f'<td><a href="{v["url"]}" target="_blank" rel="noopener">{v["titulo"]}</a>'
-            f'<div class="fautor">{v["autor"]}</div></td>'
+            f'<td>{titulo}<div class="fautor">{v["autor"]}</div></td>'
             f'<td><span class="tipo t-{v["tipo"]}">{tipos.get(v["tipo"], v["tipo"])}</span></td>'
             f'<td class="fnota">{v["nota"]}</td></tr>'
         )

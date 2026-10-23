@@ -41,7 +41,7 @@ def cargar():
                 errores.append(f"{k}: falta '{campo}'")
         if v.get("tipo") not in TIPOS:
             errores.append(f"{k}: tipo '{v.get('tipo')}' no admitido")
-        if not (v.get("url", "").startswith(("http://", "https://", "file:"))):
+        if not (v.get("url", "").startswith(("http://", "https://", "file:", "repo://"))):
             errores.append(f"{k}: url no valida")
     return fuentes, errores
 

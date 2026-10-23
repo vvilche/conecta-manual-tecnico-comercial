@@ -126,6 +126,7 @@ table.fuentes-tabla thead th{background:var(--bg3);text-align:left;padding:10px 
 table.fuentes-tabla td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--txt2)}
 .fid{font-family:var(--mono);font-size:11.5px;color:var(--acc);white-space:nowrap}
 .fautor{font-size:11.5px;color:var(--txt3);margin-top:3px}
+.frepo{font-family:var(--mono);font-size:10.5px;color:var(--txt3);margin-top:2px}
 .fnota{font-size:12px;color:var(--txt3);max-width:420px}
 .tipo{font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:3px;white-space:nowrap;font-weight:700}
 .t-regulador{background:rgba(34,197,94,.15);color:#4ade80}

@@ -95,7 +95,7 @@
     "CATALOGO-86": {
       "titulo": "Catalogo consolidado de 86 lineas por categoria y partner",
       "autor": "Skill producto-industria-mapping (references/catalogo-lineas.md)",
-      "url": "file:///Users/victorvilche/.hermes/skills/conecta/producto-industria-mapping/references/catalogo-lineas.md",
+      "url": "repo://skills/producto-industria-mapping/references/catalogo-lineas.md",
       "tipo": "interno-medido",
       "nota": "Primera linea del archivo: '# Catalogo consolidado de 86 lineas por categoria y partner'. Regla del archivo: 'sin precios, solo specs verificables'. Contiene 10 categorias: Control y automatizacion (SUPCON), Seguridad funcional, Instrumentacion de campo, Software industrial e IA, Diagnostico predictivo (PRIDE), Infraestructura de planta, Subestacion y proteccion, Red OT y ciberseguridad (Belden/Hirschmann), Medicion y calidad de energia (SATEC), Servicios CONECTA. Verificado en disco: existe, 59 lineas."
     },
@@ -109,7 +109,7 @@
     "CONECTA-BOM": {
       "titulo": "Costos y composicion de BOMs historicos por linea",
       "autor": "Repo ConectaCotizador — data/calibracion_boms.json y data/costos_hardware.json",
-      "url": "file:///Users/victorvilche/orca/projects/ConectaCotizador/data/calibracion_boms.json",
+      "url": "repo://ConectaCotizador/data/calibracion_boms.json",
       "tipo": "interno-medido",
       "nota": "Extraido de BOMs reales por ZIP+XML, cero LLM. n por linea: RTU 23, SCADA 41, EDAC 50, Repro 57. El manual usa SOLO la composicion (que componente va en que linea), NO las cifras, por decision de Victor."
     },
