@@ -56,9 +56,10 @@ data/
   cap_cotizacion.py      <- 07 Armar una cotizacion (10 elementos + ejemplo)
   cap_metodologia.py     <- 08 Metodologia comercial (Escalera, Mina de Oro, objeciones)
 scripts/
-  construir.py           <- genera manual.html y audita citas
-  plantilla.py           <- HTML, CSS y buscador
+  construir.py           <- genera manual.html + index.html y audita citas
+  plantilla.py           <- HTML, CSS, buscador y comentarios
   fuentes.py             <- valida fuentes y verifica URLs por HTTP real
+  verificar_manual.py    <- verificacion completa: version, guia, citas, fugas
 ```
 
 ## Uso
@@ -66,8 +67,9 @@ scripts/
 ```bash
 PY=~/.hermes/hermes-agent/venv/bin/python
 
-$PY scripts/construir.py             # regenera manual.html
+$PY scripts/construir.py             # regenera manual.html + index.html
 $PY scripts/construir.py --auditar   # solo audita citas, no escribe
+$PY scripts/verificar_manual.py      # verificacion completa (16 chequeos)
 $PY scripts/fuentes.py               # valida estructura del registro de fuentes
 $PY scripts/fuentes.py --verificar-urls   # HTTP real contra cada URL
 ```
