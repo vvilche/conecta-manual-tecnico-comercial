@@ -238,8 +238,19 @@ UTTERANCES = """
 """
 
 
+def _version_y_fecha():
+    """Version del documento desde VERSION (unico origen) y fecha de build."""
+    import datetime
+    from pathlib import Path
+    raiz = Path(__file__).resolve().parent.parent
+    v = (raiz / "VERSION").read_text(encoding="utf-8").strip() if (raiz / "VERSION").exists() else "sin-version"
+    f = datetime.date.today().strftime("%d-%m-%Y")
+    return v, f
+
+
 def pagina(capitulos, fuentes, sellos, intro, bloque_fuentes):
     nav, cuerpo, quiz = [], [], []
+    VERSION, FECHA = _version_y_fecha()
 
     for i, cap in enumerate(capitulos, 1):
         cap_id = cap["id"]
@@ -294,7 +305,7 @@ def pagina(capitulos, fuentes, sellos, intro, bloque_fuentes):
 
 <main>
 <header class="hero">
-  <div class="kicker">CONECTA Ingenieria · Documento interno</div>
+  <div class="kicker">CONECTA Ingenieria · Documento interno · {VERSION} · {FECHA}</div>
   <h1>{intro["titulo"]}</h1>
   <p class="bajada">{intro["bajada"]}</p>
   <p class="para-quien">{intro["para_quien"]}</p>
@@ -330,7 +341,9 @@ def pagina(capitulos, fuentes, sellos, intro, bloque_fuentes):
 
 <footer>
   Manual tecnico comercial · CONECTA Ingenieria · Documento de uso interno.<br>
-  Construido con fuentes verificables. Si una afirmacion no tiene sello, no afirma nada tecnico.
+  Construido con fuentes verificables. Si una afirmacion no tiene sello, no afirma nada tecnico.<br>
+  Version {VERSION} · generado {FECHA} ·
+  <a href="https://github.com/vvilche/conecta-manual-tecnico-comercial">codigo y historial de cambios</a>.
 </footer>
 </main>
 </div>

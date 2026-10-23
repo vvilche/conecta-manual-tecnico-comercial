@@ -9,6 +9,21 @@ se conversa con un cliente sin inventar nada.
 open -a "Google Chrome" ~/orca/projects/ConocimientoVentaConecta/manual.html
 ```
 
+## Versionado
+
+La version del documento vive en `VERSION` (unico origen). El build la lee y la inserta en el
+encabezado y el pie del HTML, junto a la fecha de generacion. Para sacar una version nueva:
+
+```bash
+echo "1.1.0" > VERSION
+$PY scripts/construir.py
+git add -A && git commit -m "v1.1.0: <que cambio>"
+git tag -a v1.1.0 -m "<que cambio>"
+git push && git push --tags
+```
+
+El numero se ve en el sitio: encabezado arriba y pie abajo, con link al historial de cambios.
+
 ## Regla de construccion
 
 Ninguna afirmacion tecnica del manual existe sin fuente. Cada una lleva uno de tres sellos:
@@ -26,6 +41,8 @@ referencias rotas.
 
 ```
 manual.html              <- el entregable (generado, no editar a mano)
+index.html               <- copia identica, para que Pages sirva la raiz
+VERSION                  <- version del documento (unico origen del numero)
 data/
   fuentes.json           <- UNICO origen de las fuentes (link, autor, que respalda)
   contenido.py           <- indice de capitulos, en orden
