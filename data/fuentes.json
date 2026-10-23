@@ -1,0 +1,124 @@
+{
+  "_nota": "Registro de fuentes del Manual Tecnico Comercial CONECTA. Cada afirmacion tecnica del manual apunta a un id de esta tabla. Verificado por HTTP el 2026-10-23.",
+  "fuentes": {
+    "CEN-MMF2026": {
+      "titulo": "Estudio para la Implementacion del Modulo de Medicion Fasorial, Julio 2026",
+      "autor": "Coordinador Electrico Nacional, Depto. Modelacion y Aplicaciones EMS",
+      "url": "https://www.coordinador.cl/wp-content/uploads/2026/07/Informe-del-Estudio-Modulo-de-Medicion-Fasorial-2026.pdf",
+      "tipo": "regulador",
+      "nota": "113 paginas. Tabla 7.1-1 especificaciones de equipamiento (pag. 105 del PDF). Seccion 5.1 punto de monitoreo >= 9 MW (pag. 72). Seccion 5.9 ancho de banda 120 kbps (pag. 100)."
+    },
+    "CEN-MMF2024": {
+      "titulo": "Estudio para la Implementacion del Modulo de Medicion Fasorial, Julio 2024",
+      "autor": "Coordinador Electrico Nacional",
+      "url": "https://www.coordinador.cl/wp-content/uploads/2024/07/Informe-Estudio-Modulo-de-Medicion-Fasorial-2024.pdf",
+      "tipo": "regulador",
+      "nota": "52 paginas. Confirma tasa de muestreo 50 muestras/segundo."
+    },
+    "IEEE1815-TUT": {
+      "titulo": "IEEE Std. 1815 (DNP3) Tutorial",
+      "autor": "C. Preuss (Black & Veatch), R. Farquharson (DNP Users Group) — IEEE Substations Committee",
+      "url": "https://ewh.ieee.org/cmte/substations/scm0/Portland%20Meeting/Conference%20PDFs/tutorials/2014-05-18_Tutorial_IEEE_1815%28DNP3%29-Farquharson_Preuss-Ver%201.0%282%29.pdf",
+      "tipo": "estandar",
+      "nota": "369 paginas. Pag. 55: 'Timestamp (optional: events & frozen objects only)'. Pag. 137: DNP3 timestamps en UTC desde 2008. Pag. 35: eventos con o sin timestamp."
+    },
+    "MODBUS-V1.1b3": {
+      "titulo": "MODBUS Application Protocol Specification V1.1b3",
+      "autor": "Modbus Organization, 26 abril 2012",
+      "url": "http://www.pusr.com/download/LonHand/Modbus_Application_Protocol_V1_1b3%20tap.pdf",
+      "tipo": "estandar",
+      "nota": "50 paginas. Seccion 4.3: cuatro tablas primarias (Discrete Input, Coils, Input Registers, Holding Registers) de bits y words de 16 bits. Cero ocurrencias de 'timestamp' en todo el documento (grep verificado)."
+    },
+    "OPCUA-SRC-TS": {
+      "titulo": "OPC Unified Architecture Part 4: Services, 7.11.3 SourceTimestamp",
+      "autor": "OPC Foundation",
+      "url": "https://reference.opcfoundation.org/v104/Core/docs/Part4/7.7.3",
+      "tipo": "estandar",
+      "nota": "sourceTimestamp: tiempo aplicado por la fuente del dato; nunca cambia una vez asignado; debe ser UTC."
+    },
+    "OPCUA-SRV-TS": {
+      "titulo": "OPC Unified Architecture Part 4: Services, 7.11.4 ServerTimestamp",
+      "autor": "OPC Foundation",
+      "url": "https://reference.opcfoundation.org/Core/Part4/7.11.4/",
+      "tipo": "estandar",
+      "nota": "serverTimestamp: tiempo en que el servidor recibio o supo el valor. Puede refrescarse aunque el valor no cambie (ejemplo del documento: cada 0,5 s)."
+    },
+    "PTP-PUP-NIST": {
+      "titulo": "Precision Time Protocol Profile (IEC/IEEE 61850-9-3) — PAC World",
+      "autor": "H. Kirrmann (Solutil) y W. Dickerson (Arbiter Systems), 2016. Alojado en nist.gov",
+      "url": "https://www.nist.gov/system/files/documents/2020/11/18/20160900_PacWorld_Kirrmann%2bDickerson_038_043_IEC_IEEE_61850-9-3.pdf",
+      "tipo": "paper",
+      "nota": "6 paginas. SNTP ~10 ms suficiente para secuencia de eventos; perfil 9-3 garantiza submicrosegundo tras 15 TCs o 3 BC; error de fase 0,1 grado equivale a 5 us de error de tiempo; 1 us mas que suficiente para PMU; Sync cada 1 s."
+    },
+    "RFC5905": {
+      "titulo": "RFC 5905 — Network Time Protocol Version 4: Protocol and Algorithms Specification",
+      "autor": "D. Mills et al., IETF, junio 2010",
+      "url": "https://www.rfc-editor.org/rfc/rfc5905.html",
+      "tipo": "estandar",
+      "nota": "NTPv4 extiende la precision potencial a decenas de microsegundos con workstations modernas y LAN rapidas."
+    },
+    "KRONOS": {
+      "titulo": "Kronos Satellite Clocks — pagina de producto",
+      "autor": "NovaTech Automation",
+      "url": "https://www.novatechautomation.com/products/kronos-satellite-clocks",
+      "tipo": "fabricante",
+      "nota": "60 ns (99%) desviacion maxima de tiempo; salidas IRIG-B no modulada/modulada, PPS/PPM, NTP/SNTP, PTP; perfiles PTP UDP, 802.3, IEEE C37.238-2011, IEEE C37.238-2016, IEC 61850-9-3:2016; PRP/HSR IEC 62439-3 en 3R; holdover TCXO 9 ms/dia, OCXO <100 us/dia; IRIG-B con extensiones IEEE C37.118; constelaciones GPS/GALILEO/BEIDOU/GLONASS."
+    },
+    "ORION-RETROFIT": {
+      "titulo": "Retrofit de RTU Obsoleta — pagina de solucion (es)",
+      "autor": "NovaTech Automation",
+      "url": "https://www.novatechautomation.com/solutions/es-legacy-rtu-retrofit",
+      "tipo": "fabricante",
+      "nota": "Retrofit para RTU D20, SNW, Telegyr, Telvent y ACS. Tarjetas adaptadoras permiten la mayoria de las actualizaciones sin recablear. Kit reemplaza el espacio de 3RU. Emulacion de protocolo: el cambio de RTU puede ser transparente al SCADA sin modificar base de datos."
+    },
+    "ORION-IO-1MS": {
+      "titulo": "Orion I/O — catalogo de producto",
+      "autor": "NovaTech Automation",
+      "url": "https://www.novatechautomation.com/resource/orion-i-o-catalog",
+      "tipo": "fabricante",
+      "nota": "Texto del catalogo: 'Orion I/O is designed for high performance 12V dc to 125V dc monitoring and control applications in electrical substations including 1ms SOE Recording, circuit breaker TRIP/CLOSE, higher-speed control'. Tarjeta DI de 16 puntos: 'High speed; suitable for 1ms SOE recording'. 64 I/O discretas en 2 RU."
+    },
+    "LEY21663": {
+      "titulo": "Ley 21663 — Ley Marco de Ciberseguridad",
+      "autor": "Biblioteca del Congreso Nacional de Chile (texto oficial, version 2025-03-01)",
+      "url": "https://www.bcn.cl/leychile/navegar/imprimir?idNorma=1202434&idVersion=2025-03-01",
+      "tipo": "regulador",
+      "nota": "Articulo 4: ambito de aplicacion. Son servicios esenciales los provistos por los organismos del Estado y por el Coordinador Electrico Nacional, los bajo concesion de servicio publico, y los de instituciones privadas que realicen generacion, transmision o distribucion electrica, telecomunicaciones, infraestructura digital, agua potable, combustibles, etc. Articulo 5: la ANCI califica operadores de importancia vital; requisitos = el servicio depende de redes y sistemas informaticos, y su afectacion tiene impacto significativo. Articulo 6: revision de la calificacion al menos cada 3 anos."
+    },
+    "IEC62443-SEC": {
+      "titulo": "IEC 62443, Explained — guia de la serie (fuente SECUNDARIA)",
+      "autor": "Risk Aperture, actualizado junio 2026",
+      "url": "https://www.risk-aperture.com/resources/iec-62443-explained.html",
+      "tipo": "secundaria",
+      "nota": "AVISO: es una guia, NO el texto de la norma (IEC 62443 es de pago). Lo que se cita de aqui: la serie cubre la seguridad de sistemas de automatizacion y control industrial (IACS); ideas centrales = zonas y conductos, nivel de seguridad objetivo SL 1-4 (SL1 mal uso casual, SL4 atacante de nivel estado-nacion), siete requerimientos fundacionales (identificacion y autenticacion, control de uso, integridad del sistema, confidencialidad de datos, flujo de datos restringido, respuesta oportuna a eventos, disponibilidad de recursos) y separacion de roles (dueno del activo, integrador, proveedor de producto). Si se necesita precisión normativa, comprar/consultar la norma."
+    },
+    "CATALOGO-86": {
+      "titulo": "Catalogo consolidado de 86 lineas por categoria y partner",
+      "autor": "Skill producto-industria-mapping (references/catalogo-lineas.md)",
+      "url": "file:///Users/victorvilche/.hermes/skills/conecta/producto-industria-mapping/references/catalogo-lineas.md",
+      "tipo": "interno-medido",
+      "nota": "Primera linea del archivo: '# Catalogo consolidado de 86 lineas por categoria y partner'. Regla del archivo: 'sin precios, solo specs verificables'. Contiene 10 categorias: Control y automatizacion (SUPCON), Seguridad funcional, Instrumentacion de campo, Software industrial e IA, Diagnostico predictivo (PRIDE), Infraestructura de planta, Subestacion y proteccion, Red OT y ciberseguridad (Belden/Hirschmann), Medicion y calidad de energia (SATEC), Servicios CONECTA. Verificado en disco: existe, 59 lineas."
+    },
+    "BITRONICS": {
+      "titulo": "Bitronics Power Measurement — pagina de producto",
+      "autor": "NovaTech Automation",
+      "url": "https://www.novatechautomation.com/products/bitronics-power-measurement",
+      "tipo": "fabricante",
+      "nota": "Texto de la pagina: 'All products are individually calibrated to maintain 0.2s precision, even when you use external split-core CTs'; 'With an MTBF of 40 years'; garantia de 10 anos; 'With optional external CTs, you can install without taking an outage'. DGM = Bitronics M661 + sensores Lindsey LEA + cableado + OrionMX opcional."
+    },
+    "CONECTA-BOM": {
+      "titulo": "Costos y composicion de BOMs historicos por linea",
+      "autor": "Repo ConectaCotizador — data/calibracion_boms.json y data/costos_hardware.json",
+      "url": "file:///Users/victorvilche/orca/projects/ConectaCotizador/data/calibracion_boms.json",
+      "tipo": "interno-medido",
+      "nota": "Extraido de BOMs reales por ZIP+XML, cero LLM. n por linea: RTU 23, SCADA 41, EDAC 50, Repro 57. El manual usa SOLO la composicion (que componente va en que linea), NO las cifras, por decision de Victor."
+    },
+    "CEN-ATSM": {
+      "titulo": "Anexo Tecnico Sistema de Monitoreo (ATSM) de la NT SyCS, septiembre 2020 — citado indirectamente",
+      "autor": "Coordinador Electrico Nacional",
+      "url": "https://www.coordinador.cl/wp-content/uploads/2026/07/Informe-del-Estudio-Modulo-de-Medicion-Fasorial-2026.pdf",
+      "tipo": "regulador-citado",
+      "nota": "AVISO: NO se encontro URL publica directa del ATSM (la raiz coordinador.cl devuelve 403 a curl y no hay archivo con nombre ATSM). Lo que se afirma va citado a traves de CEN-MMF2026 pag. 3, que transcribe: 'El Articulo 63 del Anexo Tecnico Sistema de Monitoreo (ATSM) de la Norma Tecnica de Seguridad y Calidad de Servicio (NT SyCS) establece que el Coordinador Electrico Nacional debera realizar, a mas tardar el 31 de julio de cada ano, un estudio sobre instalacion, implementacion, revision y actualizacion del modulo de medicion fasorial'. Y: el MMF permite verificar los requerimientos del Articulo 4-28 de la NT SyCS. Si se necesita el ATSM original, pedirlo a Victor o bajarlo del portal de normativa del Coordinador."
+    }
+  }
+}

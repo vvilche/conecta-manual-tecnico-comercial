@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manual Tecnico Comercial — CONECTA Ingenieria</title>
+<style>
+:root{
+  --bg:#0e1116; --bg2:#151a21; --bg3:#1c232c; --line:#2a323d;
+  --txt:#e6eaf0; --txt2:#a8b3c1; --txt3:#6d7a8a;
+  --acc:#38bdf8; --acc2:#0ea5e9;
+  --medido:#22c55e; --extraido:#38bdf8; --supuesto:#f59e0b; --sec:#a855f7;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+  --mono:"SF Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.layout{display:flex;min-height:100vh}
+
+/* ---------- SIDEBAR ---------- */
+aside{width:300px;flex:0 0 300px;background:var(--bg2);border-right:1px solid var(--line);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:22px 0 40px}
+.brand{padding:0 22px 18px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.brand h1{font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:var(--acc);font-weight:700}
+.brand p{font-size:12px;color:var(--txt3);margin-top:4px;line-height:1.4}
+.search-wrap{padding:14px 18px}
+#buscar{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;
+  padding:9px 12px;color:var(--txt);font-size:13px;font-family:var(--sans);outline:none}
+#buscar:focus{border-color:var(--acc)}
+#buscar::placeholder{color:var(--txt3)}
+#res-count{font-size:11px;color:var(--txt3);padding:0 18px 8px;font-family:var(--mono);min-height:16px}
+nav{padding:0 10px}
+nav .cap{margin-bottom:2px}
+nav .cap>a{display:block;padding:9px 12px;color:var(--txt);text-decoration:none;font-size:14px;
+  font-weight:600;border-radius:7px;border-left:3px solid transparent}
+nav .cap>a:hover{background:var(--bg3);border-left-color:var(--acc)}
+nav .cap>a .n{color:var(--txt3);font-family:var(--mono);font-size:12px;margin-right:8px}
+nav ul{list-style:none;padding:2px 0 8px 0}
+nav ul li a{display:block;padding:5px 12px 5px 34px;color:var(--txt2);text-decoration:none;
+  font-size:13px;border-radius:6px;line-height:1.35}
+nav ul li a:hover{background:var(--bg3);color:var(--txt)}
+nav ul li a.active{color:var(--acc);background:#152430}
+
+/* ---------- MAIN ---------- */
+main{flex:1;min-width:0;max-width:1000px;padding:0 46px 120px}
+header.hero{padding:60px 0 40px;border-bottom:1px solid var(--line)}
+header.hero .kicker{color:var(--acc);font-family:var(--mono);font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+header.hero h1{font-size:46px;line-height:1.1;margin:14px 0 16px;font-weight:800;letter-spacing:-1px}
+header.hero .bajada{font-size:19px;color:var(--txt2);max-width:720px;line-height:1.55}
+.para-quien{margin-top:22px;font-size:14px;color:var(--txt3);max-width:700px}
+.regla{background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--acc);
+  border-radius:8px;padding:18px 22px;margin-top:26px;font-size:14.5px;color:var(--txt2)}
+.regla b{color:var(--txt)}
+
+section.capitulo{padding:56px 0 10px;border-top:1px solid var(--line);margin-top:30px}
+section.capitulo:first-of-type{border-top:none}
+.cap-head{margin-bottom:26px}
+.cap-num{font-family:var(--mono);font-size:12px;color:var(--acc);letter-spacing:2px}
+.cap-head h2{font-size:34px;font-weight:800;letter-spacing:-.6px;margin:6px 0 8px}
+.cap-head .sub{color:var(--txt2);font-size:16px;max-width:700px}
+
+article.bloque{margin-bottom:52px;scroll-margin-top:24px}
+article.bloque h3{font-size:23px;font-weight:700;letter-spacing:-.3px;margin-bottom:16px;
+  padding-bottom:8px;border-bottom:1px solid var(--line)}
+article.bloque h4{font-size:16.5px;font-weight:700;margin:26px 0 10px;color:var(--txt)}
+article.bloque p{margin-bottom:14px;color:var(--txt2)}
+article.bloque p.lead{font-size:17.5px;color:var(--txt);line-height:1.6}
+article.bloque ul.lista,article.bloque ol.pasos{margin:0 0 16px 22px}
+article.bloque ul.lista li,article.bloque ol.pasos li{margin-bottom:9px;color:var(--txt2)}
+article.bloque code{background:var(--bg3);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:.88em;color:var(--acc)}
+article.bloque a{color:var(--acc);text-decoration:none;border-bottom:1px solid #1e4a63}
+article.bloque a:hover{border-bottom-color:var(--acc)}
+mark.resaltado{background:#3f3418;color:#ffd479;padding:1px 3px;border-radius:3px}
+
+/* ---------- TABLAS ---------- */
+.tabla-scroll{overflow-x:auto;margin-bottom:12px;border:1px solid var(--line);border-radius:10px}
+table.tabla{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:14px;background:var(--bg2);
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+table.tabla thead th{background:var(--bg3);text-align:left;padding:12px 14px;font-size:12px;
+  text-transform:uppercase;letter-spacing:.7px;color:var(--txt3);font-weight:700;border-bottom:1px solid var(--line)}
+table.tabla td{padding:12px 14px;border-bottom:1px solid var(--line);color:var(--txt2);vertical-align:top}
+table.tabla tbody tr:last-child td{border-bottom:none}
+table.tabla tbody tr:hover{background:#181f27}
+table.tabla td b{color:var(--txt)}
+.mini{font-size:11.5px;color:var(--txt3);font-family:var(--mono)}
+table.madre td{font-size:13.4px}
+table.madre .no{color:#f87171;font-weight:700;white-space:nowrap}
+table.madre .si{color:var(--medido);font-weight:700;white-space:nowrap}
+table.madre .cond{color:var(--supuesto);font-weight:700;white-space:nowrap}
+table.madre tr.r-no{background:rgba(248,113,113,.045)}
+table.madre tr.r-si{background:rgba(34,197,94,.04)}
+table.madre tr.r-cond{background:rgba(245,158,11,.045)}
+
+/* ---------- SELLOS ---------- */
+.sello{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:1px;
+  padding:3px 8px;border-radius:4px;vertical-align:middle;margin-right:6px;text-transform:uppercase}
+.s-medido{background:rgba(34,197,94,.15);color:var(--medido);border:1px solid rgba(34,197,94,.35)}
+.s-extraido{background:rgba(56,189,248,.13);color:var(--extraido);border:1px solid rgba(56,189,248,.3)}
+.s-supuesto{background:rgba(245,158,11,.13);color:var(--supuesto);border:1px solid rgba(245,158,11,.32)}
+cite{display:block;font-size:12.5px;color:var(--txt3);font-style:normal;margin:-4px 0 18px;
+  padding-left:12px;border-left:2px solid var(--line);line-height:1.5}
+cite a{color:var(--txt2);border-bottom:1px dotted var(--line)}
+
+/* ---------- CARDS / CALLOUTS ---------- */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 20px}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card .cta{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--acc);font-weight:700;margin-bottom:8px}
+.card p{font-size:13.5px;margin:0;color:var(--txt2)}
+.callout{background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--acc);
+  border-radius:8px;padding:16px 20px;margin:18px 0;font-size:14.5px;color:var(--txt2);line-height:1.6}
+.callout b{color:var(--txt)}
+.callout.supuesto{border-left-color:var(--supuesto);background:rgba(245,158,11,.045)}
+.callout.ejemplo-aviso{border-left-color:#f43f5e;background:rgba(244,63,94,.08);color:#fecdd3}
+.doc{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:20px 24px;margin:14px 0 20px}
+.doc p{color:var(--txt2);font-size:14.5px}
+.doc ul.lista{margin-left:20px}
+.doc h4{margin-top:0}
+pre.diagrama{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:18px;
+  font-family:var(--mono);font-size:11.5px;line-height:1.5;color:var(--txt2);overflow-x:auto;margin:14px 0}
+
+/* ---------- FUENTES ---------- */
+section.fuentes{padding:56px 0 40px;border-top:2px solid var(--line);margin-top:40px}
+section.fuentes h2{font-size:30px;font-weight:800;margin-bottom:10px}
+section.fuentes>p{color:var(--txt2);margin-bottom:24px;max-width:740px}
+table.fuentes-tabla{width:100%;border-collapse:collapse;font-size:13px}
+table.fuentes-tabla thead th{background:var(--bg3);text-align:left;padding:10px 12px;font-size:11px;
+  text-transform:uppercase;letter-spacing:.7px;color:var(--txt3);border-bottom:1px solid var(--line)}
+table.fuentes-tabla td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--txt2)}
+.fid{font-family:var(--mono);font-size:11.5px;color:var(--acc);white-space:nowrap}
+.fautor{font-size:11.5px;color:var(--txt3);margin-top:3px}
+.fnota{font-size:12px;color:var(--txt3);max-width:420px}
+.tipo{font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:3px;white-space:nowrap;font-weight:700}
+.t-regulador{background:rgba(34,197,94,.15);color:#4ade80}
+.t-regulador-citado{background:rgba(34,197,94,.1);color:#86efac}
+.t-estandar{background:rgba(56,189,248,.15);color:#7dd3fc}
+.t-paper{background:rgba(168,85,247,.15);color:#c084fc}
+.t-fabricante{background:rgba(245,158,11,.15);color:#fbbf24}
+.t-interno-medido{background:rgba(236,72,153,.15);color:#f472b6}
+.t-secundaria{background:rgba(148,163,184,.15);color:#cbd5e1}
+
+footer{padding:30px 0 60px;color:var(--txt3);font-size:12.5px;border-top:1px solid var(--line)}
+
+/* ---------- COMENTARIOS ---------- */
+section.comentarios{padding:50px 0 20px;border-top:2px solid var(--line);margin-top:30px}
+section.comentarios h2{font-size:28px;font-weight:800;margin-bottom:10px}
+section.comentarios>p{color:var(--txt2);margin-bottom:24px;max-width:700px;font-size:15px}
+#utterances-hilo{min-height:180px;background:var(--bg2);border:1px solid var(--line);
+  border-radius:10px;padding:8px}
+#utterances-hilo .utterances{max-width:100%}
+
+@media(max-width:1000px){
+  aside{display:none}
+  main{padding:0 20px 80px}
+  header.hero h1{font-size:32px}
+  .grid3{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <div class="brand">
+    <h1>CONECTA</h1>
+    <p>Manual tecnico comercial<br>Uso interno</p>
+  </div>
+  <div class="search-wrap">
+    <input id="buscar" type="text" placeholder="Buscar en el manual..." autocomplete="off">
+  </div>
+  <div id="res-count"></div>
+  <nav><div class="cap"><a href="#conceptos"><span class="n">01</span>Conceptos</a><ul><li><a href="#dato-tiempo">El dato sin tiempo no sirve</a></li><li><a href="#por-que-reloj">Por que el reloj es parte del sistema, no un accesorio</a></li><li><a href="#capas">Las cinco capas que hay que saber nombrar</a></li><li><a href="#lo-que-vendemos">Que vende CONECTA, en una frase por familia</a></li></ul></div><div class="cap"><a href="#lineas"><span class="n">02</span>Las seis lineas</a><ul><li><a href="#que-es-linea">Que es una linea, y por que importa saberlo</a></li><li><a href="#las-seis">Las seis, una por una</a></li><li><a href="#lineas-fuera">Lo que no es una de las seis, y aun asi se vende</a></li></ul></div><div class="cap"><a href="#producto"><span class="n">03</span>Producto</a><ul><li><a href="#mapa-portafolio">El portafolio en un mapa</a></li><li><a href="#rtu">RTU y gateways: el reemplazo que no recablea</a></li><li><a href="#medicion">Medicion de potencia: el numero que se audita</a></li><li><a href="#pmu-pdc">Medicion fasorial: PMU y PDC</a></li><li><a href="#no-confundir">Cinco cosas que se confunden y cuestan una reunion</a></li></ul></div><div class="cap"><a href="#protocolos"><span class="n">04</span>Protocolos</a><ul><li><a href="#tabla-madre">La tabla madre: quien lleva estampa de tiempo</a></li><li><a href="#modbus-detalle">Modbus: por que no tiene hora, y como se disfraza</a></li><li><a href="#dnp3-detalle">DNP3: el tiempo es opcional y cambia el uso</a></li><li><a href="#relojes-protocolos">Protocolos de sincronizacion: cual ofrecer</a></li><li><a href="#preguntas-protocolo">Las cuatro preguntas que resuelven cualquier discusion de protocolo</a></li></ul></div><div class="cap"><a href="#arquitectura"><span class="n">05</span>Arquitectura de comunicaciones</a><ul><li><a href="#que-es-arquitectura">Que es una arquitectura de comunicaciones</a></li><li><a href="#elementos">Los elementos que toda arquitectura debe llevar</a></li><li><a href="#como-construir">Como se construye, paso a paso</a></li><li><a href="#arquitecturas-referencia">Tres arquitecturas de referencia</a></li></ul></div><div class="cap"><a href="#ciberseguridad"><span class="n">06</span>Ciberseguridad</a><ul><li><a href="#que-es-ciber">Que es ciberseguridad en un sistema electrico</a></li><li><a href="#ley-chile">Que exige la normativa chilena</a></li><li><a href="#iec62443">El estandar tecnico: IEC 62443</a></li><li><a href="#que-pide-sector">Que pide el sector electrico en concreto</a></li></ul></div><div class="cap"><a href="#cotizacion"><span class="n">07</span>Armar una cotizacion</a><ul><li><a href="#los-diez">Los diez elementos, y por que cada uno existe</a></li><li><a href="#resumen-ejecutivo">1. Resumen ejecutivo: lo que se lee y lo que se firma</a></li><li><a href="#alcance-exclusiones">2 y 10. Alcance y exclusiones: las dos caras del mismo limite</a></li><li><a href="#servicios-precio">5, 8 y 9. Servicios, precio e hitos de pago</a></li><li><a href="#ejemplo">Ejemplo completo, de punta a punta</a></li></ul></div><div class="cap"><a href="#metodologia"><span class="n">08</span>Metodologia comercial</a><ul><li><a href="#escalera">La Escalera al Exito: cuatro escalones, sin saltarse ninguno</a></li><li><a href="#mina-de-oro">La Mina de Oro: vender al miedo, no al dolor</a></li><li><a href="#objeciones">Objeciones: que responder sin inventar</a></li></ul></div></nav>
+</aside>
+
+<main>
+<header class="hero">
+  <div class="kicker">CONECTA Ingenieria · Documento interno</div>
+  <h1>Manual Tecnico Comercial</h1>
+  <p class="bajada">Que vende CONECTA, por que importa tecnicamente, y como se conversa con un cliente sin inventar nada.</p>
+  <p class="para-quien">Gente nueva que necesita entender el negocio, y gente actual que necesita una referencia unica para no improvisar en terreno.</p>
+  <div class="regla">Cada afirmacion tecnica de este manual lleva un sello y una fuente. <b>MEDIDO</b> = lo corri sobre archivos reales. <b>EXTRAIDO</b> = lo dice una norma o el fabricante, con link. <b>SUPUESTO</b> = es criterio de CONECTA o convencion de industria, y se declara como tal. Si una frase no tiene sello, es porque no afirma nada tecnico.</div>
+  <div class="regla" style="border-left-color:var(--txt3)">
+    <b>Como esta ordenado.</b>
+    <ul class="lista" style="margin-top:10px"><li><b>Conceptos</b> — Las ideas que hay que entender antes de vender. Empezando por la mas dificil: el dato sin tiempo no sirve.</li><li><b>Producto</b> — Que componente resuelve que problema, y en que linea del catalogo cae.</li><li><b>Protocolos</b> — La tabla que evita el error mas caro: creer que todo protocolo trae estampa de tiempo.</li><li><b>Metodologia</b> — La Escalera, la Mina de Oro, las objeciones. Como se califica y como se conversa.</li><li><b>Casos</b> — Que se cotiza de verdad, con que se compone una linea, y que no prometer.</li></ul>
+  </div>
+</header>
+
+<section class="capitulo" id="conceptos"><div class="cap-head"><div class="cap-num">CAPITULO 01</div><h2>Conceptos</h2><div class="sub">Lo que hay que entender antes de hablar con un cliente.</div></div><article class="bloque" id="dato-tiempo"><h3>El dato sin tiempo no sirve</h3>
+<p class="lead">Este es el concepto que mas gente nueva confunde, y el que mas caro sale en terreno.
+Un dato electrico tiene tres partes, y la tercera se olvida: <b>valor, calidad y tiempo</b>.
+Sin el tiempo, el dato sirve para mirar una pantalla, pero no para reconstruir que paso.</p>
+
+<div class="grid3">
+  <div class="card"><div class="cta">VALOR</div><p>3,4 MW. El numero. Es lo unico que mira quien recien empieza.</p></div>
+  <div class="card"><div class="cta">CALIDAD</div><p>Valido, invalido, cuestionable, sustituido. Un valor malo no es un valor.</p></div>
+  <div class="card"><div class="cta">TIEMPO</div><p>Cuando ocurrio. Es lo que permite ordenar eventos y encontrar la causa.</p></div>
+</div>
+
+<div class="callout">
+  <b>Por que importa comercialmente.</b> Cuando el Coordinador Electrico te pide reconstruir por que se
+  cayo una zona, no le sirve saber que la tension bajo: necesita saber <i>que bajo primero</i>. Sin
+  estampa de tiempo el evento no tiene secuencia, y sin secuencia no hay causa. Ahi es donde se pierden
+  los reclamos y donde se ganan las ventas de sincronizacion y de medicion fasorial.
+</div>
+
+<p>La consecuencia practica es dura: <b>no todos los protocolos llevan estampa de tiempo</b>. Algunos
+transportan valores crudos y el tiempo lo pone quien pregunta. Si el equipo que disenaste no guarda el
+tiempo, cuando el operador lo mira ya es tarde y el dato perdio su origen. Esta es la diferencia entre
+un sistema que <i>reporta</i> y un sistema que <i>registra</i>.</p>
+
+<h4>Que significa exactamente "estampa de tiempo"</h4>
+<p>Hay una trampa que conviene entender de entrada: no es lo mismo el tiempo <b>de la fuente</b> que el
+tiempo <b>del servidor que lo recibio</b>. OPC UA los separa explicitamente y eso ayuda a pensar el resto
+de los protocolos:</p>
+
+<table class="tabla">
+<thead><tr><th>Concepto OPC UA</th><th>Que significa</th><th>Fuente</th></tr></thead>
+<tbody>
+<tr><td><b>SourceTimestamp</b></td><td>El tiempo que le puso <i>la fuente del dato</i>. Una vez asignado no cambia nunca. Debe ir en UTC.</td><td><a href="#f-OPCUA-SRC-TS">OPCUA-SRC-TS</a></td></tr>
+<tr><td><b>ServerTimestamp</b></td><td>El tiempo en que <i>el servidor recibio</i> el valor, o supo que era correcto. Puede refrescarse aunque el valor no cambie.</td><td><a href="#f-OPCUA-SRV-TS">OPCUA-SRV-TS</a></td></tr>
+</tbody>
+</table>
+
+<p>Cuando alguien dice "ese dato viene con hora", la primera pregunta tecnica es <b>cual hora</b>. Si es la
+del servidor, la latencia de la red se cuela dentro del dato y una comparacion entre dos subestaciones
+queda corrida. Si es la de la fuente, el dato conserva su origen aunque llegue tarde. La especificacion de
+OPC UA es explicita en que el <code>serverTimestamp</code> se actualiza periodicamente aunque el valor no
+haya cambiado, justamente porque mide <i>cuando el servidor supo del valor</i>, no cuando ocurrio.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-OPCUA-SRC-TS">OPCUA-SRC-TS</a> · <a href="#f-OPCUA-SRV-TS">OPCUA-SRV-TS</a></cite>
+</article><article class="bloque" id="por-que-reloj"><h3>Por que el reloj es parte del sistema, no un accesorio</h3>
+<p class="lead">Si dos equipos no comparten el mismo reloj, sus estampas de tiempo no se pueden comparar
+entre si. Y comparar es exactamente para lo que sirve la estampa. Por eso la sincronizacion no es un
+detalle de instalacion: es un requisito de la medicion.</p>
+
+<p>La precision que exige cada aplicacion es distinta, y confundirlas hace que se pague de mas o se
+entregue de menos. Estos numeros salen de fuente primaria:</p>
+
+<table class="tabla">
+<thead><tr><th>Necesidad</th><th>Precision de tiempo</th><th>Que la cumple</th><th>Fuente</th></tr></thead>
+<tbody>
+<tr><td>Secuencia de eventos clasica en la red</td><td>del orden de <b>~10 ms</b></td><td>SNTP</td><td><a href="#f-PTP-PUP-NIST">PTP-PUP-NIST</a></td></tr>
+<tr><td>Comparacion de phase entre PMU</td><td><b>1 µs</b> se considera mas que suficiente</td><td>GPS / IRIG-B</td><td><a href="#f-PTP-PUP-NIST">PTP-PUP-NIST</a></td></tr>
+<tr><td>Proteccion diferencial y bus de proceso digital</td><td>unos <b>microsegundos</b></td><td>PPS dedicado o PTP</td><td><a href="#f-PTP-PUP-NIST">PTP-PUP-NIST</a></td></tr>
+<tr><td>Perfil PTP de utility (IEC/IEEE 61850-9-3)</td><td>garantiza <b>submicrosegundo</b> tras 15 TCs o 3 BC</td><td>PTP perfil 9-3</td><td><a href="#f-PTP-PUP-NIST">PTP-PUP-NIST</a></td></tr>
+<tr><td>NTP en LAN moderna</td><td>decenas de <b>microsegundos</b></td><td>NTPv4</td><td><a href="#f-RFC5905">RFC5905</a></td></tr>
+</tbody>
+</table>
+<span class="sello s-extraido">EXTRAIDO</span>
+
+<div class="callout">
+  <b>El dato que conviene memorizar.</b> Un error de fase de 0,1° equivale a un error de tiempo de 5 µs
+  en el muestreo. Por eso la PMU exige microsegundos y no milisegundos: el error de tiempo se convierte
+  directamente en error de angulo. <a href="#f-PTP-PUP-NIST">PTP-PUP-NIST</a>
+</div>
+
+<h4>Como se ve esto en un equipo real</h4>
+<p>Un Kronos, por ejemplo, declara 60 ns de desviacion maxima de tiempo (99%), y admite como salidas
+IRIG-B no modulada y modulada, PPS/PPM, NTP/SNTP y PTP con los perfiles UDP, 802.3, IEEE C37.238-2011,
+IEEE C37.238-2016 e IEC 61850-9-3:2016. Ademas soporta PRP/HSR (IEC 62439-3) en la serie 3R, que es lo
+que permite redundar la red sin perder paquetes.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-KRONOS">KRONOS</a> — pagina de producto NovaTech</cite>
+
+<p>El punto comercial es este: el reloj define <b>cuanta verdad</b> tiene el sistema. Si el cliente va a
+comparar eventos entre dos subestaciones y esta sincronizando con NTP por la red corporativa, sus
+estampas van a estar corridas y el analisis posterior no va a cerrar. Ahi entra el reloj GPS como
+producto, y no como accesorio del RTU.</p>
+
+<div class="callout supuesto">
+  <b>SUPUESTO — criterio CONECTA.</b> En una subestacion nueva, ofrecer la sincronizacion dedicada desde
+  la primera conversacion. Es mas barato discutirla con el diseno abierto que justificarla despues,
+  cuando el cliente ya descubrio que sus eventos no cuadran.
+</div>
+</article><article class="bloque" id="capas"><h3>Las cinco capas que hay que saber nombrar</h3>
+<p class="lead">Una planta o una subestacion se conversa en capas. Saber en que capa vive cada problema
+permite responder sin marear al cliente, y permite armar el paquete sin vender tres veces lo mismo.</p>
+
+<table class="tabla capa-tabla">
+<thead><tr><th>Capa</th><th>Pregunta que responde</th><th>Que hay ahi</th></tr></thead>
+<tbody>
+<tr><td><b>1. Campo</b></td><td>Que esta pasando fisicamente</td><td>Instrumentos, sensores, valvulas, posicionadores, actitud de equipos</td></tr>
+<tr><td><b>2. Control</b></td><td>Quien manda al proceso</td><td>DCS, PLC, SIS, reles de proteccion, controladores de planta</td></tr>
+<tr><td><b>3. Adquisicion</b></td><td>Como el dato sale del equipo</td><td>RTU, gateway, IED, merging unit, PMU</td></tr>
+<tr><td><b>4. Red</b></td><td>Como viaja sin perderse</td><td>Switches IEC 61850-3, PRP/HSR, firewalls OT, fibra</td></tr>
+<tr><td><b>5. Aplicacion</b></td><td>Que se hace con el dato</td><td>SCADA, HMI, PDC, analitica, predictivo, UNS, reportes regulatorios</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Modelo de capas propio de CONECTA para conversar. No es un estandar publicado.</cite>
+
+<h4>La regla que evita el error caro</h4>
+<p>Antes de proponer hardware en la capa 3, verificar si el dato <b>ya existe</b> en la capa 2. Si la
+senal vive en un rele o en un medidor, se lee por protocolo y no gasta una sola entrada digital. Es la
+diferencia entre cotizar un gateway nuevo y no cotizarlo.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-ORION-IO-1MS">ORION-IO-1MS</a> — un Orion I/O entrega eventos discretos con resolucion de 1 ms; si el rele ya los publica, la I/O es redundante</cite>
+</article><article class="bloque" id="lo-que-vendemos"><h3>Que vende CONECTA, en una frase por familia</h3>
+<p class="lead">CONECTA no fabrica. Integra y responde tecnicamente por lo que instala. Esa es la
+diferencia con un distribuidor puro, y es la razon por la que el cliente nos llama cuando algo no cuadra.</p>
+
+<table class="tabla">
+<thead><tr><th>Familia</th><th>En una frase</th><th>Cuando aparece</th></tr></thead>
+<tbody>
+<tr><td><b>Control y automatizacion</b></td><td>El cerebro de la planta: DCS, SIS, APC, predictivo</td><td>Planta nueva, o reemplazo de un control obsoleto</td></tr>
+<tr><td><b>Adquisicion y RTU</b></td><td>El puente entre el equipo y el SCADA, sin recablear</td><td>RTU al final de su vida util, migracion a IEC 61850</td></tr>
+<tr><td><b>Medicion de precision</b></td><td>El numero que se factura o se declara al Coordinador</td><td>Medicion de transferencias, monitoreo de red</td></tr>
+<tr><td><b>Medicion fasorial</b></td><td>Lo que permite ver la dinamica de la red, no solo el estado</td><td>Exigencia del Coordinador, analisis de perturbaciones</td></tr>
+<tr><td><b>Sincronizacion</b></td><td>Que todas las estampas de tiempo sean comparables</td><td>Cuando el cliente ya tiene datos y no cuadran</td></tr>
+<tr><td><b>Red OT</b></td><td>Que el dato viaje aunque un enlace o un switch falle</td><td>Subestacion digital, bus de proceso, PRP/HSR</td></tr>
+<tr><td><b>Conexion controlada</b></td><td>Energizar un transformador sin el golpe del inrush</td><td>Transformadores de poder, bancos de condensadores</td></tr>
+<tr><td><b>Plataforma de datos</b></td><td>Poner el dato industrial donde la IA pueda usarlo</td><td>Digitalizacion, agentes, analitica</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Agrupacion comercial de CONECTA. Los productos concretos de cada familia estan en el capitulo Producto.</cite>
+
+<div class="callout">
+  <b>Lo que NO somos.</b> No somos un revendedor de partes con catalogo y precio en mano. Cuando un
+  cliente pide "cotizame un switch", la respuesta correcta no es el switch: es preguntar que tiene que
+  sobrevivir a que falla. Un switch IEC 61850-3 sin PRP no resuelve el problema que el cliente cree tener.
+</div>
+</article></section><section class="capitulo" id="lineas"><div class="cap-head"><div class="cap-num">CAPITULO 02</div><h2>Las seis lineas</h2><div class="sub">Lo que el cotizador trata como linea de negocio, que se compone en cada una, y que NO va en ella.</div></div><article class="bloque" id="que-es-linea"><h3>Que es una linea, y por que importa saberlo</h3>
+<p class="lead">En CONECTA una <b>linea</b> no es un catalogo de productos: es una unidad de trabajo que
+tiene su propio alcance, su propia composicion de equipos y sus propias horas de ingenieria. Cuando alguien
+dice "eso es PMU" o "eso es Repro", esta diciendo como se cotiza, no que se vende.</p>
+
+<p>El cotizador de CONECTA reconoce seis lineas. Son las que tienen cuestionario propio de "Datos Cliente"
+y plantilla de cotizacion construida:</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-CONECTA-BOM">CONECTA-BOM</a> — repo ConectaCotizador, README: "PMU, PDC, RTU, SCADA, EDAC y Repro usan el formato NUEVO (cuestionario) vía 23_cotizar_pmu.py --linea". Las lineas Medición, GPS y Licencias usan el formato viejo.</cite>
+
+<div class="callout">
+  <b>Por que una linea y no un producto.</b> El cliente compra un resultado: "que la planta deje de
+  detenerse", "que el Coordinador no me observe", "que el transformador no se dañe". La linea es como
+  CONECTA empaqueta ese resultado. Si se cotiza por producto suelto, se pierden las horas de ingenieria
+  que son justamente donde esta el margen.
+</div>
+
+<h4>La regla de la linea</h4>
+<p>Una linea tiene cuatro cosas, siempre las mismas:</p>
+<ol class="pasos">
+  <li><b>Un alcance tecnico</b> — que queda dentro y que queda fuera. Se escribe, no se sobreentiende.</li>
+  <li><b>Una composicion de equipos</b> — que hardware entra, tipicamente en un gabinete o armario.</li>
+  <li><b>Horas hombre por rol</b> — ingenieria, programacion, montaje, puesta en servicio, capacitacion.</li>
+  <li><b>Una condicion de cierre</b> — el entregable que demuestra que la linea quedo terminada.</li>
+</ol>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Estructura propia, derivada de la plantilla de Valorizacion historica de CONECTA.</cite>
+</article><article class="bloque" id="las-seis"><h3>Las seis, una por una</h3>
+<p class="lead">Para cada linea: que resuelve, que se compone historicamente, y con que no se debe
+confundir. La composicion es la que aparece en los BOMs reales, <b>sin cifras de costo</b>.</p>
+
+<table class="tabla seis">
+<thead><tr><th>Linea</th><th>Que resuelve</th><th>Composicion tipica (BOMs reales)</th><th>No confundir con</th></tr></thead>
+<tbody>
+
+<tr>
+<td><b>1. PMU</b><br><span class="mini">Medicion fasorial</span></td>
+<td>Entregar fasores sincronizados al Coordinador, con la precision que exige la norma.</td>
+<td>PMU Vizimax, GPS Kronos, gabinete Rittal, licencia PDC, switch industrial, importacion.</td>
+<td>No es "un medidor mejor". Si no hay reloj resuelto, la PMU no cumple.</td>
+</tr>
+
+<tr>
+<td><b>2. PDC</b><br><span class="mini">Concentrador de datos fasoriales</span></td>
+<td>Concentrar los datos de las PMU y entregarlos al PDC del Coordinador, con almacenamiento si se cae el enlace.</td>
+<td>Licencia PDC corporativo o local, servidor, redundancia, dongle, capacitacion.</td>
+<td>No es un servidor generico. La licencia PDC Local es adicional a la corporativa.</td>
+</tr>
+
+<tr>
+<td><b>3. RTU</b><br><span class="mini">Adquisicion en subestacion</span></td>
+<td>Llevar las señales de la subestacion al centro de control, reutilizando el cableado existente.</td>
+<td>Orion SX, Orion I/O (DI, DO, AI), switch Hermes, HMI, gabinete, fuente, touch y teclado rack.</td>
+<td>No es un PLC. No reemplaza el control del proceso.</td>
+</tr>
+
+<tr>
+<td><b>4. SCADA</b><br><span class="mini">Supervision y control</span></td>
+<td>Ver y operar la instalacion desde una sala de control, con HMI y base de datos de eventos.</td>
+<td>Orion SX (servidores), exportacion, I/O de terceros, pantalla o workstation.</td>
+<td>No es el sistema de proteccion. El SCADA mira, no dispara.</td>
+</tr>
+
+<tr>
+<td><b>5. EDAC</b><br><span class="mini">Desconexion automatica de carga</span></td>
+<td>Desconectar carga automaticamente ante una contingencia, segun lo que exige el Coordinador.</td>
+<td>Orion I/O, Orion SX, licencias PCVue, despacho expedito.</td>
+<td>No es un plan de defensa completo por si solo: el EDAC ejecuta, el plan define.</td>
+</tr>
+
+<tr>
+<td><b>6. Repro</b><br><span class="mini">Reconfiguracion de protecciones</span></td>
+<td>Ajustar y reconfigurar protecciones existentes para que coordinen y cumplan.</td>
+<td>Reles de proteccion, proteccion diferencial de transformador, blocks de prueba, importacion.</td>
+<td>No es venta de reles nuevos. Muchas veces es servicio sobre lo que ya esta instalado.</td>
+</tr>
+
+</tbody>
+</table>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-CONECTA-BOM">CONECTA-BOM</a> — composicion extraida de los BOMs historicos por ZIP+XML, cero LLM. Muestras por linea: RTU 23, SCADA 41, EDAC 50, Repro 57.</cite>
+
+<div class="callout">
+  <b>Aviso de lectura.</b> La composicion muestra <b>que</b> compone una linea, no <b>cuanto</b> vale.
+  Los costos reales existen y estan medidos, pero no se publican en este manual: se consultan en el
+  cotizador. Un vendedor que da un precio de memoria es un pasivo, no un activo.
+</div>
+</article><article class="bloque" id="lineas-fuera"><h3>Lo que no es una de las seis, y aun asi se vende</h3>
+<p class="lead">Las seis lineas son las que tienen motor de cotizacion. Pero CONECTA vende mas cosas, y
+conviene saber donde caen para no forzar un producto dentro de una linea donde no pertenece.</p>
+
+<table class="tabla">
+<thead><tr><th>Lo que el cliente pide</th><th>Donde cae</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td>Medicion de potencia (Bitronics)</td><td>Linea Medición (formato viejo)</td><td>El medidor de precision no es una PMU.</td></tr>
+<tr><td>Solo el reloj GPS</td><td>Linea GPS (formato viejo)</td><td>Se puede vender solo, y muchas veces es la venta mas facil.</td></tr>
+<tr><td>Licencias, drivers, upgrade de software</td><td>Linea Licencias (formato viejo)</td><td>Firewall, Modbus, OPC, redundancia basica, upgrade.</td></tr>
+<tr><td>SynchroTeq (conexion controlada)</td><td>Linea propia en el catalogo</td><td>Se relaciona con Repro pero es otro producto y otras horas.</td></tr>
+<tr><td>Ciberseguridad</td><td>Linea propia, sin BOM de hardware</td><td>Ver capitulo Ciberseguridad: es servicio, no equipos en la planilla historica.</td></tr>
+<tr><td>Protecciones</td><td>Linea propia, sin BOM de hardware</td><td>Los BOMs reales no traen equipos en "Equi. Mat. Arr. Sub.": son servicios y estudios.</td></tr>
+</tbody>
+</table>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-CONECTA-BOM">CONECTA-BOM</a> — costos_hardware.json, campo _vacios: "Protecciones y Ciberseguridad: sus BOMs reales no traen equipos en 'Equi. Mat. Arr. Sub.' (son servicios/estudios). No se inventa hardware donde no lo hay."</cite>
+
+<div class="callout supuesto">
+  <b>SUPUESTO — reflejo que hay que tener.</b> Si el cliente pide algo que no cae en ninguna linea, la
+  respuesta no es forzarlo: es preguntar que tiene que lograr y armar el alcance.
+</div>
+
+<div class="callout">
+  <b>Seis no son todo el catalogo.</b> El catalogo de CONECTA tiene del orden de 86 lineas de producto
+  agrupadas por categoria y partner; las seis de este capitulo son solo las que tienen motor de
+  cotizacion construido. Confundir ambas cosas lleva a dos errores opuestos: creer que no vendemos algo
+  que si esta en catalogo, o prometer una cotizacion automatica para una linea que hay que armar a mano.
+  <a href="#f-CATALOGO-86">CATALOGO-86</a>
+</div>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-CATALOGO-86">CATALOGO-86</a> — referencia del catalogo consolidado: "Catalogo consolidado de 86 lineas por categoria y partner".</cite>
+</article></section><section class="capitulo" id="producto"><div class="cap-head"><div class="cap-num">CAPITULO 03</div><h2>Producto</h2><div class="sub">Que hay en el catalogo, que problema resuelve cada cosa, y con que no se confunde.</div></div><article class="bloque" id="mapa-portafolio"><h3>El portafolio en un mapa</h3>
+<p class="lead">CONECTA integra marcas de fabricante. Saber cual es cual evita el error de atribuir una
+capacidad al producto equivocado, que es la forma mas rapida de perder credibilidad tecnica.</p>
+
+<table class="tabla">
+<thead><tr><th>Marca</th><th>Que hace</th><th>Productos que veras en propuestas</th></tr></thead>
+<tbody>
+<tr><td><b>SUPCON</b></td><td>Control y automatizacion de planta completa: DCS, SIS, instrumentacion, valvulas, software industrial, IA</td><td>ECS-700 (DCS), TCS-500 (SIS), PRIDE (predictivo), APC, supOS, transmisores CXT, valvulas y posicionador CVP2000</td></tr>
+<tr><td><b>NovaTech</b></td><td>Automatizacion de subestacion, medicion de potencia y sincronizacion</td><td>Orion LX+/SX/MX/VX, Orion I/O, Bitronics, Kronos, switches Hermes</td></tr>
+<tr><td><b>Vizimax</b></td><td>Conexion controlada (point-on-wave), PMU, merging unit</td><td>SynchroTeq MV/Plus/Lite, PMU, AMU, RightWON</td></tr>
+<tr><td><b>Belden / Hirschmann</b></td><td>Red industrial endurecida para subestacion</td><td>Switches IEC 61850-3, PRP/HSR, firewalls OT</td></tr>
+<tr><td><b>Elipse</b></td><td>SCADA e HMI, lectura de protecciones, drivers de protocolo</td><td>Elipse Power, driver IEC 61850, driver DNP3, COMTRADE</td></tr>
+<tr><td><b>Tier0 (SUPCON)</b></td><td>Plataforma de datos industriales (UNS) para que la IA consuma el dato</td><td>Tier0 Cloud, Tier0 Edge</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Agrupacion comercial propia. Las capacidades concretas por equipo estan abajo, con su fuente.</cite>
+
+<div class="callout">
+  <b>Cuidado con esto.</b> Un producto puede ser de una marca y el servicio de otra. En una propuesta,
+  el cliente compra una solucion, no seis marcas. La marca va en el anexo tecnico, no en el titulo.
+</div>
+</article><article class="bloque" id="rtu"><h3>RTU y gateways: el reemplazo que no recablea</h3>
+<p class="lead">El Orion es el caballo de batalla de la automatizacion de subestacion. Su argumento mas
+fuerte no es la capacidad: es que permite reemplazar una RTU vieja <b>sin rehacer el cableado de campo</b>.</p>
+
+<table class="tabla">
+<thead><tr><th>Modelo</th><th>Posicionamiento</th></tr></thead>
+<tbody>
+<tr><td><b>OrionLX+</b></td><td>Subestaciones grandes y las aplicaciones mas complejas</td></tr>
+<tr><td><b>OrionSX</b></td><td>Servidor de datos y HMI</td></tr>
+<tr><td><b>OrionMX</b></td><td>Compacto, para espacios reducidos</td></tr>
+<tr><td><b>OrionVX</b></td><td>Virtualizado, sobre servidor</td></tr>
+<tr><td><b>Orion I/O</b></td><td>Retrofit de RTUs legacy; pin-compatible con GE D20</td></tr>
+</tbody>
+</table>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-ORION-RETROFIT">ORION-RETROFIT</a> — pagina de solucion de retrofit de NovaTech</cite>
+
+<h4>El argumento de venta, con la precision que corresponde</h4>
+<p>NovaTech produce soluciones retrofit para RTU <b>D20, SNW, Telegyr, Telvent y ACS</b>. Las tarjetas
+adaptadoras permiten que la mayoria de las actualizaciones se hagan <b>sin volver a cablear</b>, y el kit
+reemplaza el espacio de <b>3RU</b>. Ademas, como hay emulacion de protocolo, el cambio de RTU puede ser
+<b>transparente al SCADA</b>, sin modificar la base de datos del centro de control.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-ORION-RETROFIT">ORION-RETROFIT</a></cite>
+
+<div class="callout">
+  <b>No digas "cero recableado".</b> La fuente dice "sin necesidad de volver a cablear" para la mayoria de
+  las actualizaciones, mediante tarjetas adaptadoras. Los conectores si se mueven a la adaptor board. Usar
+  la frase exacta: <b>se reutiliza el cableado de campo existente</i></b>, no "no se toca un cable".
+</div>
+
+<h4>Que se gana en la practica</h4>
+<p>El Orion I/O esta pensado para monitoreo y control de 12 Vdc a 125 Vdc en subestaciones, incluyendo
+<b>registro de secuencia de eventos con resolucion de 1 ms</b>, mando TRIP/CLOSE de interruptor y
+monitoreo de transductores analogicos. Una tarjeta de 16 entradas discretas se declara apta para
+SOE de 1 ms, y con tarjetas discretas llenas entrega 64 I/O en 2 RU.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-ORION-IO-1MS">ORION-IO-1MS</a></cite>
+
+<div class="callout supuesto">
+  <b>SUPUESTO — pregunta obligatoria antes de cotizar.</b> "Cuantas de tus senales ya viven en un rele o
+  en un medidor?" Si la senal ya esta en un IED, la RTU la lee por protocolo y no gasta una entrada. Cotizar
+  I/O de mas es un error de dimensionamiento, y el cliente que sabe lo va a notar.
+</div>
+</article><article class="bloque" id="medicion"><h3>Medicion de potencia: el numero que se audita</h3>
+<p class="lead">Bitronics es la linea de medicion de precision de NovaTech. Lo que se vende aqui no es un
+medidor mas: es un numero que resiste una auditoria y que no requiere cortar el servicio para instalarse.</p>
+
+<ul class="lista">
+  <li>Precision <b>0,2s</b> en todos los productos, calibrados individualmente, incluso con TC de nucleo partido externos.</li>
+  <li><b>MTBF de 40 anos</b> y garantia de 10 anos.</li>
+  <li>Se instala con TC externos opcionales <b>sin tomar una salida de servicio</b>.</li>
+  <li>El <b>DGM</b> (Distribution Grid Monitor) es una solucion "primary in a box": medidor M661 + sensores Lindsey LEA + cableado, con OrionMX opcional para ciberseguridad, I/O y automatizacion.</li>
+</ul>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-BITRONICS">BITRONICS</a> — pagina de producto de NovaTech</cite>
+
+<div class="callout">
+  <b>El argumento que gana la reunion.</b> "No hay que sacar de servicio la instalacion para medirla".
+  En una planta que factura por disponibilidad, eso vale mas que cualquier decimal de precision.
+</div>
+</article><article class="bloque" id="pmu-pdc"><h3>Medicion fasorial: PMU y PDC</h3>
+<p class="lead">Una PMU no es un medidor mas rapido. Es un equipo que entrega fasores sincronizados en el
+tiempo, y eso permite ver la dinamica de la red, no solo su estado.</p>
+
+<h4>Lo que exige el Coordinador en Chile</h4>
+<p>Las PMU que se integren al Modulo de Medicion Fasorial deben cumplir, a lo menos (Tabla 7.1-1):</p>
+
+<table class="tabla">
+<thead><tr><th>Requerimiento</th><th>Exigencia</th></tr></thead>
+<tbody>
+<tr><td>Clase de precision</td><td>IEEE 60255-118-1-2018 (o ultima version de IEEE C37.118), <b>M-Class</b></td></tr>
+<tr><td>Tasa de muestreo</td><td><b>50 muestras por segundo</b></td></tr>
+<tr><td>Protocolo de sincrofasores</td><td>Ultima version IEEE C37.118 o IEEE 60255-118-1-2018</td></tr>
+<tr><td>Precision de sincronizacion</td><td><b>Dentro de 1 µs</b>, con base de tiempo GPS</td></tr>
+<tr><td>Codigo de tiempo</td><td><b>IRIG-B no modulada</b> (PTP si no hay antena)</td></tr>
+<tr><td>Alimentacion</td><td>Desde la red segura de la subestacion, con respaldo para medir al menos <b>8 horas</b></td></tr>
+<tr><td>Ancho de banda</td><td><b>120 kbps</b> minimo por punto de monitoreo</td></tr>
+</tbody>
+</table>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-CEN-MMF2026">CEN-MMF2026</a>, Tabla 7.1-1 (pagina 105) y seccion 5.9 (ancho de banda, pagina 100)</cite>
+
+<div class="callout">
+  <b>Dato de lead directo.</b> El estudio de julio 2026 exige PMU en todas las instalaciones de generacion
+  con potencia instalada <b>igual o superior a 9 MW</b>, y define 51 nuevos puntos de monitoreo. Donde va
+  la PMU es distinto segun tecnologia: en bornes de cada unidad generadora sincronica; en el punto de
+  control del PPC para parques renovables con inversores; y dos puntos cuando la central es hibrida
+  (generacion + almacenamiento). <a href="#f-CEN-MMF2026">CEN-MMF2026</a>, seccion 5.1 y conclusiones.
+</div>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-CEN-MMF2026">CEN-MMF2026</a>, secciones 5.1 y 6</cite>
+
+<h4>PDC: el concentrador</h4>
+<p>La PMU no habla con el Coordinador de uno a uno: entrega sus datos a un <b>PDC Local</b>, y el PDC Local
+los manda al PDC Corporativo del Coordinador. El estudio mantiene la arquitectura con un segundo data
+center y un tercer PDC Corporativo, y establece que cada Coordinado puede implementar sus propios PDC
+locales si lo necesita para cumplir la disponibilidad. Tambien exige que el PDC Local <b>almacene</b> la
+informacion que no pudo transmitir y se sincronice al restablecerse la comunicacion.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-CEN-MMF2026">CEN-MMF2026</a>, conclusiones y seccion 5.10.1</cite>
+
+<div class="callout supuesto">
+  <b>SUPUESTO.</b> La licencia del PDC es un punto de friccion recurrente: el Coordinador exige una licencia
+  de integracion al PDC Local <b>adicional</b> a la del PDC Corporativo, y ese costo es del Coordinado
+  (<a href="#f-CEN-MMF2026">CEN-MMF2026</a>, pagina 103). Preguntarlo temprano, no al final del proyecto.
+</div>
+</article><article class="bloque" id="no-confundir"><h3>Cinco cosas que se confunden y cuestan una reunion</h3>
+<p class="lead">Estos errores aparecen mucho en terreno. Cada uno se corrige en una frase, pero si no se
+corrige a tiempo, el cliente deja de creer en el resto de la propuesta.</p>
+
+<table class="tabla">
+<thead><tr><th>Se confunde</th><th>Con</th><th>La diferencia que importa</th></tr></thead>
+<tbody>
+<tr><td><b>RTU</b></td><td>Controlador (PLC/DCS)</td><td>La RTU lleva datos al centro de control y puede ejecutar logica, pero no reemplaza al control del proceso. No vender una RTU como "el control de la planta".</td></tr>
+<tr><td><b>Medidor de facturacion</b></td><td>Medidor de calidad de energia</td><td>Uno sirve para cobrar, el otro para diagnosticar. Pueden ser el mismo equipo, pero el argumento de venta es distinto.</td></tr>
+<tr><td><b>PMU</b></td><td>SCADA mas rapido</td><td>La PMU entrega fasores con tiempo comun. Un SCADA rapido sigue siendo un SCADA.</td></tr>
+<tr><td><b>Sincronizacion</b></td><td>Un servidor NTP en la red</td><td>NTP por red corporativa no alcanza para PMU ni para bus de proceso. Ver capitulo Protocolos.</td></tr>
+<tr><td><b>Switch industrial</b></td><td>Switch IEC 61850-3 con PRP</td><td>Endurecido no es lo mismo que redundante sin perdida. Si el cliente necesita continuidad, el argumento es PRP/HSR.</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Distinciones de criterio propio, consistentes con las fuentes de cada capa.</cite>
+</article></section><section class="capitulo" id="protocolos"><div class="cap-head"><div class="cap-num">CAPITULO 04</div><h2>Protocolos</h2><div class="sub">Que transporta cada uno, y cual lleva la hora. Esta tabla evita el error mas caro.</div></div><article class="bloque" id="tabla-madre"><h3>La tabla madre: quien lleva estampa de tiempo</h3>
+<p class="lead">Si te llevas una sola hoja de este manual, que sea esta. La columna que importa no es
+"que protocolo es mejor" sino <b>"quien pone la hora, y cuando"</b>.</p>
+
+<div class="tabla-scroll">
+<table class="tabla madre">
+<thead>
+<tr>
+  <th>Protocolo</th>
+  <th>Que transporta</th>
+  <th>Lleva tiempo?</th>
+  <th>Resolucion del tiempo</th>
+  <th>Quien pone la hora</th>
+  <th>El error tipico</th>
+</tr>
+</thead>
+<tbody>
+
+<tr class="r-no">
+  <td><b>Modbus</b><br><span class="mini">RTU / TCP</span></td>
+  <td>Bits y registros crudos de 16 bits en cuatro tablas: Discrete Input, Coils, Input Registers, Holding Registers <a href="#f-MODBUS-V1.1b3">[MODBUS-V1.1b3]</a></td>
+  <td class="no"><b>NO</b></td>
+  <td>—</td>
+  <td>Nadie. El maestro pregunta y recibe un valor sin contexto temporal.</td>
+  <td>Creer que el registro "trae hora". No la trae: si necesitas tiempo, lo pones tu al leer, y entonces mides el momento de la lectura, no el del evento.</td>
+</tr>
+
+<tr class="r-si">
+  <td><b>DNP3</b><br><span class="mini">IEEE 1815</span></td>
+  <td>Valor, calidad y tiempo, reportado por eventos (change-of-state) <a href="#f-IEEE1815-TUT">[IEEE1815-TUT]</a></td>
+  <td class="si"><b>SI, opcional</b></td>
+  <td>milisegundos</td>
+  <td>La estacion remota, cuando arma el evento. En UTC desde 2008 <a href="#f-IEEE1815-TUT">[IEEE1815-TUT]</a></td>
+  <td>Asumir que todo punto viene con hora. En DNP3 el timestamp es <b>opcional y solo para eventos y objetos congelados</b>, no para datos estaticos <a href="#f-IEEE1815-TUT">[IEEE1815-TUT]</a>.</td>
+</tr>
+
+<tr class="r-cond">
+  <td><b>IEC 60870-5-101/104</b></td>
+  <td>Telecontrol: medidas, estados, mandos, con marca de tiempo en el ASDU</td>
+  <td class="cond"><b>SI, segun tipo</b></td>
+  <td>CP56Time2a: milisegundos. Tambien existen CP24Time2a y CP32Time2a con menos alcance</td>
+  <td>El equipo que origina el evento</td>
+  <td>Elegir el tipo de dato sin hora y perder la secuencia. La marca de tiempo no es del protocolo, es del <i>tipo de dato</i> que se configure.</td>
+</tr>
+
+<tr class="r-si">
+  <td><b>IEC 61850</b><br><span class="mini">MMS, GOOSE, SV</span></td>
+  <td>Modelo de datos del equipo completo: medidas, estados, calidad y tiempo, con nombre semantico</td>
+  <td class="si"><b>SI</b></td>
+  <td>Estructura de tiempo de 80 bits (segundos + fraccion + calidad de tiempo)</td>
+  <td>El IED que publica, sincronizado por PTP o IRIG-B</td>
+  <td>Suponer que el nombre del punto dice cuando ocurrio. El tiempo viaja como atributo aparte del valor, y hay que leerlo.</td>
+</tr>
+
+<tr class="r-si">
+  <td><b>IEC 61850-9-2</b><br><span class="mini">Sampled Values</span></td>
+  <td>Valores muestreados del bus de proceso (corrientes y tensiones digitalizadas)</td>
+  <td class="si"><b>SI, y sincronizado</b></td>
+  <td>Muestras por ciclo; en el perfil 9-2LE tipicamente 80 muestras por ciclo</td>
+  <td>La merging unit, con un flag de sincronizacion que dice si esta enganchada al reloj</td>
+  <td>No verificar el flag de sincronizacion: si la MU perdio el reloj, sigue mandando muestras y parecen validas.</td>
+</tr>
+
+<tr class="r-si">
+  <td><b>IEEE C37.118</b><br><span class="mini">Sincrofasores / PMU</span></td>
+  <td>Fasores de tension y corriente, frecuencia y ROCOF, con time stamp de la muestra</td>
+  <td class="si"><b>SI, es el nucleo</b></td>
+  <td>Requiere 1 µs de precision de sincronizacion <a href="#f-CEN-MMF2026">[CEN-MMF2026]</a></td>
+  <td>La PMU, sincronizada por GPS/IRIG-B</td>
+  <td>Instalar la PMU sin resolver el reloj. Con el reloj malo la PMU entrega datos que parecen buenos y no lo son.</td>
+</tr>
+
+<tr class="r-cond">
+  <td><b>OPC UA</b></td>
+  <td>Valor + calidad + <b>dos</b> tiempos: sourceTimestamp y serverTimestamp <a href="#f-OPCUA-SRC-TS">[OPCUA-SRC-TS]</a></td>
+  <td class="cond"><b>SI, y separa cual</b></td>
+  <td>Resolucion del reloj del equipo; el estandar no fija una resolucion unica</td>
+  <td>La fuente pone el sourceTimestamp; el servidor pone el serverTimestamp</td>
+  <td>Usar el serverTimestamp como si fuera el momento del evento. Ese es el momento en que el servidor supo del valor, y se refresca aunque el valor no cambie.</td>
+</tr>
+
+<tr class="r-no">
+  <td><b>SNMP</b></td>
+  <td>Estado y contadores de la red: puertos, trafico, alarmas de equipos</td>
+  <td class="no"><b>NO como evento</b></td>
+  <td>—</td>
+  <td>El colector, al hacer la consulta</td>
+  <td>Usarlo como si fuera un registro de eventos de proceso. SNMP sirve para saber como esta la red, no cuando ocurrio un fenomeno electrico.</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+<span class="sello s-extraido">EXTRAIDO</span> Modbus, DNP3, OPC UA y CEN: fuente primaria con link.
+<span class="sello s-supuesto">SUPUESTO</span> 60870-5-104, 61850 MMS/GOOSE, 9-2 y SNMP: clasificacion segun el uso habitual en el rubro; no se cito el texto de la norma.
+</article><article class="bloque" id="modbus-detalle"><h3>Modbus: por que no tiene hora, y como se disfraza</h3>
+<p class="lead">El spec oficial de Modbus define cuatro tablas de datos: Discrete Input (bits, solo
+lectura), Coils (bits, lectura/escritura), Input Registers (palabras de 16 bits, solo lectura) y Holding
+Registers (palabras de 16 bits, lectura/escritura). <b>Ninguna de las cuatro tiene una columna de
+tiempo</b>.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-MODBUS-V1.1b3">MODBUS-V1.1b3</a>, seccion 4.3 (pagina del spec, 50 paginas)</cite>
+
+<h4>Lo que si existe, y no es lo mismo</h4>
+<p>Como el protocolo no lleva hora, algunos fabricantes la mandan <b>como datos</b>: reservan dos o mas
+registros para escribir una fecha y una hora, o implementan una extension tipo Enron Modbus. Eso no es
+estampa de tiempo del protocolo; es un acuerdo entre el equipo y quien lo lee.</p>
+
+<div class="callout">
+  <b>La pregunta que desarma el problema.</b> "El registro de hora que me estas mostrando, lo escribe el
+  equipo cuando ocurre el evento, o lo escribe el SCADA cuando hace la consulta?"
+  Si la respuesta es la segunda, el dato no tiene tiempo del evento: tiene tiempo de cuando alguien lo miro.
+</div>
+
+<p>Consecuencia practica: en una instalacion Modbus, la secuencia de eventos se reconstruye con el reloj
+del maestro, y la resolucion real es <b>el periodo de polling</b>, no menos. Si el maestro pregunta cada 5
+segundos, dos eventos que ocurrieron con 100 ms de diferencia aparecen simultaneos o en orden arbitrario.</p>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Consecuencia de ingenieria, no una frase del spec. El spec solo define que no hay campo de tiempo.</cite>
+
+<p>Esto no significa que Modbus sea malo. Significa que hay que saber <b>para que se usa</b>: leer un
+estado actual, integrar un equipo de terceros, operar una valvula. Para reconstruir una perturbacion se
+necesita otra cosa.</p>
+</article><article class="bloque" id="dnp3-detalle"><h3>DNP3: el tiempo es opcional y cambia el uso</h3>
+<p class="lead">DNP3 se diseno para no preguntar todo el tiempo: la estacion remota reporta los cambios
+como eventos. El tutorial del comite de subestaciones del IEEE lo dice directo: los datos reportados son
+<b>{Value, Quality, Timestamp}</b>, y los cambios se reportan como eventos <i>con o sin</b> timestamps</i>.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-IEEE1815-TUT">IEEE1815-TUT</a>, paginas 35-36</cite>
+
+<h4>La distincion que hay que saber de memoria</h4>
+<table class="tabla">
+<thead><tr><th>Tipo de dato DNP3</th><th>Trae timestamp?</th><th>Para que sirve</th></tr></thead>
+<tbody>
+<tr><td>Datos <b>estaticos</b> (el valor actual)</td><td>Normalmente no</td><td>Saber como esta ahora. Se lee al arrancar o despues de una perdida de datos.</td></tr>
+<tr><td><b>Eventos</b> (cambios, clase 1/2/3)</td><td><b>Opcional, por variacion del objeto</b></td><td>Reconstruir que paso y en que orden. Es la base de la secuencia de eventos.</td></tr>
+<tr><td><b>Objetos congelados</b></td><td><b>Opcional</b></td><td>Capturar un valor con su hora para facturar o auditar.</td></tr>
+</tbody>
+</table>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-IEEE1815-TUT">IEEE1815-TUT</a>, pagina 55: "Timestamp (optional: events &amp; frozen objects only)"</cite>
+
+<div class="callout">
+  <b>Regla de compra.</b> Al especificar un RTU o un equipo DNP3, pedir explicitamente que los eventos
+  se transmitan <b>con timestamp</b> y que el equipo tenga reloj propio sincronizado. Si no se pide, la
+  variacion por defecto puede no incluirlo, y despues no hay forma de recuperar ese tiempo.
+</div>
+
+<p>Detalle fino que sirve para cerrar bien una propuesta: los timestamps de DNP3 estan definidos en
+<b>UTC desde 2008</b>, lo que evita el desorden del horario de verano. Pero el tutorial advierte que
+algunos sistemas siguen usando hora local y que manejarlo "es un tema del proveedor". Si el cliente tiene
+equipos de marcas distintas, ese es un punto de friccion real y conviene sacarlo en la reunion tecnica.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-IEEE1815-TUT">IEEE1815-TUT</a>, pagina 137</cite>
+</article><article class="bloque" id="relojes-protocolos"><h3>Protocolos de sincronizacion: cual ofrecer</h3>
+<p class="lead">Los protocolos de tiempo no compiten entre si por "ser mejores": resuelven necesidades
+distintas. Elegir mal se paga en datos que no cuadran.</p>
+
+<table class="tabla">
+<thead><tr><th>Protocolo</th><th>Precision</th><th>Como viaja</th><th>Cuando es la respuesta</th></tr></thead>
+<tbody>
+<tr><td><b>NTP / SNTP</b></td><td>decenas de µs en LAN moderna <a href="#f-RFC5905">[RFC5905]</a>; ~10 ms basta para secuencia de eventos clasica <a href="#f-PTP-PUP-NIST">[PTP-PUP-NIST]</a></td><td>Por la red, sin cable dedicado</td><td>Cuando no se necesita comparar angulos entre equipos. Monitoreo general, logs, servidores.</td></tr>
+<tr><td><b>IRIG-B</b></td><td>Depende del reloj maestro; el Kronos declara 60 ns (99%) <a href="#f-KRONOS">[KRONOS]</a></td><td>Par trenzado, coaxil o fibra; modulada o no modulada</td><td>Cuando el equipo tiene puerto IRIG-B y se necesita tiempo robusto y probado. Es lo que pide el Coordinador para PMU <a href="#f-CEN-MMF2026">[CEN-MMF2026]</a>.</td></tr>
+<tr><td><b>PTP (IEEE 1588)</b></td><td>submicrosegundo con el perfil de utility <a href="#f-PTP-PUP-NIST">[PTP-PUP-NIST]</a></td><td>Ethernet, con soporte de redundancia PRP/HSR</td><td>Subestacion digital, bus de proceso, cuando el tiempo viaja por la misma red que los datos.</td></tr>
+<tr><td><b>PPS / PPM</b></td><td>pulso por segundo, sin informacion de fecha</td><td>Par dedicado</td><td>Sincronizar muestreo de proteccion. Necesita otro canal para saber que segundo es.</td></tr>
+</tbody>
+</table>
+<span class="sello s-extraido">EXTRAIDO</span>
+
+<h4>Lo que exige el Coordinador para una PMU</h4>
+<p>Esto es normativa chilena y conviene tenerlo a mano: la Tabla 7.1-1 del estudio del Modulo de Medicion
+Fasorial pide, entre otras cosas, <b>precison de sincronizacion dentro de 1 µs</b> con base de tiempo
+sincronizada por GPS, y <b>codigo de tiempo IRIG-B no modulada</b> (con PTP aceptado en casos de
+indisponibilidad de antena). La sincronizacion por reloj externo debe entrar por <b>puerto IRIG-B</b>.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-CEN-MMF2026">CEN-MMF2026</a>, Tabla 7.1-1, pagina 105 del PDF</cite>
+
+<div class="callout">
+  <b>Consecuencia comercial concreta.</b> Si el cliente esta obligado a instalar una PMU, el reloj no es
+  opcional ni "se ve despues": es parte del requerimiento. Cotizar la PMU sin el reloj es entregar un
+  proyecto que no va a pasar la puesta en servicio.
+</div>
+
+<div class="callout supuesto">
+  <b>SUPUESTO.</b> Cuando el cliente ya tiene un reloj GPS de otra marca y funciona, no proponer
+  reemplazarlo de entrada. Verificar primero si admite IRIG-B y PTP, y ofrecer solo lo que falta.
+</div>
+</article><article class="bloque" id="preguntas-protocolo"><h3>Las cuatro preguntas que resuelven cualquier discusion de protocolo</h3>
+<p class="lead">No hace falta memorizar todos los protocolos. Hace falta saber preguntar. Estas cuatro
+preguntas ordenan cualquier conversacion tecnica y, de paso, muestran dominio del tema.</p>
+
+<ol class="pasos">
+  <li><b>Para que se usa este dato?</b> — Mirar una pantalla, facturar, o reconstruir una falla son tres
+  necesidades distintas. La tercera es la que exige tiempo.</li>
+  <li><b>Quien pone la hora?</b> — El equipo que origina el evento, o el sistema que lo recibe. Si es el
+  segundo, la latencia de la red esta dentro del dato.</li>
+  <li><b>Con que reloj esta sincronizado ese equipo?</b> — GPS, IRIG-B, PTP, NTP, o ninguno. Si es
+  "ninguno", la estampa existe pero no significa nada entre equipos.</li>
+  <li><b>Que pasa si el enlace se cae?</b> — El equipo guarda el evento y lo entrega despues con su hora
+  original, o el evento se pierde. La diferencia define si el sistema sirve para post-operacion.</li>
+</ol>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Guion de conversacion de CONECTA, armado sobre las fuentes citadas arriba.</cite>
+
+<div class="callout">
+  <b>Por que estas preguntas venden.</b> El cliente rara vez tiene las respuestas. Cuando descubre que su
+  sistema actual no las cumple, la conversacion deja de ser sobre precio y pasa a ser sobre riesgo. Eso es
+  la Mina de Oro aplicada a lo tecnico.
+</div>
+</article></section><section class="capitulo" id="arquitectura"><div class="cap-head"><div class="cap-num">CAPITULO 05</div><h2>Arquitectura de comunicaciones</h2><div class="sub">Como se construye una, que elementos debe llevar, y que hay que dibujar para que no se caiga.</div></div><article class="bloque" id="que-es-arquitectura"><h3>Que es una arquitectura de comunicaciones</h3>
+<p class="lead">Una arquitectura de comunicaciones no es un dibujo con cajitas y flechas. Es la
+<b>decision sobre que pasa cuando algo falla</b>. Si el dibujo no responde esa pregunta, no es una
+arquitectura: es un inventario.</p>
+
+<p>Toda arquitectura de un sistema electrico industrial responde cinco preguntas. Si falta una, el
+diseño esta incompleto:</p>
+
+<table class="tabla">
+<thead><tr><th>Pregunta</th><th>Que define</th><th>Si no se responde</th></tr></thead>
+<tbody>
+<tr><td><b>1. Que datos viajan</b></td><td>Señales de proceso, estados, alarms, mediciones, archivos de evento</td><td>Se dimensiona mal la red y falta ancho de banda</td></tr>
+<tr><td><b>2. Con que protocolo</b></td><td>Como se lee cada equipo y quien pone el tiempo</td><td>Datos sin hora, o hora que no se puede comparar</td></tr>
+<tr><td><b>3. Por donde</b></td><td>Medio fisico, segmentacion, rutas, redundancia</td><td>Un solo cable tumba todo el sistema</td></tr>
+<tr><td><b>4. Que pasa si falla</b></td><td>Redundancia, buffers, retencion, modo degradado</td><td>Se pierden eventos justo cuando mas importan</td></tr>
+<tr><td><b>5. Quien responde</b></td><td>Frontera entre CONECTA, el cliente y terceros</td><td>Nadie se hace cargo del problema en la reunion dificil</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Metodo propio de CONECTA para disenar y revisar arquitecturas. No es un estandar publicado.</cite>
+
+<div class="callout">
+  <b>La prueba del dibujo.</b> Si el cliente puede tapar cualquier caja del diagrama con el dedo y
+  preguntar "y ahora que pasa?", y no hay respuesta, la arquitectura no esta terminada.
+</div>
+</article><article class="bloque" id="elementos"><h3>Los elementos que toda arquitectura debe llevar</h3>
+<p class="lead">Estos son los elementos que hay que dibujar y rotular. Un esquema al que le falta la
+sincronizacion o la frontera de responsabilidad no sirve para cotizar ni para discutir con el cliente.</p>
+
+<table class="tabla">
+<thead><tr><th>Elemento</th><th>Que debe mostrar</th><th>Por que es obligatorio</th></tr></thead>
+<tbody>
+<tr><td><b>Equipos de campo</b></td><td>Instrumentos, reles, medidores, transformadores de medida</td><td>Es donde nace el dato. Sin esto no se sabe que se esta midiendo.</td></tr>
+<tr><td><b>Nivel de control</b></td><td>Controlador, DCS, PLC, SIS</td><td>Define quien manda y quien solo observa.</td></tr>
+<tr><td><b>Nivel de adquisicion</b></td><td>RTU, gateway, merging unit, PMU</td><td>Define quien traduce y quien pone estampa de tiempo.</td></tr>
+<tr><td><b>Red y segmentos</b></td><td>Switches, VLANs, zonas, conductos, enlaces</td><td>Define la contencion. Sin segmentos, cualquier falla es total.</td></tr>
+<tr><td><b>Redundancia</b></td><td>PRP/HSR, hot standby, enlaces redundantes</td><td>Es la respuesta a "que pasa si falla".</td></tr>
+<tr><td><b>Sincronizacion</b></td><td>Reloj GPS y como llega a cada equipo (IRIG-B, PTP, NTP)</td><td>Sin reloj comun, las estampas no se comparan.</td></tr>
+<tr><td><b>Protocolos por enlace</b></td><td>Que protocolo va en cada flecha</td><td>Evita prometer una integracion que el equipo no soporta.</td></tr>
+<tr><td><b>Frontera de responsabilidad</b></td><td>Que es de CONECTA, que del cliente, que de un tercero</td><td>Es el limite contractual. Sin linea, no hay discusion posible.</td></tr>
+<tr><td><b>Nivel de aplicacion</b></td><td>SCADA, HMI, PDC, plataforma de datos, reportes</td><td>Es lo que el usuario ve y por lo que paga.</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Checklist propio de CONECTA. Los elementos tecnicos citados (IRIG-B, PTP, PRP/HSR) estan respaldados en el capitulo Protocolos.</cite>
+
+<div class="callout">
+  <b>El error frecuente.</b> Dibujar los equipos y olvidar el reloj. El reloj no es un accesorio del
+  esquema: es una de las flechas, y si no esta dibujado, nadie lo cotiza.
+</div>
+</article><article class="bloque" id="como-construir"><h3>Como se construye, paso a paso</h3>
+<p class="lead">El orden importa. Si se empieza por el equipo, la arquitectura termina justificando un
+producto. Si se empieza por la pregunta, el producto aparece solo.</p>
+
+<ol class="pasos">
+  <li><b>Definir el objetivo del sistema.</b> Que decision tiene que poder tomar el cliente que hoy no
+  puede. "Ver la planta" no es un objetivo; "saber que paso primero cuando se cayo" si lo es.</li>
+  <li><b>Inventariar lo que ya existe.</b> Equipos, protocolos, reloj, red, cableado. Lo que existe
+  condiciona mas que lo que se quiere comprar.</li>
+  <li><b>Decidir que se lee por protocolo y que se cablea.</b> Es la decision que mas plata mueve. Si la
+  señal ya esta en un IED, no se gasta una entrada.</li>
+  <li><b>Fijar la sincronizacion.</b> Que reloj, con que precision, y como llega a cada equipo que
+  necesita estampa. Ver capitulo Protocolos.</li>
+  <li><b>Segmentar y definir la redundancia.</b> Zonas, conductos, que enlace es critico y que pasa si
+  se cae.</li>
+  <li><b>Dibujar y rotular.</b> Protocolo en cada enlace, reloj dibujado, frontera marcada.</li>
+  <li><b>Recorrer las fallas.</b> Tapar cada caja y preguntar que pasa. Lo que no tiene respuesta vuelve
+  al paso 5.</li>
+</ol>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Procedimiento propio de CONECTA.</cite>
+
+<div class="callout">
+  <b>Regla de honestidad tecnica.</b> Si en el paso 2 el cliente dice "no se que protocolo usa ese
+  equipo", no se asume: se pide la ficha o se manda a levantar. Un protocolo supuesto es la causa mas
+  comun de un proyecto que no cierra en la puesta en servicio.
+</div>
+
+<h4>Que mirar cuando se revisa una arquitectura ajena</h4>
+<p>Cuando se revisa un diseño de otro (un cliente, un competidor, un integrador), estas son las preguntas
+que revelan rapido si el diseño piensa en fallas:</p>
+<ul class="lista">
+  <li>Hay un solo enlace entre dos zonas criticas?</li>
+  <li>La PMU tiene su reloj, y ese reloj admite IRIG-B?</li>
+  <li>El SCADA y el control comparten el mismo switch?</li>
+  <li>Quien guarda los eventos si el centro de control no esta disponible?</li>
+  <li>La frontera de responsabilidad esta escrita, o solo dibujada?</li>
+</ul>
+<span class="sello s-supuesto">SUPUESTO</span>
+</article><article class="bloque" id="arquitecturas-referencia"><h3>Tres arquitecturas de referencia</h3>
+<p class="lead">Estas tres se repiten en el negocio. Saberlas de memoria permite dibujar en una pizarra
+en la primera reunion, que es donde se gana la confianza tecnica.</p>
+
+<h4>A. Subestacion con PMU y PDC</h4>
+<p>Del campo al Coordinador: los transformadores de medida entregan a la PMU; la PMU recibe el tiempo por
+IRIG-B desde el reloj GPS; el dato va al PDC Local por la red de la subestacion; el PDC Local lo entrega
+al PDC Corporativo del Coordinador, con almacenamiento si se corta el enlace.</p>
+<p><b>Elementos obligatorios:</b> PMU, reloj GPS con salida IRIG-B, switch IEC 61850-3, PDC Local con
+licencia, enlace de al menos 120 kbps por punto de monitoreo, respaldo de alimentacion 8 horas.
+<a href="#f-CEN-MMF2026">CEN-MMF2026</a>, Tabla 7.1-1 y seccion 5.9.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+
+<h4>B. Reemplazo de RTU legacy</h4>
+<p>Del campo existente al centro de control, sin rehacer el cableado: los cables de campo llegan a
+tarjetas adaptadoras; el Orion I/O ocupa el mismo espacio de 3RU; la Orion emula el protocolo anterior y
+el SCADA no cambia su base de datos.</p>
+<p><b>Elementos obligatorios:</b> Orion I/O con tarjetas adaptadoras, Orion como RTU, switch, y el
+levantamiento del protocolo que hoy habla el SCADA del cliente.
+<a href="#f-ORION-RETROFIT">ORION-RETROFIT</a>.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+
+<h4>C. Bus de proceso digital (IEC 61850-9-2)</h4>
+<p>Donde los transformadores de medida se digitalizan en la merging unit y viajan como valores muestreados
+por la red. Aqui el tiempo no es un extra: es lo que permite que la proteccion diferencial compare muestras
+tomadas en lugares distintos.</p>
+<p><b>Elementos obligatorios:</b> merging unit sincronizada, red con PTP (perfil IEC/IEEE 61850-9-3) o
+IRIG-B, y verificacion del flag de sincronizacion de cada MU. <a href="#f-PTP-PUP-NIST">PTP-PUP-NIST</a>.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+
+<div class="callout supuesto">
+  <b>SUPUESTO.</b> En la mayoria de los proyectos chilenos de subestacion existente, la arquitectura que
+  se vende es la B, no la C. El bus de proceso completo es atractivo tecnicamente pero cambia demasiado
+  del sistema del cliente, y el riesgo de puesta en servicio se lo come el integrador.
+</div>
+</article></section><section class="capitulo" id="ciberseguridad"><div class="cap-head"><div class="cap-num">CAPITULO 06</div><h2>Ciberseguridad</h2><div class="sub">Que es en un sistema electrico, que exige la ley chilena, y que se puede vender de verdad.</div></div><article class="bloque" id="que-es-ciber"><h3>Que es ciberseguridad en un sistema electrico</h3>
+<p class="lead">En una oficina, un incidente de ciberseguridad se paga con datos o con plata. En una
+subestacion se paga con <b>consecuencia fisica</b>: un interruptor que se abre cuando no debe, una
+proteccion que no dispara, un transformador que se daña. Esa es la diferencia y es lo que hay que
+entender antes de vender.</p>
+
+<p>Por eso no se aplican los mismos criterios que en TI. En una red industrial el objetivo principal no es
+la confidencialidad: es la <b>disponibilidad</b> y la <b>integridad</b>. Un dato que no llega a tiempo es
+un dato inutil, aunque nadie lo haya visto.</p>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Criterio de ingenieria OT, consistente con las fuentes de este capitulo.</cite>
+
+<h4>Las cuatro cosas que se protegen</h4>
+<table class="tabla">
+<thead><tr><th>Se protege</th><th>Contra que</th><th>Ejemplo en subestacion</th></tr></thead>
+<tbody>
+<tr><td><b>Acceso</b></td><td>Quien puede entrar a un equipo y con que derechos</td><td>Un tecnico de otro proveedor con clave compartida de la RTU</td></tr>
+<tr><td><b>Flujo</b></td><td>Que trafico cruza de una zona a otra</td><td>La red corporativa del cliente conectada directo al bus de proceso</td></tr>
+<tr><td><b>Integridad</b></td><td>Que el dato llegue como salio</td><td>Un mando de TRIP falso</td></tr>
+<tr><td><b>Registro</b></td><td>Quien hizo que y cuando</td><td>Nadie sabe quien cambio una configuracion de proteccion</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+
+<div class="callout">
+  <b>La verdad incomoda.</b> Los protocolos industriales historicos no se diseñaron para ser seguros.
+  Modbus, por ejemplo, no tiene autenticacion ni cifrado: cualquier equipo que alcance el puerto puede
+  leer los registros. Por eso la proteccion no se resuelve en el protocolo: se resuelve en la
+  <b>arquitectura</b> (segmentacion, firewalls, control de acceso) y en el <b>equipo</b> (cuando soporta
+  autenticacion y registro).
+  <a href="#f-MODBUS-V1.1b3">MODBUS-V1.1b3</a> define solo el intercambio de bits y registros; no incluye
+  mecanismos de seguridad en el protocolo.
+</div>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-MODBUS-V1.1b3">MODBUS-V1.1b3</a> — el spec define el PDU de datos y las funciones; no define autenticacion ni cifrado.</cite>
+</article><article class="bloque" id="ley-chile"><h3>Que exige la normativa chilena</h3>
+<p class="lead">En Chile la referencia es la <b>Ley 21.663, Ley Marco de Ciberseguridad</b>, publicada en
+abril de 2024. No es una recomendacion: define quien esta obligado y quien fiscaliza.</p>
+
+<h4>Quien esta dentro del alcance</h4>
+<p>La ley aplica a los servicios calificados como esenciales y a los operadores de importancia vital. Son
+<b>servicios esenciales</b>, entre otros, los provistos por los organismos del Estado <b>y por el
+Coordinador Electrico Nacional</b>, los prestados bajo concesion de servicio publico, y los proveidos por
+instituciones privadas que realicen <b>generacion, transmision o distribucion electrica</b>,
+telecomunicaciones, agua potable, combustibles, e infraestructura digital.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-LEY21663">LEY21663</a>, Articulo 4 (ambito de aplicacion)</cite>
+
+<div class="callout">
+  <b>Traduccion comercial.</b> Practicamente todos los clientes de CONECTA en el sector electrico estan
+  dentro del alcance de la ley. Eso cambia la conversacion: la ciberseguridad deja de ser un "seria bueno
+  tenerlo" y pasa a ser una obligacion legal del cliente.
+</div>
+
+<h4>Los operadores de importancia vital</h4>
+<p>La Agencia Nacional de Ciberseguridad (ANCI) califica a los operadores de importancia vital. Los
+requisitos son dos: que la provision del servicio <b>dependa de redes y sistemas informaticos</b>, y que su
+afectacion, interceptacion, interrupcion o destruccion tenga un <b>impacto significativo</b> en la seguridad
+y el orden publico o en la provision continua de servicios esenciales. La calificacion se revisa al menos
+cada tres años.</p>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-LEY21663">LEY21663</a>, Articulos 5 y 6</cite>
+
+<div class="callout supuesto">
+  <b>SUPUESTO — pregunta de calificacion.</b> No se debe afirmar en una reunion que un cliente "es" o "no
+  es" operador de importancia vital: eso lo determina la ANCI. Lo que si se puede preguntar es si ya
+  recibio la comunicacion. Si la respuesta es "no se", ese cliente tiene un problema mas grande que el
+  proyecto que esta cotizando.
+</div>
+</article><article class="bloque" id="iec62443"><h3>El estandar tecnico: IEC 62443</h3>
+<p class="lead">La ley dice que hay que proteger. El estandar tecnico dice <b>como</b>. La referencia
+internacional para seguridad de sistemas de automatizacion y control industrial es la serie
+<b>IEC 62443</b>, porque es la que entiende el mundo OT y no el mundo de oficina.</p>
+
+<h4>Las cuatro ideas que hacen todo el trabajo</h4>
+<table class="tabla">
+<thead><tr><th>Idea</th><th>Que significa</th><th>Como se ve en un proyecto</th></tr></thead>
+<tbody>
+<tr><td><b>Zonas y conductos</b></td><td>Agrupar activos con requisitos de seguridad comunes en zonas, y controlar <b>todo</b> camino de comunicacion entre zonas como un conducto</td><td>Bus de proceso, red de subestacion, red corporativa: tres zonas, con firewall entre ellas</td></tr>
+<tr><td><b>Nivel de seguridad (SL 1-4)</b></td><td>Cada zona recibe un SL objetivo segun el riesgo que debe soportar: SL1 mal uso casual, hasta SL4 atacante de nivel estado-nacion</td><td>La diferencia entre el SL objetivo y el SL alcanzado es la hoja de ruta de remediacion</td></tr>
+<tr><td><b>Siete requerimientos fundacionales</b></td><td>Identificacion y autenticacion, control de uso, integridad del sistema, confidencialidad de datos, flujo de datos restringido, respuesta oportuna a eventos, disponibilidad de recursos</td><td>Cada zona se evalua contra estos siete, no contra una lista suelta</td></tr>
+<tr><td><b>Separacion de roles</b></td><td>Dueño del activo, integrador de sistemas y proveedor de producto, cada uno con obligaciones definidas</td><td>CONECTA es integrador: responde por como se integra, no por el firmware del fabricante</td></tr>
+</tbody>
+</table>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-IEC62443-SEC">IEC62443-SEC</a> — <b>fuente secundaria</b>: guia sobre la serie IEC 62443, no el texto de la norma (que es de pago). Para precision normativa hay que consultar la norma.</cite>
+
+<div class="callout">
+  <b>Por que "zonas y conductos" es lo primero.</b> La mayoria de los sistemas industriales tienen la red
+  plana: todo ve a todo. La segmentacion es lo que impide que un notebook infectado en la oficina llegue al
+  bus de proceso. Si el cliente no tiene segmentado, ese es el hallazgo, y es vendible como proyecto.
+</div>
+
+<h4>La separacion de roles, explicada para una propuesta</h4>
+<p>Este punto es el que mas problemas evita en el cierre. Cuando un cliente exige ciberseguridad, hay que
+dejar escrito <b>quien responde por que</b>:</p>
+<ul class="lista">
+  <li><b>Proveedor de producto:</b> responde por las capacidades de seguridad del equipo (autenticacion, registro, cifrado si lo soporta).</li>
+  <li><b>Integrador (CONECTA):</b> responde por el diseño de zonas, la configuracion de firewalls, el endurecimiento y la puesta en servicio.</li>
+  <li><b>Dueño del activo (el cliente):</b> responde por las politicas, las claves, los accesos y el monitoreo continuo.</li>
+</ul>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Aplicacion propia de la separacion de roles descrita en IEC62443-SEC. La asignacion concreta se negocia en el contrato.</cite>
+</article><article class="bloque" id="que-pide-sector"><h3>Que pide el sector electrico en concreto</h3>
+<p class="lead">Bajando a lo que un proyecto tiene que entregar, estas son las exigencias que aparecen
+efectivamente en los proyectos del sector electrico chileno.</p>
+
+<table class="tabla">
+<thead><tr><th>Exigencia</th><th>De donde viene</th><th>Que significa para la propuesta</th></tr></thead>
+<tbody>
+<tr><td><b>Segmentacion de red</b></td><td>IEC 62443 (zonas y conductos)</td><td>Firewall OT entre red corporativa y red de subestacion. No es opcional si el cliente esta bajo la ley.</td></tr>
+<tr><td><b>Control de acceso</b></td><td>IEC 62443 (identificacion y autenticacion)</td><td>Sin claves compartidas, con roles. Los equipos deben soportar autenticacion.</td></tr>
+<tr><td><b>Registro y trazabilidad</b></td><td>IEC 62443 (respuesta oportuna a eventos)</td><td>Que quede registro de quien cambio que. Se convierte en requerimiento del equipo.</td></tr>
+<tr><td><b>Cumplimiento de estandares de ciberseguridad de la normativa sectorial</b></td><td>Coordinador Electrico, puesta en servicio de PMU</td><td>Se verifica expresamente antes de integrar una PMU: no es un anexo, es requisito de puesta en servicio.</td></tr>
+<tr><td><b>Clasificacion y obligaciones legales</b></td><td>Ley 21.663</td><td>El cliente puede tener deberes de reporte de incidentes y de gestion de riesgo.</td></tr>
+</tbody>
+</table>
+<span class="sello s-extraido">EXTRAIDO</span>
+<cite><a href="#f-CEN-MMF2026">CEN-MMF2026</a> (pagina 102, verificacion de puesta en servicio: "Cumplimiento de los Estándares de Ciberseguridad requeridos en la normativa sectorial eléctrica") · <a href="#f-IEC62443-SEC">IEC62443-SEC</a> · <a href="#f-LEY21663">LEY21663</a></cite>
+
+<div class="callout">
+  <b>El detalle que sirve en una propuesta.</b> En la puesta en servicio de una PMU, el Coordinador exige
+  verificar el cumplimiento de los estandares de ciberseguridad de la normativa sectorial. Si la propuesta
+  no incluye ese trabajo, el cliente descubre el faltante cuando ya esta en la etapa de integracion.
+</div>
+
+<h4>Que se puede vender de ciberseguridad, sin inventar</h4>
+<div class="callout supuesto">
+  <b>SUPUESTO — oferta realista.</b> Los BOMs historicos de CONECTA no traen equipos de ciberseguridad en
+  la planilla de "Equi. Mat. Arr. Sub.": son servicios y estudios (<a href="#f-CONECTA-BOM">CONECTA-BOM</a>).
+  Por eso la ciberseguridad se vende como <b>servicio de ingenieria</b>: levantamiento, diseño de zonas,
+  configuracion de firewalls, endurecimiento, y acompañamiento en puesta en servicio. Cuando hay hardware,
+  entra como firewall OT o como capacidad del propio equipo (Orion soporta NERC CIP, por ejemplo).
+</div>
+</article></section><section class="capitulo" id="cotizacion"><div class="cap-head"><div class="cap-num">CAPITULO 07</div><h2>Armar una cotizacion</h2><div class="sub">Los diez elementos que toda cotizacion debe llevar, en orden, con un ejemplo completo.</div></div><article class="bloque" id="los-diez"><h3>Los diez elementos, y por que cada uno existe</h3>
+<p class="lead">Una cotizacion no es un precio. Es un documento que define <b>que se vende, hasta donde, y
+en que condiciones</b>. Si falta un elemento, alguien va a discutir despues. Estos son los diez, en el
+orden en que aparecen.</p>
+
+<table class="tabla">
+<thead><tr><th>#</th><th>Elemento</th><th>Que debe contener</th><th>Que evita</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><b>Resumen ejecutivo</b></td><td>Que problema resuelve, que se propone, cuanto cuesta y en cuanto tiempo. Media pagina, sin jerga.</td><td>Que el que firma no entienda la propuesta y la mande a "revisar despues"</td></tr>
+<tr><td>2</td><td><b>Alcance</b></td><td>Que esta incluido, con limite claro: cantidad de equipos, cantidad de puntos, cantidad de subestaciones.</td><td>El "yo creia que estaba incluido"</td></tr>
+<tr><td>3</td><td><b>Arquitectura</b></td><td>Diagrama con equipos, protocolos por enlace, sincronizacion y frontera de responsabilidad.</td><td>Prometer una integracion que el equipo no soporta</td></tr>
+<tr><td>4</td><td><b>Suministros</b></td><td>Lista de equipos, uno por linea, con modelo y cantidad. Sin precio unitario si el cliente no lo pidio.</td><td>Que discutan el margen de un tornillo en vez del proyecto</td></tr>
+<tr><td>5</td><td><b>Servicios</b></td><td>Ingenieria, programacion, montaje, puesta en servicio, capacitacion. Con horas o con entregables.</td><td>Regalar el trabajo que es donde esta el margen</td></tr>
+<tr><td>6</td><td><b>Plazos de entrega</b></td><td>Plazo desde la OC, y plazos por hito. Distinguir entrega de suministro y termino de servicio.</td><td>Confundir "llega el equipo" con "queda operativo"</td></tr>
+<tr><td>7</td><td><b>Lugar de entrega</b></td><td>Direccion, bodega o sitio. Quien recibe y con que documento.</td><td>Equipos perdidos en una bodega del cliente</td></tr>
+<tr><td>8</td><td><b>Precio</b></td><td>Total, moneda, si incluye impuestos, y validez de la oferta.</td><td>Que la oferta "sirva" un año despues con otro tipo de cambio</td></tr>
+<tr><td>9</td><td><b>Hitos de pago</b></td><td>Porcentajes y contra que documento se factura cada uno.</td><td>Financiar el proyecto con caja propia</td></tr>
+<tr><td>10</td><td><b>Consideraciones y exclusiones</b></td><td>Que asume CONECTA y que hace el cliente. Todo lo que NO esta incluido.</td><td>El conflicto en terreno cuando falta el andamio</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Estructura propia de CONECTA, coherente con la plantilla de Valorizacion (Resumen, Ficha, Calculo HH, Equi. Mat. Arr. Sub., Expenses). Ver <a href="#f-CONECTA-BOM">CONECTA-BOM</a>.</cite>
+</article><article class="bloque" id="resumen-ejecutivo"><h3>1. Resumen ejecutivo: lo que se lee y lo que se firma</h3>
+<p class="lead">Este es el unico elemento que el gerente va a leer completo. Si no convence en media
+pagina, el resto del documento no se lee.</p>
+
+<h4>Estructura en cuatro parrafos cortos</h4>
+<ol class="pasos">
+  <li><b>La situacion</b> — en una frase, el hecho tecnico o regulatorio que crea la necesidad. Con dato y fuente cuando exista.</li>
+  <li><b>Lo que se propone</b> — en una frase, la solucion. Sin siglas sin explicar.</li>
+  <li><b>Lo que el cliente obtiene</b> — el resultado verificable, no la caracteristica del equipo.</li>
+  <li><b>Lo que cuesta y cuando</b> — monto, plazo y condicion de pago principal.</li>
+</ol>
+<span class="sello s-supuesto">SUPUESTO</span>
+
+<div class="callout">
+  <b>El error tipico del resumen ejecutivo.</b> Convertirlo en una lista de productos. Si el resumen
+  empieza con "el Orion LX+ es una RTU...", el gerente dejo de leer. La RTU va en Suministros; el resumen
+  habla de lo que le pasa al cliente.
+</div>
+
+<h4>Frases que no se usan</h4>
+<p>Por definicion de CONECTA, no se usan estas expresiones en documentos comerciales:</p>
+<ul class="lista">
+  <li>"piloto gratuito", "sin costo", "demo gratuita", "sin compromiso"</li>
+  <li>"revolucionario", "líder mundial", "unico en Chile", "la mejor solucion"</li>
+  <li>"Calcular ROI" como boton o llamado a la accion</li>
+  <li>Promesas de plazo que no estan respaldadas por el fabricante</li>
+</ul>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Reglas de comunicacion de CONECTA. Se registran aqui porque son parte de la cotizacion, no solo del correo.</cite>
+</article><article class="bloque" id="alcance-exclusiones"><h3>2 y 10. Alcance y exclusiones: las dos caras del mismo limite</h3>
+<p class="lead">El alcance y las exclusiones son el mismo documento visto de dos lados. Un alcance sin
+exclusiones es una promesa abierta, y una promesa abierta se cobra en el margen.</p>
+
+<h4>Como escribir el alcance para que no crezca</h4>
+<p>Todo alcance se escribe con <b>unidades contables</b>. "Implementacion de SCADA" no es un alcance.
+"Implementacion de SCADA para 1 subestacion, con 1.200 puntos, 3 pantallas y 1 base de eventos" si lo es.</p>
+
+<table class="tabla">
+<thead><tr><th>Dimensionar por</th><th>Porque</th><th>Ejemplo</th></tr></thead>
+<tbody>
+<tr><td>Cantidad de sitios</td><td>Cada sitio tiene traslado, montaje y puesta en servicio propios</td><td>"1 subestacion" vs "3 subestaciones"</td></tr>
+<tr><td>Cantidad de puntos / señales</td><td>Es lo que consume programacion y bases de datos</td><td>"1.200 puntos DNP3"</td></tr>
+<tr><td>Cantidad de equipos</td><td>Define el suministro y la importacion</td><td>"2 PMU, 1 PDC local"</td></tr>
+<tr><td>Iteraciones de ingenieria</td><td>Cada revision del cliente son horas</td><td>"2 revisiones de ingenieria de detalle; adicionales se cotizan"</td></tr>
+<tr><td>Dias de terreno</td><td>El montaje y la puesta en servicio se cobran por dia-persona</td><td>"5 dias de puesta en servicio, 2 especialistas"</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+
+<h4>Las exclusiones que nunca pueden faltar</h4>
+<div class="callout">
+  <b>Checklist de exclusiones obligatorias.</b> Estas se repiten en todos los proyectos de CONECTA y
+  olvidarlas es la causa mas comun de perdida de margen:
+  <ul class="lista" style="margin-top:8px">
+    <li><b>Obras civiles</b> — sala, fundaciones, canalizaciones, perforaciones.</li>
+    <li><b>Cableado de campo</b> — tendido de cables entre equipos y tablero, cuando no esta en el alcance.</li>
+    <li><b>Andamios, izaje y acceso</b> — si el equipo pesa o va en altura.</li>
+    <li><b>Suministro electrico</b> — la alimentacion desde la red segura es del cliente salvo indicacion contraria.</li>
+    <li><b>Configuracion de la red del cliente</b> — VLANs, firewall corporativo, apertura de puertos.</li>
+    <li><b>Licencias del cliente</b> — lo que ya tiene y lo que debe comprar. La licencia PDC Local es adicional a la corporativa.</li>
+    <li><b>Datos de entrada</b> — listado de puntos, planos, hojas de datos. Si el cliente no los entrega, se detiene el plazo.</li>
+    <li><b>Aprobaciones de terceros</b> — permisos de la empresa dueña del PDC Local, validaciones del Coordinador.</li>
+  </ul>
+</div>
+<span class="sello s-extraido">EXTRAIDO</span> (licencia adicional del PDC)
+<cite><a href="#f-CEN-MMF2026">CEN-MMF2026</a>, pagina 103: "Costos asociados a la integración de los nuevos puntos, incluyendo licencia de integración al PDC Local (adicional a la licencia al PDC corporativo)"</cite>
+</article><article class="bloque" id="servicios-precio"><h3>5, 8 y 9. Servicios, precio e hitos de pago</h3>
+<p class="lead">El suministro de equipos tiene poco margen y mucha competencia. Los servicios son donde
+CONECTA aporta y donde se defiende el precio. Por eso se listan y se valorizan por separado.</p>
+
+<h4>Los servicios que siempre hay que nombrar</h4>
+<table class="tabla">
+<thead><tr><th>Servicio</th><th>Que entrega</th><th>Como se dimensiona</th></tr></thead>
+<tbody>
+<tr><td><b>Ingenieria de detalle</b></td><td>Arquitectura, planos, listado de puntos, hojas de datos</td><td>Horas por documento, con numero de revisiones</td></tr>
+<tr><td><b>Programacion y configuracion</b></td><td>RTU, HMI, base de datos, logica</td><td>Horas por punto o por equipo</td></tr>
+<tr><td><b>Montaje y supervisión</b></td><td>Instalacion en terreno</td><td>Dias-persona por sitio</td></tr>
+<tr><td><b>Puesta en servicio</b></td><td>Pruebas SAT, integracion, documentacion de cierre</td><td>Dias-persona, incluye traslados</td></tr>
+<tr><td><b>Capacitacion</b></td><td>Transferencia al equipo del cliente</td><td>Horas o sesiones</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+
+<h4>Precio: lo que no puede faltar</h4>
+<ul class="lista">
+  <li><b>Moneda</b> y si esta afecto a variacion. Si el equipo es importado, el precio no es fijo por dos años.</li>
+  <li><b>Impuestos</b>: decir explicitamente si el monto es neto o incluye IVA.</li>
+  <li><b>Validez de la oferta</b> con fecha de caducidad concreta.</li>
+  <li><b>Si el precio es firme o estimado</b>. Un estimado presentado como firme es un problema futuro.</li>
+</ul>
+<span class="sello s-supuesto">SUPUESTO</span>
+
+<div class="callout">
+  <b>Regla dura.</b> Nunca poner un precio en un manual, en una ficha de producto ni en un catalogo. El
+  precio sale del cotizador, con la composicion y el margen que corresponda. Un precio de memoria es la
+  forma mas rapida de vender bajo el costo.
+</div>
+
+<h4>Hitos de pago: como se protege el flujo</h4>
+<p>Un hito de pago no es solo un porcentaje: es un <b>documento contra el que se factura</b>. Si no se puede
+nombrar el documento, el hito no existe.</p>
+<table class="tabla">
+<thead><tr><th>Hito</th><th>Contra que se factura</th></tr></thead>
+<tbody>
+<tr><td>Anticipo</td><td>Orden de compra aceptada y, si aplica, boleta de garantia</td></tr>
+<tr><td>Hito de ingenieria</td><td>Entrega y aprobacion del paquete de ingenieria de detalle</td></tr>
+<tr><td>Hito de suministro</td><td>Equipos entregados en el lugar acordado, con acta de recepcion</td></tr>
+<tr><td>Hito de puesta en servicio</td><td>Protocolo de pruebas firmado y sistema operativo</td></tr>
+<tr><td>Saldo / garantia</td><td>Termino del periodo de garantia o entrega de documentacion final</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+</article><article class="bloque" id="ejemplo"><h3>Ejemplo completo, de punta a punta</h3>
+<div class="callout ejemplo-aviso">
+  <b>EJEMPLO DIDACTICO — TODAS LAS CIFRAS SON FICTICIAS.</b> Este ejemplo no es una oferta, no refleja
+  costos reales de CONECTA ni precios de proveedor. Sirve para ver la <b>forma</b> del documento. Cualquier
+  precio real sale del cotizador de CONECTA.
+</div>
+
+<p class="lead">Caso: un parque solar en operacion tiene que instalar PMU porque su capacidad supera el
+umbral que fija el Coordinador. El cliente no tiene reloj GPS en la subestacion.</p>
+
+<h4>1. Resumen ejecutivo</h4>
+<div class="doc">
+  <p>El Coordinador Electrico exige un punto de monitoreo fasorial en las instalaciones de generacion con
+  potencia instalada igual o superior a 9 MW. El parque no cuenta hoy con medicion fasorial ni con una base
+  de tiempo sincronizada que cumpla la precision requerida, por lo que no puede integrarse al Modulo de
+  Medicion Fasorial en las condiciones que la normativa exige.</p>
+  <p>Se propone el suministro e instalacion de una unidad de medicion fasorial sincronizada, junto con el
+  reloj GPS y la integracion al concentrador, dejando el punto verificado y documentado para su puesta en
+  servicio.</p>
+  <p>Al termino, el parque cuenta con un punto de monitoreo fasorial operativo, con estampa de tiempo
+  sincronizada a 1 µs, integrado a su PDC local y con la documentacion de puesta en servicio exigida.</p>
+  <p>Plazo estimado de 14 semanas desde la orden de compra. El detalle economico y los hitos de pago se
+  presentan en la seccion 8.</p>
+</div>
+
+<h4>2. Alcance</h4>
+<div class="doc">
+  <ul class="lista">
+    <li>1 punto de monitoreo fasorial en la subestacion del parque, en el punto de control del PPC.</li>
+    <li>1 unidad PMU clase M conforme IEEE 60255-118-1-2018, tasa de 50 muestras por segundo.</li>
+    <li>1 reloj GPS con salida IRIG-B no modulada y capacidad PTP.</li>
+    <li>1 gabinete de montaje en rack con borneras, protecciones y etiquetado.</li>
+    <li>Integracion de la PMU al PDC local del cliente y verificacion de entrega al PDC corporativo.</li>
+    <li>Configuracion de la PMU, pruebas de laboratorio y pruebas en terreno (SAT).</li>
+    <li>Documentacion de puesta en servicio: planos de conexion, hojas de datos, ajustes y protocolo de pruebas.</li>
+    <li>Capacitacion de 1 sesion de 4 horas al equipo de operacion.</li>
+  </ul>
+</div>
+
+<h4>3. Arquitectura</h4>
+<div class="doc">
+  <p>El trazado de la solucion, con los elementos obligatorios del capitulo Arquitectura:</p>
+  <pre class="diagrama">
+  TTCC / TTPP (nucleos de medida)
+        |
+        v
+  +-------------+   AC analogica    +----------------+
+  | Bornes SE   |------------------>|  PMU (M-class) |
+  +-------------+                   +--------+-------+
+                                             |  C37.118
+        +----------------+                   v
+        |  Reloj GPS     |--IRIG-B-->  +-----------+
+        |  (IRIG-B + PTP)|             |   Red     |
+        +----------------+             |  61850-3  |
+                                       +-----+-----+
+                                             | >= 120 kbps
+                                             v
+                                     +---------------+
+                                     |  PDC Local    |
+                                     |  del cliente  |
+                                     +-------+-------+
+                                             |
+                                             v
+                                   PDC Corporativo CEN
+  </pre>
+  <p><b>Sincronizacion:</b> reloj GPS con salida IRIG-B no modulada hacia la PMU, con precision dentro de
+  1 µs. <b>Respaldo:</b> PMU y comunicaciones alimentadas desde la red segura de la subestacion, con
+  autonomia minima de 8 horas. <b>Redundancia:</b> enlace secundario al PDC local segun lo exija la
+  arquitectura vigente del cliente.</p>
+  <p><b>Frontera de responsabilidad:</b> CONECTA entrega hasta el puerto del PDC local del cliente,
+  incluyendo la configuracion de la PMU. La configuracion del PDC local y su enlace al PDC corporativo son
+  responsabilidad del cliente, con acompañamiento de CONECTA.</p>
+</div>
+
+<h4>4. Suministros</h4>
+<div class="doc">
+  <table class="tabla">
+  <thead><tr><th>Item</th><th>Descripcion</th><th>Cant.</th></tr></thead>
+  <tbody>
+  <tr><td>1</td><td>Unidad de medicion fasorial clase M, IEEE 60255-118-1-2018, con entrada de tiempo IRIG-B</td><td>1</td></tr>
+  <tr><td>2</td><td>Reloj satelital GPS con salida IRIG-B no modulada y soporte PTP, redundancia de alimentacion</td><td>1</td></tr>
+  <tr><td>3</td><td>Antena GPS, cable y kit de montaje</td><td>1</td></tr>
+  <tr><td>4</td><td>Gabinete rack con borneras, protecciones y etiquetado</td><td>1</td></tr>
+  <tr><td>5</td><td>Switch industrial endurecido IEC 61850-3 para la red de la subestacion</td><td>1</td></tr>
+  <tr><td>6</td><td>Fuente de alimentacion redundante para el conjunto</td><td>1</td></tr>
+  </tbody>
+  </table>
+</div>
+
+<h4>5. Servicios</h4>
+<div class="doc">
+  <table class="tabla">
+  <thead><tr><th>Servicio</th><th>Entregable</th><th>Cantidad</th></tr></thead>
+  <tbody>
+  <tr><td>Ingenieria de detalle</td><td>Arquitectura, planos de conexion, listado de puntos, hojas de datos</td><td>2 revisiones incluidas</td></tr>
+  <tr><td>Configuracion de PMU</td><td>Equipo configurado y respaldado</td><td>1 punto</td></tr>
+  <tr><td>Pruebas de laboratorio</td><td>Informe de verificacion de medidas</td><td>1 juego</td></tr>
+  <tr><td>Montaje y supervisión</td><td>Equipo instalado en gabinete y en sala</td><td>3 dias-persona</td></tr>
+  <tr><td>Puesta en servicio (SAT)</td><td>Protocolo de pruebas firmado</td><td>3 dias-persona, 2 especialistas</td></tr>
+  <tr><td>Integracion al PDC local</td><td>Datos visibles en el PDC del cliente</td><td>2 dias-persona</td></tr>
+  <tr><td>Capacitacion</td><td>Sesion de transferencia</td><td>1 sesion de 4 horas</td></tr>
+  </tbody>
+  </table>
+</div>
+
+<h4>6. Plazos de entrega</h4>
+<div class="doc">
+  <ul class="lista">
+    <li>Ingenieria de detalle: 4 semanas desde la OC.</li>
+    <li>Suministro de equipos: 10 semanas desde la aprobacion de la ingenieria.</li>
+    <li>Montaje: 1 semana desde la recepcion en sitio.</li>
+    <li>Puesta en servicio: 1 semana desde el termino del montaje.</li>
+    <li><b>Plazo total estimado: 14 semanas</b> desde la OC, sujeto a la entrega de datos de entrada por el cliente.</li>
+  </ul>
+</div>
+
+<h4>7. Lugar de entrega</h4>
+<div class="doc">
+  <ul class="lista">
+    <li>Equipos: subestacion del parque, direccion a confirmar, en horario coordinado con el cliente.</li>
+    <li>Recepcion: contraparte tecnica designada por el cliente, con acta de recepcion y verificacion de embalaje.</li>
+    <li>Documentacion digital: por correo al responsable designado.</li>
+  </ul>
+</div>
+
+<h4>8. Precio</h4>
+<div class="doc">
+  <table class="tabla">
+  <thead><tr><th>Concepto</th><th>Monto (USD, ficticio)</th></tr></thead>
+  <tbody>
+  <tr><td>Suministros</td><td>48.000</td></tr>
+  <tr><td>Servicios de ingenieria y puesta en servicio</td><td>26.000</td></tr>
+  <tr><td><b>Total neto</b></td><td><b>74.000</b></td></tr>
+  </tbody>
+  </table>
+  <p>Monto neto, no incluye IVA. Moneda USD. Oferta valida por 30 dias desde la fecha de emision. Precio
+  sujeto a variacion de tipo de cambio sobre el componente importado si la OC se emite despues de la
+  validez.</p>
+</div>
+
+<h4>9. Hitos de pago</h4>
+<div class="doc">
+  <table class="tabla">
+  <thead><tr><th>Hito</th><th>%</th><th>Contra</th></tr></thead>
+  <tbody>
+  <tr><td>Anticipo</td><td>30%</td><td>Orden de compra aceptada</td></tr>
+  <tr><td>Ingenieria</td><td>20%</td><td>Aprobacion del paquete de ingenieria de detalle</td></tr>
+  <tr><td>Suministro</td><td>30%</td><td>Acta de recepcion de equipos en sitio</td></tr>
+  <tr><td>Puesta en servicio</td><td>20%</td><td>Protocolo de pruebas firmado</td></tr>
+  </tbody>
+  </table>
+</div>
+
+<h4>10. Consideraciones y exclusiones</h4>
+<div class="doc">
+  <p><b>Asume CONECTA:</b></p>
+  <ul class="lista">
+    <li>Dimensionamiento del punto de monitoreo y de la base de tiempo.</li>
+    <li>Configuracion de la PMU y verificacion de entrega al PDC local del cliente.</li>
+    <li>Documentacion de puesta en servicio de lo suministrado.</li>
+    <li>Traslados y estadia del personal segun los dias-persona indicados.</li>
+  </ul>
+  <p><b>Asume el cliente:</b></p>
+  <ul class="lista">
+    <li>Punto de conexion a la red segura de la subestacion, con disponibilidad durante los trabajos.</li>
+    <li>Acceso a la subestacion, permisos de trabajo y sala para el personal.</li>
+    <li>Entrega del listado de puntos, planos de la subestacion y hojas de datos de los TTCC y TTPP al inicio.</li>
+    <li>Licencia del PDC local y su enlace al PDC corporativo del Coordinador.</li>
+    <li>Gestion y aprobacion ante el Coordinador de la puesta en servicio del punto de monitoreo.</li>
+  </ul>
+  <p><b>No incluido:</b></p>
+  <ul class="lista">
+    <li>Obras civiles, fundaciones, canalizaciones y perforaciones.</li>
+    <li>Tendido de cables de fuerza o de señal desde los TTCC y TTPP hasta el gabinete.</li>
+    <li>Andamios, izaje o trabajos en altura.</li>
+    <li>Configuracion de la red corporativa del cliente (VLANs, firewall, apertura de puertos).</li>
+    <li>Licencia del PDC corporativo y cualquier licencia no listada en Suministros.</li>
+    <li>Estudios electricos, de coordinacion de protecciones o de modelacion.</li>
+    <li>Revisiones de ingenieria adicionales a las dos incluidas.</li>
+  </ul>
+</div>
+
+<div class="callout">
+  <b>Por que este ejemplo sirve.</b> Cada seccion responde una pregunta que el cliente va a hacer, en el
+  orden en que la va a hacer. Y las exclusiones no estan escondidas al final en letra chica: estan
+  nombradas, porque cada una es una conversacion que se adelanta.
+</div>
+</article></section><section class="capitulo" id="metodologia"><div class="cap-head"><div class="cap-num">CAPITULO 08</div><h2>Metodologia comercial</h2><div class="sub">Como se califica, como se conversa y que se responde. La parte que no es tecnica y decide la venta.</div></div><article class="bloque" id="escalera"><h3>La Escalera al Exito: cuatro escalones, sin saltarse ninguno</h3>
+<p class="lead">La metodologia de CONECTA ordena el trabajo comercial en cuatro escalones. La regla de
+hierro es una sola: <b>no se sube un escalon si el anterior no esta cerrado</b>. En particular, si la
+capacidad de respuesta (R) no esta al 100%, esta prohibido pasar al Escalon 2.</p>
+
+<table class="tabla">
+<thead><tr><th>Escalon</th><th>Formula</th><th>Pregunta</th></tr></thead>
+<tbody>
+<tr><td><b>1</b></td><td>P x M x R</td><td>Podemos cumplir?</td></tr>
+<tr><td><b>2</b></td><td>N x Pv x Map</td><td>Donde esta el dinero?</td></tr>
+<tr><td><b>3</b></td><td>F x Mt x E</td><td>Donde ponemos el foco?</td></tr>
+<tr><td><b>4</b></td><td>Pv x Mt x Pc</td><td>Cuál es el plan?</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Metodologia de ventas de CONECTA (framework de trabajo, no una norma). Detalle en la skill escalera-al-exito.</cite>
+
+<h4>Escalon 1 — P x M x R</h4>
+<ul class="lista">
+  <li><b>P (Producto):</b> que vendemos exactamente. Vector de diferenciacion, defendibilidad, el 10% de innovacion.</li>
+  <li><b>M (Mercado):</b> quien compra. Es obligatorio o discrecional. El mercado crece.</li>
+  <li><b>R (Respuesta):</b> tenemos HW y SW, equipo certificado, proveedor competitivo, tiempo de respuesta. Semaforo: verde subir, amarillo subir con condiciones, <b>rojo no subir</b>.</li>
+</ul>
+<div class="callout">
+  <b>Los tres caminos cuando R falla.</b> A) cambiar el componente debil · B) redefinir el producto para
+  un nicho donde si alcanza · C) diferenciar por servicio, no por hardware. Este ultimo es el mas usado en
+  CONECTA, porque permite vender con el equipo que hay.
+</div>
+
+<h4>Escalon 2 — N x Pv x Map: donde esta el dinero</h4>
+<p>Numero de clientes potenciales, potencial de venta por nicho, y mapeo de esfuerzo. El resultado es una
+matriz de priorizacion: el foco esta en alto potencial con bajo esfuerzo.</p>
+<table class="tabla">
+<thead><tr><th></th><th>Alto Pv</th><th>Medio Pv</th><th>Bajo Pv</th></tr></thead>
+<tbody>
+<tr><td><b>Bajo esfuerzo</b></td><td>Foco primario</td><td>Volumen</td><td>Mantenimiento</td></tr>
+<tr><td><b>Medio esfuerzo</b></td><td>Foco primario</td><td>Evaluar</td><td>Descartar</td></tr>
+<tr><td><b>Alto esfuerzo</b></td><td>Evaluar ROI</td><td>Solo estrategico</td><td>Descartar</td></tr>
+</tbody>
+</table>
+
+<h4>Escalon 3 — F x Mt x E: donde ponemos el foco</h4>
+<p><b>F</b> es el foco (producto core, servicio incluido, recurrente, upsell). <b>Mt</b> es el Trivector:
+las tres ventajas unicas que ningun competidor puede copiar rapido, y que deben aparecer tanto en las bases
+tecnicas como en el resumen ejecutivo. <b>E</b> es la ecuacion de posicionamiento: precio x valor x
+posicionamiento.</p>
+
+<h4>Escalon 4 — Pv x Mt x Pc: el plan</h4>
+<p>Plan de cuenta en cinco fases: <b>Inteligencia, Contacto, Demo, Propuesta, Expansion</b>. Sin plan de
+cuenta no hay pipeline real.</p>
+
+<div class="callout">
+  <b>La regla del TAE.</b> Si no esta en la tabla de acciones estrategicas, no existe. Y una cuenta sin
+  Campeon interno es una cuenta huerfana: muere en el primer recorte de presupuesto.
+</div>
+</article><article class="bloque" id="mina-de-oro"><h3>La Mina de Oro: vender al miedo, no al dolor</h3>
+<p class="lead">El gerente de mantenimiento no compra "mejorar la eficiencia". Teme que una falla pare la
+planta y que lo despidan. Ese es el dolor oculto, y es el que decide.</p>
+
+<h4>Antes de la reunion, cinco verificaciones</h4>
+<ol class="pasos">
+  <li>Quien es el comprador: nombre, cargo, antiguedad.</li>
+  <li>Que paso en esa planta en los ultimos doce meses.</li>
+  <li>Quien es su jefe y que le pide.</li>
+  <li>Que pasaria si esta persona falla en su trabajo.</li>
+  <li>Hay un competidor que ya los visito.</li>
+</ol>
+
+<h4>Las preguntas que abren la conversacion</h4>
+<p><b>Para gerente de planta:</b></p>
+<ul class="lista">
+  <li>Cuál fue el peor dia en esta planta en el ultimo año.</li>
+  <li>Si un equipo critico falla un viernes a las 8 de la noche, quien recibe la llamada.</li>
+  <li>Que KPI le quita el sueño.</li>
+  <li>Cuanto cuesta una hora de parada no planificada.</li>
+</ul>
+<p><b>Para gerente de mantenimiento:</b></p>
+<ul class="lista">
+  <li>Cuál es el equipo que mas veces han reparado este año.</li>
+  <li>Se han quedado sin repuesto critico en el peor momento.</li>
+  <li>Como saben que un equipo va a fallar, o se enteran cuando ya fallo.</li>
+  <li>Si tuviera que defender su presupuesto mañana, que dato le falta.</li>
+</ul>
+<p><b>Para innovacion o TI:</b></p>
+<ul class="lista">
+  <li>Que dato de la planta le llega tarde.</li>
+  <li>Si pudiera ver una sola cosa en tiempo real que hoy no ve, cual seria.</li>
+  <li>Hay alguien que se resiste a digitalizar, y por que.</li>
+  <li>Que proyecto de digitalizacion no salio como esperaban.</li>
+</ul>
+<p><b>Para CFO o finanzas:</b></p>
+<ul class="lista">
+  <li>Como evaluan el retorno de una inversion en tecnologia.</li>
+  <li>Que proveedor actual les gustaria tener de respaldo.</li>
+  <li>Si este proyecto sale mal, quien asume el costo politico interno.</li>
+</ul>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Guion de ventas de CONECTA. No es una fuente externa.</cite>
+
+<h4>Las señales de que se toco la Mina de Oro</h4>
+<p>Cuando el cliente dice alguna de estas frases, <b>hay que dejar de vender</b> y escuchar:</p>
+<ul class="lista">
+  <li>"Si esto falla, me cortan la cabeza."</li>
+  <li>"No puedo dormir pensando en eso."</li>
+  <li>"Ya intentamos arreglarlo y no funciono."</li>
+  <li>"Mi jefe me pregunta todas las semanas por este numero."</li>
+  <li>"Prefiero no pensar en lo que costaria que esto salga mal."</li>
+</ul>
+
+<div class="callout">
+  <b>Como se conecta con lo tecnico.</b> La estampa de tiempo y la sincronizacion son la respuesta tecnica
+  a "no se que paso primero". Ese es el puente entre el capitulo Protocolos y este. Cuando el cliente dice
+  "cuando tenemos un evento, discutimos dos dias que paso", la respuesta ya no es precio: es trazabilidad.
+</div>
+</article><article class="bloque" id="objeciones"><h3>Objeciones: que responder sin inventar</h3>
+<p class="lead">Cada objecion tiene un ancla (la pregunta que la reencuadra), un dato y un rebote. La regla
+de oro: <b>atacar el contenido con hechos, proteger el contexto con respeto</b>.</p>
+
+<table class="tabla">
+<thead><tr><th>Objecion</th><th>Ancla</th><th>Rebote</th></tr></thead>
+<tbody>
+<tr><td>"Es muy caro"</td><td>"Comparado con que referencia?"</td><td>"Y si el proyecto se paga solo en menos de doce meses?"</td></tr>
+<tr><td>"Quien mas lo usa en Chile"</td><td>Nombrar referencias reales y verificables</td><td>"En su rubro serian pioneros. Ventaja o riesgo?"</td></tr>
+<tr><td>"Ya tengo proveedor"</td><td>"No venimos a reemplazar. Agregamos inteligencia."</td><td>"Que es lo que su proveedor actual no les esta dando?"</td></tr>
+<tr><td>"Mandame info por correo"</td><td>"Prefiero mostrarte en 20 minutos. Jueves?"</td><td>"Para enviarte algo util: que te preocupa mas de tu operacion hoy?"</td></tr>
+<tr><td>"Sin presupuesto este año"</td><td>"El proyecto se cae por CAPEX o por prioridad?"</td><td>"Si se paga solo en menos de un año, cambia la conversacion?"</td></tr>
+<tr><td>"Y si no funciona"</td><td>"Por eso acotamos el alcance a una fase verificable."</td><td>"Que necesitaria ver en 30 dias para sentirse seguro?"</td></tr>
+<tr><td>"No tengo el dato tecnico"</td><td>"Entonces el primer entregable es levantarlo. Se cotiza."</td><td>"Quien en su equipo puede confirmar protocolos y reloj?"</td></tr>
+</tbody>
+</table>
+<span class="sello s-supuesto">SUPUESTO</span>
+<cite>Matriz de objeciones de CONECTA. Detalle por cliente en la skill conecta-objeciones.</cite>
+
+<div class="callout">
+  <b>Prohibido.</b> Ofrecer piloto sin costo, demo gratuita o prueba sin compromiso. Si el cliente pide
+  probar, la respuesta es un <b>alcance acotado cotizado</b>, no un regalo. Regalar la prueba destruye el
+  precio del proyecto completo.
+</div>
+
+<h4>Datos que se pueden citar con fuente</h4>
+<table class="tabla">
+<thead><tr><th>Si el cliente pregunta por...</th><th>Lo que se puede decir (con fuente)</th></tr></thead>
+<tbody>
+<tr><td>Precision de medicion Bitronics</td><td>0,2s, calibrada individualmente, MTBF 40 años, garantia 10 años <a href="#f-BITRONICS">[BITRONICS]</a></td></tr>
+<tr><td>Precision de reloj</td><td>Kronos: 60 ns (99%), IRIG-B con extensiones C37.118, perfiles PTP <a href="#f-KRONOS">[KRONOS]</a></td></tr>
+<tr><td>Retrofit sin recablear</td><td>Tarjetas adaptadoras para D20, SNW, Telegyr, Telvent, ACS; mismo espacio 3RU <a href="#f-ORION-RETROFIT">[ORION-RETROFIT]</a></td></tr>
+<tr><td>Que exige el Coordinador a una PMU</td><td>Clase M, 50 muestras/s, 1 µs, IRIG-B, 8 horas de respaldo, 120 kbps <a href="#f-CEN-MMF2026">[CEN-MMF2026]</a></td></tr>
+</tbody>
+</table>
+<span class="sello s-extraido">EXTRAIDO</span>
+
+<div class="callout supuesto">
+  <b>SUPUESTO — lo que NO se dice.</b> No afirmar que un competidor es "peor" sin evidencia. No prometer
+  plazos que el fabricante no confirmo. No dar precios de memoria. Y no afirmar que un cliente esta o no
+  obligado por la Ley 21.663: eso lo determina la ANCI.
+</div>
+</article></section>
+
+<section class="fuentes" id="fuentes">
+  <h2>Fuentes</h2>
+  <p>Cada afirmacion tecnica del manual apunta a una de estas fuentes. Las que tienen link directo se
+  pueden abrir desde aca. Las marcadas como fuente secundaria se declaran como tales. Ninguna cifra del
+  manual sale de memoria.</p>
+  <div class="tabla-scroll" style="border:none">
+  <table class="fuentes-tabla">
+    <thead><tr><th>ID</th><th>Documento</th><th>Tipo</th><th>Que respalda</th></tr></thead>
+    <tbody><tr id="f-BITRONICS"><td class="fid">BITRONICS</td><td><a href="https://www.novatechautomation.com/products/bitronics-power-measurement" target="_blank" rel="noopener">Bitronics Power Measurement — pagina de producto</a><div class="fautor">NovaTech Automation</div></td><td><span class="tipo t-fabricante">Fabricante</span></td><td class="fnota">Texto de la pagina: 'All products are individually calibrated to maintain 0.2s precision, even when you use external split-core CTs'; 'With an MTBF of 40 years'; garantia de 10 anos; 'With optional external CTs, you can install without taking an outage'. DGM = Bitronics M661 + sensores Lindsey LEA + cableado + OrionMX opcional.</td></tr>
+<tr id="f-CATALOGO-86"><td class="fid">CATALOGO-86</td><td><a href="file:///Users/victorvilche/.hermes/skills/conecta/producto-industria-mapping/references/catalogo-lineas.md" target="_blank" rel="noopener">Catalogo consolidado de 86 lineas por categoria y partner</a><div class="fautor">Skill producto-industria-mapping (references/catalogo-lineas.md)</div></td><td><span class="tipo t-interno-medido">Medido interno</span></td><td class="fnota">Primera linea del archivo: '# Catalogo consolidado de 86 lineas por categoria y partner'. Regla del archivo: 'sin precios, solo specs verificables'. Contiene 10 categorias: Control y automatizacion (SUPCON), Seguridad funcional, Instrumentacion de campo, Software industrial e IA, Diagnostico predictivo (PRIDE), Infraestructura de planta, Subestacion y proteccion, Red OT y ciberseguridad (Belden/Hirschmann), Medicion y calidad de energia (SATEC), Servicios CONECTA. Verificado en disco: existe, 59 lineas.</td></tr>
+<tr id="f-CEN-ATSM"><td class="fid">CEN-ATSM</td><td><a href="https://www.coordinador.cl/wp-content/uploads/2026/07/Informe-del-Estudio-Modulo-de-Medicion-Fasorial-2026.pdf" target="_blank" rel="noopener">Anexo Tecnico Sistema de Monitoreo (ATSM) de la NT SyCS, septiembre 2020 — citado indirectamente</a><div class="fautor">Coordinador Electrico Nacional</div></td><td><span class="tipo t-regulador-citado">Regulador (citado)</span></td><td class="fnota">AVISO: NO se encontro URL publica directa del ATSM (la raiz coordinador.cl devuelve 403 a curl y no hay archivo con nombre ATSM). Lo que se afirma va citado a traves de CEN-MMF2026 pag. 3, que transcribe: 'El Articulo 63 del Anexo Tecnico Sistema de Monitoreo (ATSM) de la Norma Tecnica de Seguridad y Calidad de Servicio (NT SyCS) establece que el Coordinador Electrico Nacional debera realizar, a mas tardar el 31 de julio de cada ano, un estudio sobre instalacion, implementacion, revision y actualizacion del modulo de medicion fasorial'. Y: el MMF permite verificar los requerimientos del Articulo 4-28 de la NT SyCS. Si se necesita el ATSM original, pedirlo a Victor o bajarlo del portal de normativa del Coordinador.</td></tr>
+<tr id="f-CEN-MMF2024"><td class="fid">CEN-MMF2024</td><td><a href="https://www.coordinador.cl/wp-content/uploads/2024/07/Informe-Estudio-Modulo-de-Medicion-Fasorial-2024.pdf" target="_blank" rel="noopener">Estudio para la Implementacion del Modulo de Medicion Fasorial, Julio 2024</a><div class="fautor">Coordinador Electrico Nacional</div></td><td><span class="tipo t-regulador">Regulador</span></td><td class="fnota">52 paginas. Confirma tasa de muestreo 50 muestras/segundo.</td></tr>
+<tr id="f-CEN-MMF2026"><td class="fid">CEN-MMF2026</td><td><a href="https://www.coordinador.cl/wp-content/uploads/2026/07/Informe-del-Estudio-Modulo-de-Medicion-Fasorial-2026.pdf" target="_blank" rel="noopener">Estudio para la Implementacion del Modulo de Medicion Fasorial, Julio 2026</a><div class="fautor">Coordinador Electrico Nacional, Depto. Modelacion y Aplicaciones EMS</div></td><td><span class="tipo t-regulador">Regulador</span></td><td class="fnota">113 paginas. Tabla 7.1-1 especificaciones de equipamiento (pag. 105 del PDF). Seccion 5.1 punto de monitoreo >= 9 MW (pag. 72). Seccion 5.9 ancho de banda 120 kbps (pag. 100).</td></tr>
+<tr id="f-CONECTA-BOM"><td class="fid">CONECTA-BOM</td><td><a href="file:///Users/victorvilche/orca/projects/ConectaCotizador/data/calibracion_boms.json" target="_blank" rel="noopener">Costos y composicion de BOMs historicos por linea</a><div class="fautor">Repo ConectaCotizador — data/calibracion_boms.json y data/costos_hardware.json</div></td><td><span class="tipo t-interno-medido">Medido interno</span></td><td class="fnota">Extraido de BOMs reales por ZIP+XML, cero LLM. n por linea: RTU 23, SCADA 41, EDAC 50, Repro 57. El manual usa SOLO la composicion (que componente va en que linea), NO las cifras, por decision de Victor.</td></tr>
+<tr id="f-IEC62443-SEC"><td class="fid">IEC62443-SEC</td><td><a href="https://www.risk-aperture.com/resources/iec-62443-explained.html" target="_blank" rel="noopener">IEC 62443, Explained — guia de la serie (fuente SECUNDARIA)</a><div class="fautor">Risk Aperture, actualizado junio 2026</div></td><td><span class="tipo t-secundaria">secundaria</span></td><td class="fnota">AVISO: es una guia, NO el texto de la norma (IEC 62443 es de pago). Lo que se cita de aqui: la serie cubre la seguridad de sistemas de automatizacion y control industrial (IACS); ideas centrales = zonas y conductos, nivel de seguridad objetivo SL 1-4 (SL1 mal uso casual, SL4 atacante de nivel estado-nacion), siete requerimientos fundacionales (identificacion y autenticacion, control de uso, integridad del sistema, confidencialidad de datos, flujo de datos restringido, respuesta oportuna a eventos, disponibilidad de recursos) y separacion de roles (dueno del activo, integrador, proveedor de producto). Si se necesita precisión normativa, comprar/consultar la norma.</td></tr>
+<tr id="f-IEEE1815-TUT"><td class="fid">IEEE1815-TUT</td><td><a href="https://ewh.ieee.org/cmte/substations/scm0/Portland%20Meeting/Conference%20PDFs/tutorials/2014-05-18_Tutorial_IEEE_1815%28DNP3%29-Farquharson_Preuss-Ver%201.0%282%29.pdf" target="_blank" rel="noopener">IEEE Std. 1815 (DNP3) Tutorial</a><div class="fautor">C. Preuss (Black & Veatch), R. Farquharson (DNP Users Group) — IEEE Substations Committee</div></td><td><span class="tipo t-estandar">Estandar</span></td><td class="fnota">369 paginas. Pag. 55: 'Timestamp (optional: events & frozen objects only)'. Pag. 137: DNP3 timestamps en UTC desde 2008. Pag. 35: eventos con o sin timestamp.</td></tr>
+<tr id="f-KRONOS"><td class="fid">KRONOS</td><td><a href="https://www.novatechautomation.com/products/kronos-satellite-clocks" target="_blank" rel="noopener">Kronos Satellite Clocks — pagina de producto</a><div class="fautor">NovaTech Automation</div></td><td><span class="tipo t-fabricante">Fabricante</span></td><td class="fnota">60 ns (99%) desviacion maxima de tiempo; salidas IRIG-B no modulada/modulada, PPS/PPM, NTP/SNTP, PTP; perfiles PTP UDP, 802.3, IEEE C37.238-2011, IEEE C37.238-2016, IEC 61850-9-3:2016; PRP/HSR IEC 62439-3 en 3R; holdover TCXO 9 ms/dia, OCXO <100 us/dia; IRIG-B con extensiones IEEE C37.118; constelaciones GPS/GALILEO/BEIDOU/GLONASS.</td></tr>
+<tr id="f-LEY21663"><td class="fid">LEY21663</td><td><a href="https://www.bcn.cl/leychile/navegar/imprimir?idNorma=1202434&idVersion=2025-03-01" target="_blank" rel="noopener">Ley 21663 — Ley Marco de Ciberseguridad</a><div class="fautor">Biblioteca del Congreso Nacional de Chile (texto oficial, version 2025-03-01)</div></td><td><span class="tipo t-regulador">Regulador</span></td><td class="fnota">Articulo 4: ambito de aplicacion. Son servicios esenciales los provistos por los organismos del Estado y por el Coordinador Electrico Nacional, los bajo concesion de servicio publico, y los de instituciones privadas que realicen generacion, transmision o distribucion electrica, telecomunicaciones, infraestructura digital, agua potable, combustibles, etc. Articulo 5: la ANCI califica operadores de importancia vital; requisitos = el servicio depende de redes y sistemas informaticos, y su afectacion tiene impacto significativo. Articulo 6: revision de la calificacion al menos cada 3 anos.</td></tr>
+<tr id="f-MODBUS-V1.1b3"><td class="fid">MODBUS-V1.1b3</td><td><a href="http://www.pusr.com/download/LonHand/Modbus_Application_Protocol_V1_1b3%20tap.pdf" target="_blank" rel="noopener">MODBUS Application Protocol Specification V1.1b3</a><div class="fautor">Modbus Organization, 26 abril 2012</div></td><td><span class="tipo t-estandar">Estandar</span></td><td class="fnota">50 paginas. Seccion 4.3: cuatro tablas primarias (Discrete Input, Coils, Input Registers, Holding Registers) de bits y words de 16 bits. Cero ocurrencias de 'timestamp' en todo el documento (grep verificado).</td></tr>
+<tr id="f-OPCUA-SRC-TS"><td class="fid">OPCUA-SRC-TS</td><td><a href="https://reference.opcfoundation.org/v104/Core/docs/Part4/7.7.3" target="_blank" rel="noopener">OPC Unified Architecture Part 4: Services, 7.11.3 SourceTimestamp</a><div class="fautor">OPC Foundation</div></td><td><span class="tipo t-estandar">Estandar</span></td><td class="fnota">sourceTimestamp: tiempo aplicado por la fuente del dato; nunca cambia una vez asignado; debe ser UTC.</td></tr>
+<tr id="f-OPCUA-SRV-TS"><td class="fid">OPCUA-SRV-TS</td><td><a href="https://reference.opcfoundation.org/Core/Part4/7.11.4/" target="_blank" rel="noopener">OPC Unified Architecture Part 4: Services, 7.11.4 ServerTimestamp</a><div class="fautor">OPC Foundation</div></td><td><span class="tipo t-estandar">Estandar</span></td><td class="fnota">serverTimestamp: tiempo en que el servidor recibio o supo el valor. Puede refrescarse aunque el valor no cambie (ejemplo del documento: cada 0,5 s).</td></tr>
+<tr id="f-ORION-IO-1MS"><td class="fid">ORION-IO-1MS</td><td><a href="https://www.novatechautomation.com/resource/orion-i-o-catalog" target="_blank" rel="noopener">Orion I/O — catalogo de producto</a><div class="fautor">NovaTech Automation</div></td><td><span class="tipo t-fabricante">Fabricante</span></td><td class="fnota">Texto del catalogo: 'Orion I/O is designed for high performance 12V dc to 125V dc monitoring and control applications in electrical substations including 1ms SOE Recording, circuit breaker TRIP/CLOSE, higher-speed control'. Tarjeta DI de 16 puntos: 'High speed; suitable for 1ms SOE recording'. 64 I/O discretas en 2 RU.</td></tr>
+<tr id="f-ORION-RETROFIT"><td class="fid">ORION-RETROFIT</td><td><a href="https://www.novatechautomation.com/solutions/es-legacy-rtu-retrofit" target="_blank" rel="noopener">Retrofit de RTU Obsoleta — pagina de solucion (es)</a><div class="fautor">NovaTech Automation</div></td><td><span class="tipo t-fabricante">Fabricante</span></td><td class="fnota">Retrofit para RTU D20, SNW, Telegyr, Telvent y ACS. Tarjetas adaptadoras permiten la mayoria de las actualizaciones sin recablear. Kit reemplaza el espacio de 3RU. Emulacion de protocolo: el cambio de RTU puede ser transparente al SCADA sin modificar base de datos.</td></tr>
+<tr id="f-PTP-PUP-NIST"><td class="fid">PTP-PUP-NIST</td><td><a href="https://www.nist.gov/system/files/documents/2020/11/18/20160900_PacWorld_Kirrmann%2bDickerson_038_043_IEC_IEEE_61850-9-3.pdf" target="_blank" rel="noopener">Precision Time Protocol Profile (IEC/IEEE 61850-9-3) — PAC World</a><div class="fautor">H. Kirrmann (Solutil) y W. Dickerson (Arbiter Systems), 2016. Alojado en nist.gov</div></td><td><span class="tipo t-paper">Paper</span></td><td class="fnota">6 paginas. SNTP ~10 ms suficiente para secuencia de eventos; perfil 9-3 garantiza submicrosegundo tras 15 TCs o 3 BC; error de fase 0,1 grado equivale a 5 us de error de tiempo; 1 us mas que suficiente para PMU; Sync cada 1 s.</td></tr>
+<tr id="f-RFC5905"><td class="fid">RFC5905</td><td><a href="https://www.rfc-editor.org/rfc/rfc5905.html" target="_blank" rel="noopener">RFC 5905 — Network Time Protocol Version 4: Protocol and Algorithms Specification</a><div class="fautor">D. Mills et al., IETF, junio 2010</div></td><td><span class="tipo t-estandar">Estandar</span></td><td class="fnota">NTPv4 extiende la precision potencial a decenas de microsegundos con workstations modernas y LAN rapidas.</td></tr></tbody>
+  </table>
+  </div>
+</section>
+
+<section class="comentarios" id="comentarios">
+  <h2>Comentarios y revisión</h2>
+  <p>Deja tu observación acá. Se necesita una cuenta de GitHub; cada comentario queda registrado
+  con autor y fecha, y no se puede editar el documento sin que quede rastro.</p>
+  <div id="utterances-hilo"></div>
+  <noscript>Para comentar, activa JavaScript. Los comentarios se guardan como Issues del repositorio.</noscript>
+</section>
+
+<footer>
+  Manual tecnico comercial · CONECTA Ingenieria · Documento de uso interno.<br>
+  Construido con fuentes verificables. Si una afirmacion no tiene sello, no afirma nada tecnico.
+</footer>
+</main>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var input = document.getElementById('buscar');
+  var count = document.getElementById('res-count');
+  var bloques = Array.prototype.slice.call(document.querySelectorAll('article.bloque'));
+
+  // --- Buscador sobre el contenido de cada bloque ---
+  input.addEventListener('input', function(){
+    var q = input.value.trim().toLowerCase();
+    if(!q){
+      bloques.forEach(function(b){ b.style.display=''; b.classList.remove('oculto'); });
+      document.querySelectorAll('section.capitulo').forEach(function(s){ s.style.display=''; });
+      count.textContent = '';
+      return;
+    }
+    var hits = 0;
+    bloques.forEach(function(b){
+      var txt = b.textContent.toLowerCase();
+      var ok = txt.indexOf(q) !== -1;
+      b.style.display = ok ? '' : 'none';
+      if(ok) hits++;
+    });
+    // ocultar capitulos sin resultados
+    document.querySelectorAll('section.capitulo').forEach(function(s){
+      var visibles = s.querySelectorAll('article.bloque:not([style*="display: none"])').length;
+      s.style.display = visibles ? '' : 'none';
+    });
+    count.textContent = hits + ' bloque(s) encontrado(s)';
+  });
+
+  // --- Resaltar enlace activo al hacer scroll ---
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav ul li a'));
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){ l.classList.remove('active'); });
+        var l = links.find(function(x){ return x.getAttribute('href') === '#' + e.target.id; });
+        if(l) l.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-15% 0px -70% 0px'});
+  bloques.forEach(function(b){ if(b.id) obs.observe(b); });
+
+  // --- Autoevaluacion ---
+  document.querySelectorAll('.quiz-item').forEach(function(item){
+    var btns = item.querySelectorAll('.quiz-btn');
+    btns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var ok = btn.dataset.ok === '1';
+        var fb = item.querySelector('.quiz-fb');
+        item.querySelectorAll('.quiz-btn').forEach(function(b){ b.style.borderColor='var(--line)'; });
+        btn.style.borderColor = ok ? 'var(--medido)' : '#f87171';
+        fb.textContent = ok ? 'Correcto. ' + (fb.dataset.ok || '')
+                            : 'No. ' + (fb.dataset.no || '');
+        fb.style.color = ok ? 'var(--medido)' : '#f87171';
+      });
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  var d = document.getElementById('utterances-hilo');
+  if(!d) return;
+  var s = document.createElement('script');
+  s.src = 'https://utteranc.es/client.js';
+  s.setAttribute('repo', 'vvilche/conecta-manual-tecnico-comercial');
+  s.setAttribute('issue-term', 'pathname');
+  s.setAttribute('label', 'comentario');
+  s.setAttribute('theme', 'github-dark');
+  s.setAttribute('crossorigin', 'anonymous');
+  s.async = true;
+  d.appendChild(s);
+})();
+</script>
+
+</body>
+</html>
