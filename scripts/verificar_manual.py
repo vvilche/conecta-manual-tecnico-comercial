@@ -66,7 +66,14 @@ ver = (RAIZ / "VERSION").read_text(encoding="utf-8").strip()
 fuentes = json.loads((RAIZ / "data/fuentes.json").read_text(encoding="utf-8"))["fuentes"]
 
 check("version vigente", f"Version {ver} · generado {HOY}" in html, ver)
-check("8 capitulos / 33 bloques", html.count('class="capitulo"') == 8 and html.count('class="bloque"') == 33)
+
+# Los conteos se derivan de los capitulos reales, no se escriben a mano:
+# un numero que se escribe dos veces se desfasa.
+n_caps = len(CAPITULOS)
+n_bloques = sum(len(c["bloques"]) for c in CAPITULOS)
+check("un capitulo por bloque de contenido",
+      html.count('class="capitulo"') == n_caps and html.count('class="bloque"') == n_bloques,
+      f"{n_caps} capitulos, {n_bloques} bloques")
 check("tabla de fuentes completa", html.count('<tr id="f-') == len(fuentes), f"{len(fuentes)} fuentes")
 check("comentarios activos", html.count("utteranc.es/client.js") == 1)
 check("link al historial", "github.com/vvilche/conecta-manual-tecnico-comercial" in html)

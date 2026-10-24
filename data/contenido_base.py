@@ -46,6 +46,7 @@ INTRO = {
         ("Las seis lineas", "Lo que el cotizador trata como linea de negocio, y que se compone en cada una."),
         ("Producto", "Que componente resuelve que problema, y en que linea del catalogo cae."),
         ("Protocolos", "La tabla que evita el error mas caro: creer que todo protocolo trae estampa de tiempo."),
+        ("Casos de uso: SATEC y SUPCON", "Los dos partners de mayor portafolio, equipo por equipo, con lo que no se puede prometer."),
         ("Arquitectura de comunicaciones", "Como se construye una, que elementos debe llevar, y que mirar cuando algo falla."),
         ("Ciberseguridad", "Que exige la ley chilena y el estandar tecnico, y que se puede vender de verdad."),
         ("Armar una cotizacion", "Los diez elementos que debe llevar, con un ejemplo completo."),

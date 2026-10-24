@@ -99,6 +99,34 @@
       "tipo": "interno-medido",
       "nota": "Primera linea del archivo: '# Catalogo consolidado de 86 lineas por categoria y partner'. Regla del archivo: 'sin precios, solo specs verificables'. Contiene 10 categorias: Control y automatizacion (SUPCON), Seguridad funcional, Instrumentacion de campo, Software industrial e IA, Diagnostico predictivo (PRIDE), Infraestructura de planta, Subestacion y proteccion, Red OT y ciberseguridad (Belden/Hirschmann), Medicion y calidad de energia (SATEC), Servicios CONECTA. Verificado en disco: existe, 59 lineas."
     },
+    "SATEC": {
+      "titulo": "SATEC Global — catalogo de productos",
+      "autor": "SATEC (Israel). Matriz de conocimiento SATEC de CONECTA en disco: orca/projects/Satec/matriz_conocimiento_satec.html",
+      "url": "https://www.satec-global.com/products/",
+      "tipo": "fabricante",
+      "nota": "Portafolio de 24 productos en 8 familias: PQ Clase A (PM180, PM17x PRO, PRO Series, EDL180), serie 17x (PM175 EN50160, PM174 IEEE 1159, PM172), hibridos revenue+PQ (EM720, EM920), PMU (PMU PRO + modulo PM180), multicircuito BFM (BFM-II, BFM136, BFM-DFR), compactos (PM130 PLUS, PM135, EM132, EM133), software (Expertpower, PAS) y accesorios (HACS, RGM180, ETC, VRM). Multi-protocolo nativo: Modbus, DNP3, IEC 61850, IEC 60870-5-101/104, BACnet, C37.118.2. Casos de uso y de estudio extraidos de la matriz en disco. AVISO: SATEC NO fabrica PDC ni concentrador de fasores; su PMU PRO transmite C37.118.2 hacia un PDC de terceros."
+    },
+    "SUPCON": {
+      "titulo": "SUPCON — catalogo global",
+      "autor": "SUPCON Technology. Skills de CONECTA: supcon-dcs-ecs700, supcon-instruments, supcon-software-platform, supcon-pride, supcon-valves, supcon-control-room",
+      "url": "https://global.supcon.com/",
+      "tipo": "fabricante",
+      "nota": "Portafolio: control (ECS-700 DCS, TCS-500 SIS), instrumentacion (transmisores CXT ±0,035% y CJT, flujometros EMF/LUGB/SF20/YHLW, nivel SL90 radar 80 GHz, temperatura W, detectores DMD/DMC), valvulas y posicionador CVP2000, software e IA (supOS, PRIDE, APC, TPT). CXT tiene WirelessHART y 5G RedCap como opcion de pedido — NO decir que no las tiene."
+    },
+    "SUPCON-ECS700": {
+      "titulo": "SUPCON WebField ECS-700 DCS",
+      "autor": "SUPCON. Skill supcon-dcs-ecs700 de CONECTA",
+      "url": "https://global.supcon.com/",
+      "tipo": "fabricante",
+      "nota": "DCS numero uno en China con 19,2% de participacion (dato ARC citado por el material del fabricante), CMMI nivel 5, CE, G3 anticorrosion, 30.000+ bases instaladas. 60+ casos de desplazamiento documentados: 16 vs Yokogawa CS3000/CENTUM-VP, 16 vs Honeywell TPS/PKS, 3 vs Bailey Symphony, 4 vs Safeguard 400. Certificacion IEC 62443-4-1&2 (SL1) y Achilles. AVISO: los datos de mercado provienen del material del fabricante, no de una fuente independiente verificada en este manual."
+    },
+    "SUPCON-PRIDE": {
+      "titulo": "SUPCON PRIDE — plataforma de diagnostico predictivo de activos",
+      "autor": "SUPCON. Skill supcon-pride de CONECTA",
+      "url": "https://global.supcon.com/",
+      "tipo": "fabricante",
+      "nota": "Plataforma sobre supOS: 31.000+ estrategias de mantenimiento, 11.000+ casos de falla, refresco de datos <=5 s. Apps: Device Portal, AI Assistant, Equipment Loop, Valve, Transmitter, ICS, Flowmeter, Solenoid Valve, Cabinet, Pipeline Leakage, Boiler, Pump. Equipos rotativos: 1.566 tipos de falla. Stiction de valvulas inteligentes con 4 metodos, no inteligentes con 3. Caso documentado: 2.800+ valvulas y transmisores monitoreados, 38 valvulas con excepcion de 454. Referencias: CNOOC Huizhou, Jiangsu Oji Paper, Hubei Sanning, Shaanxi Yanchang Petroleum."
+    },
     "BITRONICS": {
       "titulo": "Bitronics Power Measurement — pagina de producto",
       "autor": "NovaTech Automation",
