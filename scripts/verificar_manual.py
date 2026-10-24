@@ -2,7 +2,8 @@
 """Verificacion del manual. Uso: python3 scripts/verificar_manual.py
 
 No es una suite de tests: son chequeos de comportamiento sobre el build real.
-Cubre lo que puede fallar en silencio: version, guia vs capitulos, citas, fugas.
+Cubre lo que puede fallar en silencio: version, guia vs capitulos, citas, fugas,
+y que cada cifra del manual exista tambien en la nota de su fuente.
 Cada chequeo dice QUE comprueba; si algo falla, nombra el archivo culpable.
 """
 import datetime
@@ -18,6 +19,10 @@ RAIZ = Path(__file__).resolve().parent.parent
 PY = sys.executable
 HOY = datetime.date.today().strftime("%d-%m-%Y")
 fallos = []
+
+sys.path.insert(0, str(RAIZ / "data"))
+from contenido import CAPITULOS  # noqa: E402
+from contenido_base import INTRO  # noqa: E402
 
 
 def check(nombre, cond, detalle=""):
@@ -44,17 +49,15 @@ try:
     (tmp / "VERSION").unlink()
     check("sin VERSION no explota", build(tmp).returncode == 0)
     check("sin VERSION dice sin-version", "sin-version" in (tmp / "index.html").read_text(encoding="utf-8"))
-
-    # ---------- B. la guia nombra los capitulos reales, con su titulo exacto ----------
-    sys.path.insert(0, str(tmp / "data"))
-    from contenido import CAPITULOS
-    from contenido_base import INTRO
-
-    reales = [c["titulo"] for c in CAPITULOS]
-    guia = [t for t, _ in INTRO["como_leer"]]
-    check("guia = titulos reales de los capitulos", guia == reales, f"{guia} vs {reales}" if guia != reales else f"{len(guia)} capitulos")
 finally:
     shutil.rmtree(tmp, ignore_errors=True)
+
+# ---------- B. la guia nombra los capitulos reales, con su titulo exacto ----------
+reales = [c["titulo"] for c in CAPITULOS]
+guia = [t for t, _ in INTRO["como_leer"]]
+check("guia = titulos reales de los capitulos", guia == reales,
+      f"{guia} vs {reales}" if guia != reales else f"{len(guia)} capitulos")
+check("capitulos sin id duplicado", len({c["id"] for c in CAPITULOS}) == len(CAPITULOS))
 
 # ---------- C. el repo real construye y queda consistente ----------
 check("build del repo", build(RAIZ).returncode == 0)
@@ -81,6 +84,23 @@ check("sin rutas del Mac", "/Users/victorvilche" not in html)
 check("sin montos de costo", not re.search(r"\$\s?[\d.]{3,}", html))
 check("audit de citas", subprocess.run([PY, "scripts/construir.py", "--auditar"],
                                        cwd=RAIZ, capture_output=True).returncode == 0)
+
+# ---------- D. cada cifra del manual existe tambien en la nota de su fuente ----------
+# Un link que abre no prueba que la fuente diga lo que el manual afirma. Estas se
+# cruzan contra el texto que el registro declara: si una se desfasa, falla aqui.
+CRUCES = [
+    ("PM180", "SATEC"), ("PMU PRO", "SATEC"), ("BFM-II", "SATEC"),
+    ("EM720", "SATEC"), ("PM130 PLUS", "SATEC"), ("C37.118.2", "SATEC"),
+    ("31.000", "SUPCON-PRIDE"), ("1.566", "SUPCON-PRIDE"), ("2.800", "SUPCON-PRIDE"),
+    ("19,2", "SUPCON-ECS700"), ("30.000", "SUPCON-ECS700"),
+]
+cap_partners = next((c for c in CAPITULOS if c["id"] == "partners"), None)
+check("capitulo de partners existe", cap_partners is not None)
+if cap_partners:
+    texto = " ".join(b["html"] for b in cap_partners["bloques"])
+    sin_respaldo = [k for k, f in CRUCES
+                    if k not in texto or k.lower() not in fuentes.get(f, {}).get("nota", "").lower()]
+    check("cifras de partners respaldadas por su fuente", not sin_respaldo, str(sin_respaldo))
 
 print()
 print(f"FALLARON {len(fallos)}: {fallos}" if fallos else "Todo OK")
