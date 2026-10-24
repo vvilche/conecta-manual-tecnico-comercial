@@ -102,6 +102,27 @@ if cap_partners:
                     if k not in texto or k.lower() not in fuentes.get(f, {}).get("nota", "").lower()]
     check("cifras de partners respaldadas por su fuente", not sin_respaldo, str(sin_respaldo))
 
+# ---------- E. mismo cruce para el capitulo de subestacion ----------
+CRUCES2 = [
+    ("OrionLX+", "NOVATECH"), ("Bitronics", "NOVATECH"), ("Kronos", "NOVATECH"),
+    ("adaptor board", "NOVATECH-RETROFIT"),
+    ("SynchroTeq Plus", "VIZIMAX"), ("AMU", "VIZIMAX"), ("RightWON", "VIZIMAX"),
+    ("MACH1000", "BELDEN"), ("BOBCAT", "BELDEN"), ("EAGLE", "BELDEN"),
+]
+cap2 = next((c for c in CAPITULOS if c["id"] == "partners-2"), None)
+check("capitulo de subestacion existe", cap2 is not None)
+if cap2:
+    texto2 = " ".join(b["html"] for b in cap2["bloques"])
+    sin2 = [k for k, f in CRUCES2
+            if k.lower() not in texto2.lower() or k.lower() not in fuentes.get(f, {}).get("nota", "").lower()]
+    check("cifras de subestacion respaldadas", not sin2, str(sin2))
+
+# ---------- F. fuentes no verificables por HTTP quedan declaradas --------
+# Belden devuelve 403 a peticiones automatizadas: la nota DEBE decirlo, para que nadie
+# la cite como verificada al construir el manual.
+nota_belden = fuentes.get("BELDEN", {}).get("nota", "")
+check("aviso de Belden no verificable", "403" in nota_belden and "NO pudo verificarse" in nota_belden)
+
 print()
 print(f"FALLARON {len(fallos)}: {fallos}" if fallos else "Todo OK")
 sys.exit(1 if fallos else 0)

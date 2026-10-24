@@ -7,6 +7,7 @@ from cap_lineas import CAP_LINEAS
 from cap_producto import CAP_PRODUCTO
 from cap_protocolos import CAP_PROTOCOLOS
 from cap_partners import CAP_PARTNERS
+from cap_partners2 import CAP_PARTNERS2
 from cap_arquitectura import CAP_ARQUITECTURA
 from cap_ciberseguridad import CAP_CIBER
 from cap_cotizacion import CAP_COTIZACION
@@ -18,6 +19,7 @@ CAPITULOS = [
     CAP_PRODUCTO,
     CAP_PROTOCOLOS,
     CAP_PARTNERS,
+    CAP_PARTNERS2,
     CAP_ARQUITECTURA,
     CAP_CIBER,
     CAP_COTIZACION,

@@ -127,6 +127,34 @@
       "tipo": "fabricante",
       "nota": "Plataforma sobre supOS: 31.000+ estrategias de mantenimiento, 11.000+ casos de falla, refresco de datos <=5 s. Apps: Device Portal, AI Assistant, Equipment Loop, Valve, Transmitter, ICS, Flowmeter, Solenoid Valve, Cabinet, Pipeline Leakage, Boiler, Pump. Equipos rotativos: 1.566 tipos de falla. Stiction de valvulas inteligentes con 4 metodos, no inteligentes con 3. Caso documentado: 2.800+ valvulas y transmisores monitoreados, 38 valvulas con excepcion de 454. Referencias: CNOOC Huizhou, Jiangsu Oji Paper, Hubei Sanning, Shaanxi Yanchang Petroleum."
     },
+    "NOVATECH": {
+      "titulo": "NovaTech Automation — catalogo de producto",
+      "autor": "NovaTech Automation. Skills de CONECTA: novatech-products, novatech-sales",
+      "url": "https://www.novatechautomation.com/",
+      "tipo": "fabricante",
+      "nota": "Fabricante desde 1979, Bethlehem PA. Lineas: Orion (Orion VX virtualizado, OrionLX+ subestaciones grandes, SX servidor de datos y HMI, MX compacto, Orion I/O pin-compatible GE D20), Bitronics (50/60 series, M661 DGM 'primary in a box', PowerPlex II con 2 sets trifascos y update de 1 ciclo, precision 0,2s, MTBF 40 anos, garantia 10 anos) y Kronos (multi-constelacion GPS+GALILEO+BEIDOU+GLONASS). Orion declara 40+ protocolos (el overview 2025 dice 50+). NERC CIP cyber secure."
+    },
+    "NOVATECH-RETROFIT": {
+      "titulo": "Legacy RTU Retrofit with Orion (sept-2020) y skill novatech-rtu-retrofit",
+      "autor": "NovaTech Automation. Skill novatech-rtu-retrofit de CONECTA, con references/casos-transelec.md",
+      "url": "https://www.novatechautomation.com/solutions/es-legacy-rtu-retrofit",
+      "tipo": "fabricante",
+      "nota": "Retrofit de D20/D200, Telvent, Siemens Telegyr, Systems Northwest y ACS 7530. Concepto: no reemplaza el campo, reemplaza procesador y modulos y conserva el cableado; los conectores pasan a una adaptor board y las interconexiones salen cableadas y probadas de fabrica (frase del deck: 'many of our retrofit solutions do not require lifting of field wiring'). D20A 32 AI, D20S 64 DI, D20K 32 DO, D20C 16DI+16DO+16AI, en el mismo espacio de 3RU. NovaTech convierte la configuracion D20 a NCD de OrionLX: linea de servicio aparte del hardware. AVISO: Orion I/O NO soporta redundancia propia (va en el OrionLX). AVISO: D20/D200 (RTU) no es D20/D25 (rele de proteccion), mismo prefijo producto distinto. Caso S/E Atacama (Transelec): 4 armarios D20 reemplazados por 2 Orion LX+ y 14 adaptadores NTX-U20 (variantes /A analogico, /K output trip-close y /D digital); margen de equipos 11% vs margen de HH 77%; el proyecto termino con ~160 m de fibra por trinchera porque no habia espacio para un armario nuevo."
+    },
+    "VIZIMAX": {
+      "titulo": "Vizimax — SynchroTeq, PMU, AMU, RightWON, Versa",
+      "autor": "Vizimax (Canada). Skill vizimax-products de CONECTA",
+      "url": "https://www.vizimax.com/",
+      "tipo": "fabricante",
+      "nota": "Especialista en control point-on-wave para limitar corrientes inrush. 30+ anos, 6 continentes. Productos: SynchroTeq MV (hasta 69 kV: bancos de capacitores, reactores shunt, cables de potencia, transformadores), SynchroTeq Plus (alta tension, el mas avanzado para breakers HV), SynchroTeq Lite, enclosures STM045000 y STM046000; PMU con cumplimiento IEEE C37.118 para generadores >20 MW y PMGDs; AMU merging unit que digitaliza mediciones AC de transformadores instrumento convencionales a IEC 61850; RightWON para monitoreo de interruptores y transformadores; Versa automatizacion modular MV/HV. Independiente del fabricante de interruptor (ABB, Siemens, SEL, GE). Competidor directo en point-on-wave: ABB Switchsync. Competidores en PMU: SUPCON y SATEC. AVISO: para cotizar SynchroTeq hay que conocer tipo de interruptor y mecanismo."
+    },
+    "BELDEN": {
+      "titulo": "Belden / Hirschmann — switches industriales y red OT",
+      "autor": "Belden (marca Hirschmann). Skill belden-hirschmann-products de CONECTA",
+      "url": "https://www.belden.com/",
+      "tipo": "fabricante",
+      "nota": "AVISO DE VERIFICACION: belden.com devuelve HTTP 403 a peticiones automatizadas (probado con y sin user-agent de navegador) y hirschmann.com no resuelve por DNS. La URL se registra como referencia del fabricante, pero su contenido NO pudo verificarse por HTTP al construir este manual. Lo que se afirma viene de la skill de CONECTA. Series: RS20/RS30/RS40 (gestionados, IEC 61850-3 e IEEE 1613), MACH1000/4000 (backbone de subestacion, PRP/HSR), BOBCAT (compacto de gabinete), RSP/RSPE (rack-mount), GREYHOUND (alto rendimiento). Rango -40 a +85 C. Firewalls OT EAGLE / EAGLE20/30 con VPN. AVISO: PRP/HSR requiere configuracion especifica, no es plug-and-play. Competidores: Siemens Ruggedcom, Moxa, Cisco Industrial, Westermo."
+    },
     "BITRONICS": {
       "titulo": "Bitronics Power Measurement — pagina de producto",
       "autor": "NovaTech Automation",
