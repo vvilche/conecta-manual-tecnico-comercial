@@ -123,6 +123,20 @@ if cap2:
 nota_belden = fuentes.get("BELDEN", {}).get("nota", "")
 check("aviso de Belden no verificable", "403" in nota_belden and "NO pudo verificarse" in nota_belden)
 
+# ---------- G. presentacion SUPCON (regla dura: CERO PRECIOS) ----------
+pres = RAIZ / "presentacion-supcon.html"
+check("presentacion-supcon.html existe", pres.exists())
+if pres.exists():
+    ph = pres.read_text(encoding="utf-8")
+    check("presentacion: 15 slides", ph.count('class="slide ') == 15, str(ph.count('class="slide ')))
+    # Un monto con $ no puede aparecer nunca. La frase "Sin precios" es prosa, no un monto.
+    montos = re.findall(r"\$\s?[\d.]{3,}", ph)
+    check("presentacion: cero montos con $", not montos, str(montos[:3]))
+    check("presentacion: sin USD", "USD" not in ph)
+    check("presentacion: sin rutas del Mac", "/Users/victorvilche" not in ph)
+    check("presentacion: navegacion con indice", "toggleIndex" in ph)
+    check("presentacion: menciona WS300", "WS300" in ph)
+
 print()
 print(f"FALLARON {len(fallos)}: {fallos}" if fallos else "Todo OK")
 sys.exit(1 if fallos else 0)

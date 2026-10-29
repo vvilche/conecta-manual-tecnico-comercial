@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teardown — Smart Electric SpA</title>
+<style>
+:root{
+  --bg:#0A1628; --panel:#0F1F3D; --panel2:#132a4d; --line:#1e3557;
+  --txt:#E6EDF7; --dim:#8FA6C4; --acc:#2563EB; --ok:#10B981; --warn:#F59E0B; --bad:#EF4444;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.6 Inter,-apple-system,system-ui,sans-serif;padding:32px 20px 80px}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-size:28px;line-height:1.2;margin:0 0 6px;letter-spacing:-.3px}
+h2{font-size:19px;margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:22px 0 8px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.sub{color:var(--dim);font-size:13px;margin-bottom:26px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:14px 16px}
+.card .k{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);margin-bottom:6px}
+.card .v{font-size:17px;font-weight:600}
+.card .n{font-size:12px;color:var(--dim);margin-top:4px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);border-bottom:1px solid var(--line);padding:8px 10px;font-weight:600}
+td{padding:9px 10px;border-bottom:1px solid rgba(30,53,87,.55);vertical-align:top}
+tr:hover td{background:rgba(37,99,235,.06)}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:2px 7px;border-radius:3px;text-transform:uppercase}
+.m{background:rgba(16,185,129,.15);color:#34d399}
+.d{background:rgba(37,99,235,.18);color:#7aa8ff}
+.s{background:rgba(245,158,11,.15);color:#fbbf24}
+.t{background:rgba(239,68,68,.15);color:#f87171}
+ul{margin:8px 0 8px 0;padding-left:20px}
+li{margin:5px 0}
+.q{background:var(--panel2);border-left:3px solid var(--acc);padding:12px 16px;border-radius:0 4px 4px 0;margin:14px 0}
+.warnbox{background:rgba(239,68,68,.08);border-left:3px solid var(--bad);padding:12px 16px;border-radius:0 4px 4px 0;margin:14px 0}
+.okbox{background:rgba(16,185,129,.07);border-left:3px solid var(--ok);padding:12px 16px;border-radius:0 4px 4px 0;margin:14px 0}
+code{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(255,255,255,.06);padding:1px 5px;border-radius:3px}
+.foot{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body><div class="wrap">
+
+<h1>Smart Electric SpA — teardown</h1>
+<div class="sub">smart-electric.cl · RUT 76.874.248-0 · medido 28-oct-2026 · todas las cifras salen de la fuente indicada. <span class="tag m">M</span> medido · <span class="tag d">D</span> declarado por la empresa · <span class="tag s">S</span> estimado · <span class="tag t">?</span> no verificado</div>
+
+<div class="q"><strong>La pregunta que decide todo:</strong> Smart Electric gana contratos de <em>servicio y ejecución</em> (pruebas, montaje, O&amp;M, SCADA a medida) en minería y data centers, pero su identidad pública está construida como empresa de <em>consultoría y estudios</em>. Si el negocio es servicio, compite por horas-hombre y cuadrillas; si el negocio es plataforma, compite con producto. No declara ninguna plataforma propia. Esa es la entrada: <strong>no son un competidor de producto, son un canal de ejecución con una capa de datos vacía</strong>.</div>
+
+<h2>1. Quién es</h2>
+
+<div class="grid">
+<div class="card"><div class="k">Razón social</div><div class="v">Smart Electric SpA</div><div class="n">RUT 76.874.248-0 · SII <span class="tag m">M</span></div></div>
+<div class="card"><div class="k">Constitución</div><div class="v">25-may-2018</div><div class="n">Fojas 34617 N°18242, año 2018 <span class="tag m">M</span></div></div>
+<div class="card"><div class="k">Trabajadores (SII)</div><div class="v" id="emp">47</div><div class="n">Tramo ventas 8/13 <span class="tag m">M</span></div></div>
+<div class="card"><div class="k">Rubro SII principal</div><div class="v">620900</div><div class="n">"Otras actividades de TI y servicios informáticos" <span class="tag m">M</span></div></div>
+</div>
+
+<h3>Propiedad — la cadena real</h3>
+<table>
+<tr><th>Hasta</th><th>Quién</th><th>Rol</th><th>Acciones</th><th>Fuente</th></tr>
+<tr><td>07-oct-2022</td><td>Katherine Solange Ramos Cruz</td><td>accionista (mayoritaria)</td><td>990 / 1000</td><td>D.O. CVE 2225627 <span class="tag m">M</span></td></tr>
+<tr><td>07-oct-2022</td><td>Julio Andrés Martínez Quiroz</td><td>accionista minoritario</td><td>10 / 1000</td><td>ídem <span class="tag m">M</span></td></tr>
+<tr><td>Desde 07-oct-2022</td><td><strong>Smart Investment and Consulting Group SpA</strong> (RUT 77.641.452-2)</td><td>accionista único (100 %)</td><td>1.000 / 1.000</td><td>ídem <span class="tag m">M</span></td></tr>
+<tr><td>Administración actual</td><td><strong>Juan Patricio Felipe Ramos Cruz</strong> (C.I. 15.478.047-5)</td><td>administrador y representante legal de la SpA controladora</td><td>—</td><td>ídem <span class="tag m">M</span></td></tr>
+</table>
+<p style="color:var(--dim);font-size:13px">Fuente primaria: Diario Oficial, Sección 5, Núm. 43.412, 28-nov-2022, CVE 2225627 (PDF descargado y leído, no el snippet). Domicilio de la controladora: Apoquindo 6410, oficina 308, Las Condes — el mismo de la ficha corporativa de LinkedIn.</p>
+
+<div class="warnbox"><strong>Trampa de RUT.</strong> En el D.O. aparecen dos RUT que parecen iguales: <code>77.641.452-2</code> es el de la SpA controladora; <code>76.235.623-6</code> pertenece a <em>otra</em> "Smart Electric SpA", en Peñalolén, sin trabajadores. No son la misma sociedad. Cualquier búsqueda por nombre mezcla las dos. <span class="tag m">M</span></div>
+
+<h3>Gente</h3>
+<ul>
+<li><strong>Felipe Ramos</strong> — Gerente Comercial, citado con nombre y cargo en prensa sectorial (revista Electroindustria, EMB, dic-2022, cobertura de Expo Energía). En esa misma nota aparecen Marco Nilo (Coordinador de Proyectos y Servicios), Pamela Arias (Coordinadora) y Pablo Rojas (Representante Comercial) <span class="tag m">M</span>.</li>
+<li><strong>Karina Comas</strong> — recibe los CV de todas las vacantes publicadas <span class="tag m">M</span> (correo <code>karina.comas@smart-electric.cl</code>).</li>
+<li><strong>Ricardo Muñoz Lagos</strong> — Ingeniero de Proyecto nov-2019 a ago-2021; carrera previa en USMACH y en distribución (LinkedIn) <span class="tag m">M</span>.</li>
+<li>Origen profesional del equipo: <strong>Universidad de Santiago de Chile</strong> (varios perfiles) y <strong>Universidad de la Frontera</strong>. Hay entrada y salida de perfiles junior de la USACH (ej. contrato jul-oct 2024), señal de rotación en el nivel base <span class="tag m">M</span>.</li>
+</ul>
+
+<h2>2. Qué vende — y qué declara que vende</h2>
+
+<table>
+<tr><th>Pilar declarado</th><th>Evidencia en el sitio</th><th>¿Sustancia?</th></tr>
+<tr><td>Estudios eléctricos</td><td>Flujo de carga, cortocircuito, coordinación de protecciones, arc flash, mallas a tierra. Software: ETAP, SKM, DigSILENT</td><td><span class="tag d">D</span> Listado, sin metodología, sin casos ni entregables tipo</td></tr>
+<tr><td>Ingeniería</td><td>Diseño de subestaciones, diseño de SCADA y salas de control, retrofit de protecciones, asesoría normativa</td><td><span class="tag d">D</span> Sin proyectos citados con nombre</td></tr>
+<tr><td>Servicios en terreno</td><td>Comisionamiento, FAT/SAT, pruebas NETA, termografía, mallas a tierra, calidad de energía</td><td><span class="tag d">D</span> Es lo más creíble: coincide con las vacantes publicadas</td></tr>
+<tr><td>O&amp;M</td><td>Mano de obra en maniobras, movilización, gestión de compras, administración de plataformas SCADA</td><td><span class="tag d">D</span> Sin SLA, sin cobertura contractual publicada</td></tr>
+<tr><td>Datacenter TIII / TIV</td><td>"Mantenimiento en los data centers más grandes de Latinoamérica"</td><td><span class="tag d">D</span> Sin nombrar cliente ni instalación. Afirmación no verificable</td></tr>
+<tr><td>Arriendo de equipos</td><td>Tienda con 20 equipos en 3 páginas (Omicron CMC 356, AEMC PowerPad 8335, Baur Viola TD, Bite 5, ISA STS-5000, Fluke 1555/287/376, ARCO 400)</td><td><span class="tag m">M</span> Existe y es real. <strong>Sin ningún precio ni botón de compra</strong>: catálogo, no e-commerce</td></tr>
+</table>
+
+<div class="okbox"><strong>El hallazgo más citable:</strong> el sitio lleva un artículo fechado de <em>capacitación oficial de COPA-DATA</em> en zenon Energy (dic-2025), con instructor con nombre (Fabio Cook) y sala propia de capacitación. Eso no es marketing: es evidencia de una relación formal de partner con COPA-DATA y de que su SCADA se construye sobre <strong>zenon</strong>, no sobre desarrollo propio. El sitio, sin embargo, <strong>no se declara partner</strong> en ninguna parte visible <span class="tag m">M</span>.</div>
+
+<h2>3. Presencia digital — lo que se puede medir</h2>
+
+<div class="grid">
+<div class="card"><div class="k">Visitas mensuales</div><div class="v">~371</div><div class="n">Crustdata, may-2026 <span class="tag s">S</span> tercero</div></div>
+<div class="card"><div class="k">Seguidores LinkedIn</div><div class="v">3.898</div><div class="n">página de empresa <span class="tag m">M</span></div></div>
+<div class="card"><div class="k">Dotación declarada por ellos</div><div class="v">10–20</div><div class="n">en LinkedIn, contra 47 en el SII <span class="tag m">M</span> — desactualizado</div></div>
+<div class="card"><div class="k">Noticias publicadas</div><div class="v">6</div><div class="n">todas entre nov-2025 y abr-2026; 3 el mismo día <span class="tag m">M</span></div></div>
+</div>
+
+<h3>Stack del sitio (medido en el HTML servido)</h3>
+<p style="font-size:13.5px">WordPress 7.1.3 · tema <code>hello-elementor</code> · Elementor 3.35.5 · WooCommerce 10.5.3 · YITH WooCommerce Catalog Mode · WPForms Lite + Contact Form 7 · Royal Elementor Addons · Essential Addons Lite · SpeedyCache Pro · <code>creame-whatsapp-me</code> (botón WhatsApp) · Connect Polylang (ES/EN/PT). Deja expuesto <code>/xmlrpc.php</code> y <code>/wp-json/</code> con la API abierta (leí los 6 posts y las 11 páginas por REST sin credenciales) <span class="tag m">M</span>.</p>
+
+<h3>La web tiene cuatro problemas que se ven a simple vista</h3>
+<ul>
+<li><strong>Sin analítica.</strong> No hay Google Analytics, GTM, Meta ni LinkedIn Insight. Con ~371 visitas/mes y sin medir, no saben si la web vende algo <span class="tag m">M</span>.</li>
+<li><strong>El formulario no dice a dónde va</strong> y en la versión EN quedó texto en español (<em>"Puesta en marcha e integración en terreno"</em>) <span class="tag m">M</span>.</li>
+<li><strong>La sección de noticias es un feed de WordPress</strong>, con una nota publicada el 02-abr-2026 que remite a un plazo vencido el 16-oct-2025 <span class="tag m">M</span>.</li>
+<li><strong>Tienda sin precios</strong> con YITH Catalog Mode: 20 equipos de arriendo que no se pueden cotizar desde la web. Cada arriendo termina en un correo manual <span class="tag m">M</span>.</li>
+</ul>
+
+<h2>4. Tamaño y forma del negocio</h2>
+<p style="font-size:13.5px">SII: <strong>47 trabajadores</strong>, tramo de ventas <strong>8 de 13</strong> (el portal no publica el rango en pesos), ranking nacional #30.919 de 3.316.848 <span class="tag m">M</span>. Crustdata: 66–68 personas con crecimiento +17,9 % en 12 meses <span class="tag s">S</span>. La discrepancia es normal (Crustdata cuenta perfiles, el SII cuenta contratos): el orden de magnitud es <strong>50–70 personas</strong>.</p>
+<p style="font-size:13.5px">Capital de la sociedad: el D.O. no lo publica. <strong>No verificado.</strong></p>
+
+<h2>5. Presencia regulatoria en el CEN</h2>
+<p style="font-size:13.5px">Consulté el padrón de completitud de InfoTécnica del Coordinador (1.089 empresas informantes): <strong>cero coincidencias con "Smart"</strong> <span class="tag m">M</span>. No son coordinado ni empresa informante. Eso no los descalifica: los proveedores de servicio para coordinados nunca aparecen ahí. Pero significa que <strong>toda su experiencia CEN está declarada por ellos, no registrada en el regulador</strong> — incluido el proyecto "Central TER Trincao" (PMU) y la adecuación de esquemas de medida NTSyCS.</p>
+
+<h2>6. Lectura competitiva frente a CONECTA</h2>
+
+<div class="two">
+<div>
+<h3>Donde se cruzan (competencia)</h3>
+<ul>
+<li>PMU / medición fasorial: ellos ofrecen suministro + integración + FAT/SAT bajo IEEE C37.118. Es exactamente nuestra línea <span class="tag d">D</span></li>
+<li>Adecuación de esquemas de medida NTSyCS (Art. 4-29 y Transitorio 9-25) — nosotros vendemos lo mismo</li>
+<li>Retrofit de protecciones y diseño SCADA de subestaciones</li>
+<li>Arriendo de equipos de prueba: <strong>nosotros no</strong> — es una línea de ingreso que no tenemos</li>
+</ul>
+</div>
+<div>
+<h3>Donde no llegan (hueco)</h3>
+<ul>
+<li><strong>Sin hardware propio ni marca representada visible.</strong> Su SCADA es zenon (COPA-DATA): son integradores, no fabricantes. Ahí entra SUPCON, NovaTech, Vizimax como producto a especificar</li>
+<li><strong>Sin plataforma de datos.</strong> Smart SCADA Cloud (nube, 2022) es lo más cerca que han estado; hoy el discurso terminó en "administración de plataformas SCADA" de terceros</li>
+<li><strong>Sin cumplimiento como producto.</strong> Ofrecen "asesoría normativa" como servicio de horas, no como solución empaquetada</li>
+<li><strong>Sin capa de IA ni analítica.</strong> Ni una mención en todo el sitio</li>
+</ul>
+</div>
+</div>
+
+<div class="q"><strong>Ángulo de canal:</strong> por la tabla de conflicto, Smart Electric cae en <strong>PARCIAL</strong> — integra SCADA sobre zenon y prueba equipos de Omicron, Megger, ISA, Baur y Fluke, pero <strong>no representa ninguna marca de protecciones, RTU ni PMU</strong>. Es comprador posible de instrumentación, RTU y medición para los proyectos donde el cliente ya definió la plataforma, y <strong>socio de ejecución</strong> para lo que ellos saben hacer mejor que nosotros: terreno, pruebas y cuadrillas en faena.</div>
+
+<h2>7. Lo que no se pudo verificar</h2>
+<table>
+<tr><th>Hueco</th><th>Qué se intentó</th></tr>
+<tr><td>Capital social y reparto actual de la controladora</td><td>portalchile bloquea con Cloudflare (Ray a51beb5a…); dequienes.cl también. El D.O. de 2022 muestra el 100 % en una sola SpA, sin abrir su composición</td></tr>
+<tr><td>Quién manda hoy operativamente</td><td>Juan Patricio Felipe Ramos Cruz es el administrador legal de la SpA controladora. Que sea además el gerente general de la operación es <strong>inferencia</strong>, no dato</td></tr>
+<tr><td>Clientes y contratos</td><td>Solo un nombre propio en todo el sitio: "Central TER Trincao". Nada de Codelco, Collahuasi, Anglo ni nombres de data center. La afirmación de los "data centers más grandes de Latinoamérica" no tiene respaldo público</td></tr>
+<tr><td>Tamaño en pesos</td><td>El portal entrega tramo 8/13, no el rango. Sin acceso a estados financieros (SpA cerrada)</td></tr>
+<tr><td>Relación real con COPA-DATA</td><td>Hay capacitación oficial y sala propia. Si el vínculo es de partner, distribuidor o solo cliente de formación no está publicado: hay que preguntarlo</td></tr>
+<tr><td>La "alianza estratégica con compañías canadienses"</td><td>Declarada en la web, sin nombrar a ninguna. En la versión EN dice "international companies", más genérico aún. <strong>Sin respaldo</strong></td></tr>
+</table>
+
+<h2>8. Si hay que actuar, la lista corta</h2>
+<ol>
+<li><strong>Felipe Ramos — Gerente Comercial.</strong> Único nombre con cargo confirmado en prensa. La conversación no es "te vendo SCADA": es <em>quién pone el hardware en los proyectos donde tú haces la integración zenon</em>.</li>
+<li><strong>Preguntar una sola cosa primero:</strong> ¿en los contratos de PMU y adecuación de medida, el equipo lo especifica el cliente o lo especifican ustedes? Si lo especifican ellos, son canal. Si lo especifica el cliente, no hay nada que vender y sí mucho que subcontratar.</li>
+<li><strong>La línea de arriendo es la puerta lateral.</strong> Tienen 20 equipos, sin precios y sin carrito. Ofrecer producto o servicio complementario a esa base de arriendo es más fácil que entrar por el proyecto grande.</li>
+</ol>
+
+<div class="foot">
+Fuentes primarias descargadas y leídas: Diario Oficial Sección 5, Núm. 43.412, 28-nov-2022, CVE 2225627 (PDF) · HTML servido de smart-electric.cl, /tienda/, /trabaja-con-nosotros/, /en/, y 3 fichas de noticia · API REST de WordPress del propio sitio · padrón de completitud InfoTécnica CEN (1.089 registros) · portalchile.org (ficha SII de ambos RUT) · revista Electroindustria EMB dic-2022 · LinkedIn de la empresa y perfiles de empleados vía snippet de buscador.<br><br>
+No se usaron: SEIA (no hay proyecto propio que buscar), Mercado Público (no vende al Estado según SII), NormativaCEN.
+</div>
+
+</div></body></html>

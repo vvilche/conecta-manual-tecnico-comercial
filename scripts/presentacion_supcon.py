@@ -1,0 +1,410 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Genera la presentacion SUPCON en HTML (design system de la skill supcon-presentaciones).
+
+REGLA DURA (skill supcon-products, punto 8): CERO PRECIOS. No hay estimaciones, ni
+rangos, ni "consultar". Si no hay lista oficial verificada, no se pone nada.
+
+Uso:  python3 scripts/presentacion_supcon.py
+Salida: presentacion-supcon.html
+"""
+from pathlib import Path
+
+RAIZ = Path(__file__).resolve().parent.parent
+SALIDA = RAIZ / "presentacion-supcon.html"
+
+CSS = """
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#0f172a;color:#f1f5f9;overflow:hidden;user-select:none}
+.slide{display:none;width:100vw;height:100vh;padding:54px 72px;flex-direction:column;justify-content:center;
+  position:absolute;top:0;left:0;overflow-y:auto}
+.slide.active{display:flex}
+.slide.dark{background:#0f172a}
+.slide.navy{background:linear-gradient(135deg,#0a1628 0%,#0f172a 100%)}
+h1{font-family:'Outfit',sans-serif;font-size:54px;font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin-bottom:18px}
+h2{font-family:'Outfit',sans-serif;font-size:38px;font-weight:700;letter-spacing:-.6px;margin-bottom:10px}
+h3{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#93c5fd;margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:1px}
+.subtitle{font-size:19px;color:#94a3b8;line-height:1.6;max-width:760px}
+.accent{color:#3b82f6}
+.tag{display:inline-block;background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.3);color:#93c5fd;
+  padding:5px 14px;border-radius:100px;font-size:12px;font-weight:600;margin:0 6px 6px 0;font-family:'IBM Plex Mono',monospace}
+.bar{background:rgba(37,99,235,.08);border-left:4px solid #2563eb;padding:18px 22px;border-radius:0 8px 8px 0;margin:10px 0}
+.bar p{font-size:15px;color:#cbd5e1;line-height:1.75}
+.bar strong{color:#fff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}
+.card{background:rgba(30,41,59,.6);border:1px solid #334155;border-radius:12px;padding:20px}
+.card h4{font-family:'Outfit',sans-serif;font-size:15.5px;color:#fff;margin-bottom:6px;line-height:1.25}
+.card p{font-size:13.2px;color:#94a3b8;line-height:1.6}
+.card.hl{border-color:#2563eb;background:rgba(37,99,235,.1)}
+.kpi{font-size:40px;font-weight:700;color:#3b82f6;font-family:'Outfit',sans-serif;line-height:1}
+.kpi-label{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-top:6px}
+.page-num{position:absolute;bottom:20px;right:30px;font-size:12px;color:#475569;font-family:'IBM Plex Mono',monospace}
+.nav-hint{position:absolute;bottom:20px;left:30px;font-size:11px;color:#334155;font-family:'IBM Plex Mono',monospace}
+.logo{position:absolute;top:26px;right:36px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;
+  color:#3b82f6;letter-spacing:1px}
+.big-num{font-family:'Outfit',sans-serif;font-size:110px;font-weight:800;color:rgba(37,99,235,.06);
+  position:absolute;top:14px;left:34px;line-height:1}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+th{text-align:left;padding:9px 12px;background:rgba(37,99,235,.12);color:#93c5fd;font-size:11px;
+  text-transform:uppercase;letter-spacing:.8px;font-weight:600;border-bottom:1px solid #334155}
+td{padding:9px 12px;border-bottom:1px solid rgba(51,65,85,.6);color:#cbd5e1;line-height:1.5}
+td b{color:#fff}
+tr:hover td{background:rgba(37,99,235,.05)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+.case{background:rgba(30,41,59,.6);border:1px solid #334155;border-radius:12px;padding:18px 20px;
+  border-left:3px solid #2563eb}
+.case .who{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#64748b;margin-bottom:4px}
+.case h4{font-size:15px;color:#fff;margin-bottom:5px}
+.case p{font-size:13px;color:#94a3b8;line-height:1.6}
+.quote{font-family:'Outfit',sans-serif;font-size:26px;font-weight:600;color:#e2e8f0;line-height:1.4;
+  border-left:4px solid #2563eb;padding-left:24px;max-width:820px}
+.small{font-size:12.5px;color:#64748b;margin-top:14px}
+.src{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#475569;margin-top:10px}
+.index{position:fixed;inset:0;background:rgba(10,22,40,.96);z-index:99;display:flex;
+  align-items:center;justify-content:center;cursor:default}
+.index-box{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:30px 40px;
+  max-height:80vh;overflow-y:auto;min-width:460px}
+.index-box h3{margin-bottom:16px}
+.index-box ol{margin-left:20px}
+.index-box li{margin-bottom:9px}
+.index-box a{color:#cbd5e1;text-decoration:none;font-size:15px;line-height:1.4}
+.index-box a:hover{color:#3b82f6}
+"""
+
+# ---------------------------------------------------------------- slides
+SLIDES = []
+
+
+def slide(cls, num, h3_, h2_, body, big=""):
+    SLIDES.append((cls, num, h3_, h2_, body, big))
+
+
+slide("navy", "01", "SUPCON Technology", "Automatización industrial <br>de planta completa",
+      """
+<p class="subtitle">DCS, seguridad funcional, instrumentación, válvulas, software industrial e IA.
+Un solo integrador responsable en Chile: CONECTA Ingeniería.</p>
+<div style="margin-top:26px">
+  <span class="tag">ECS-700 DCS</span><span class="tag">TCS-500 SIS</span>
+  <span class="tag">Instrumentación CXT</span><span class="tag">PRIDE predictivo</span>
+  <span class="tag">supOS</span><span class="tag">APC</span>
+</div>
+<div class="src">Fuente: catálogo SUPCON global · skills de producto CONECTA</div>
+""", "01")
+
+slide("dark", "02", "Quién es SUPCON", "Los números que importan",
+      """
+<div class="grid4">
+  <div class="card hl"><div class="kpi">19,2%</div><div class="kpi-label">Participación DCS en China · N.º 1</div></div>
+  <div class="card"><div class="kpi">30.000+</div><div class="kpi-label">Bases instaladas</div></div>
+  <div class="card"><div class="kpi">4.300</div><div class="kpi-label">Clientes globales</div></div>
+  <div class="card"><div class="kpi">1999</div><div class="kpi-label">Fundación · 688777.SH</div></div>
+</div>
+<div class="grid3" style="margin-top:16px">
+  <div class="card"><h4>CMMI nivel 5</h4><p>Madurez de proceso de software en el nivel más alto.</p></div>
+  <div class="card"><h4>SIL 3 / SIL 4</h4><p>Seguridad funcional certificada para la línea SIS.</p></div>
+  <div class="card"><h4>IEC 62443</h4><p>Certificación de ciberseguridad industrial (SL1).</p></div>
+</div>
+<div class="src">Fuente: material del fabricante. La participación de mercado es dato ARC citado por SUPCON, no verificación independiente.</div>
+""", "02")
+
+slide("dark", "03", "El portafolio", "Cuatro bloques, un solo responsable",
+      """
+<div class="grid2">
+  <div class="card"><h4>1 · Control</h4><p><b>ECS-700</b> — DCS para gobernar el proceso.<br>
+  <b>TCS-500</b> — SIS certificado SIL 3/4. No es un DCS con enclavamientos: es un equipo de seguridad funcional.</p></div>
+  <div class="card"><h4>2 · Instrumentación</h4><p><b>CXT</b> transmisor de presión ±0,035% · <b>CJT / SK</b> · flujómetros EMF,
+  vortex, turbina · nivel radar 80 GHz <b>SL90</b> · temperatura <b>W Series</b> · detectores de gas <b>DMD / DMC</b>.</p></div>
+  <div class="card"><h4>3 · Actuación</h4><p>Válvulas de control series <b>LN/LM/SN/VN/CN/BN</b> (vástago, bola, mariposa,
+  excéntrica, cuchilla) · posicionador inteligente <b>CVP2000</b> ±0,5% FS.</p></div>
+  <div class="card"><h4>4 · Software e IA</h4><p><b>supOS</b> sistema operativo industrial · <b>PRIDE</b> diagnóstico predictivo ·
+  <b>APC</b> control avanzado · <b>SoliSCADA</b> · <b>UCS Nyx</b> control definido por software.</p></div>
+</div>
+<div class="bar"><p><strong>Y también la sala de control:</strong> consolas de operación OP085 y mobiliario técnico.
+Casi nadie lo sabe, y es una venta adicional que se pierde por desconocimiento.</p></div>
+""", "03")
+
+slide("navy", "04", "Control", "ECS-700: el DCS que reemplaza a los incumbentes",
+      """
+<div class="two-col">
+  <div>
+    <p class="subtitle" style="font-size:16px">DCS de planta completa, con controladores y comunicación redundantes,
+    configuración por dominio y gestión multiproyecto.</p>
+    <div class="bar" style="margin-top:16px"><p><strong>I/O:</strong> AI721-S (8 canales termocupla, 7 tipos),
+    AO711-H, DO711-S, TUA711-DI32 (32 DI). Aislamiento canal a canal. Muestreo rápido 300 ms/8ch.</p></div>
+    <div class="bar"><p><strong>Redundancia</strong> configurable 1:1 en controladores, módulos y comunicación.</p></div>
+  </div>
+  <div>
+    <div class="card"><h4>60+ casos de desplazamiento documentados</h4>
+      <p style="margin-top:8px">16 vs <b>Yokogawa</b> CS3000 / CENTUM-VP (Sinopec Jiujiang, Yangzi; PetroChina Dagang)<br>
+      16 vs <b>Honeywell</b> TPS / PKS C200-C300 (PetroChina Daqing, Harbin)<br>
+      3 vs <b>Bailey Symphony</b> (Zhejiang Zheneng Lanxi, unidades 1-4)<br>
+      4 vs <b>Safeguard 400</b> (CNOOC Qinhuangdao, plataformas offshore)</p></div>
+  </div>
+</div>
+<div class="src">Fuente: skill supcon-dcs-ecs700. Casos de desplazamiento según material del fabricante.</div>
+""", "04")
+
+slide("dark", "05", "Seguridad funcional", "TCS-500: el SIS, no un DCS con enclavamientos",
+      """
+<div class="two-col">
+  <div>
+    <div class="quote">Mezclar SIS con DCS es el error que aparece en la auditoría.</div>
+    <p class="subtitle" style="font-size:15px;margin-top:20px">El sistema instrumentado de seguridad se certifica
+    para función de seguridad. El DCS gobierna el proceso. Son dos equipos, dos certificaciones y dos responsables.</p>
+  </div>
+  <div>
+    <div class="card"><h4>Qué resuelve</h4><p>Parada segura ante condición peligrosa, con integridad certificada.
+    Incluye integración de sistemas de incendio y gas (FGS) como capacidad del SIS, no como producto aparte.</p></div>
+    <div class="card" style="margin-top:12px"><h4>La pregunta que lo destapa</h4><p>"¿Qué pasa si el operador
+    no actúa a tiempo?" Si la respuesta involucra consecuencias físicas, es SIS. Si es eficiencia, es DCS.</p></div>
+  </div>
+</div>
+<div class="src">Fuente: skills supcon-sis-tcs y supcon-dcs-ecs700</div>
+""", "05")
+
+slide("dark", "06", "Instrumentación", "El dato nace en el instrumento",
+      """
+<table>
+<thead><tr><th>Familia</th><th>Modelo</th><th>Dato que lo distingue</th><th>Caso de uso</th></tr></thead>
+<tbody>
+<tr><td><b>Presión</b></td><td>CXT</td><td>±0,035% · 100 Pa a 40 MPa · estabilidad ±0,1% en 10 años · IP67 · diafragma baño de oro</td><td>Donde la exactitud se audita. WirelessHART y 5G RedCap disponibles</td></tr>
+<tr><td><b>Presión</b></td><td>CJT / SK</td><td>CJT ±0,1% capacitivo · SKC diferencial ±0,05%</td><td>Proceso general, rango ratio 40:1</td></tr>
+<tr><td><b>Caudal</b></td><td>EMF</td><td>Electromagnético ±0,2% · requiere conductividad &gt;1 µS/cm</td><td>Líquidos conductivos. Si el fluido no conduce, no sirve</td></tr>
+<tr><td><b>Caudal</b></td><td>LUGB</td><td>Vortex, baja pérdida de carga</td><td>Líquidos, vapor y gas. La respuesta cuando el EMF no aplica</td></tr>
+<tr><td><b>Nivel</b></td><td>SL90</td><td>Radar 80 GHz sin contacto, haz angosto</td><td>Silos con polvo o espuma, donde el ultrasonido falla</td></tr>
+<tr><td><b>Temperatura</b></td><td>W Series</td><td>RTD Pt y termocuplas E/J/K/N/T/B/S/R · −200 a 1600 °C</td><td>Cobertura completa de planta</td></tr>
+<tr><td><b>Gas</b></td><td>DMD / DMC</td><td>Detector puntual I-sensor · DMC6000 64 canales, 256 RS485, CAN</td><td>Seguridad de personal, no control de proceso</td></tr>
+</tbody>
+</table>
+<div class="src">Fuente: skill supcon-instruments. Sin precios por regla de CONECTA.</div>
+""", "06")
+
+slide("navy", "07", "Sensores inalámbricos", "WS300: condición de equipos rotativos sin cablear",
+      """
+<div class="two-col">
+  <div>
+    <table style="margin-top:0">
+    <tbody>
+    <tr><td><b>Tipo</b></td><td>Triaxial MEMS · vibración + temperatura</td></tr>
+    <tr><td><b>Aceleración</b></td><td>Z ±50 g · X/Y ±16 g</td></tr>
+    <tr><td><b>Frecuencia</b></td><td>Z 0,2–10 kHz · X/Y 0,2–1 kHz</td></tr>
+    <tr><td><b>Temperatura</b></td><td>−55 a 125 °C (±0,4%)</td></tr>
+    <tr><td><b>Radio</b></td><td>LoRa · batería litio 8500 mAh, 1–3 años</td></tr>
+    <tr><td><b>Ex</b></td><td>Ex ia IIC T4 Ga (Zona 1 y 2) · IP67</td></tr>
+    <tr><td><b>Peso</b></td><td>220 g · 86 × Ø47 mm</td></tr>
+    </tbody></table>
+  </div>
+  <div>
+    <div class="card hl"><h4>El dato que hay que decir bien</h4>
+      <p style="margin-top:8px">Envía el bloque de valores totales <b>cada hora</b> y la forma de onda
+      <b>cada 24 horas</b>. Es muestreo periódico, no monitorización continua.<br><br>
+      Prometer "tiempo real" es un error que se descubre en la puesta en marcha.</p></div>
+    <div class="card" style="margin-top:12px"><h4>Cómo se vende</h4><p>Sensor WS300 + gateway GW Series + PRIDE.
+    Motores, bombas, ventiladores, compresores que hoy nadie mira hasta que se detienen.</p></div>
+  </div>
+</div>
+<div class="src">Fuente: manual oficial SUPCON WS Series, doc. SUPIMP 100 T 022-100, V1.0 2022 (39 páginas)</div>
+""", "07")
+
+slide("dark", "08", "Actuación", "Válvulas y posicionador",
+      """
+<div class="grid2">
+  <div class="card"><h4>Válvulas de control</h4><p><b>Vástago deslizante</b> LN/LM — DN15 a DN400, −196 a +593 °C, hasta ANSI 2500<br>
+  <b>Bola</b> SN flotante y trunnion, VN tipo V con rangeability 300:1 y acción de cizalla para pulpa y fibra<br>
+  <b>Mariposa y excéntrica</b> BN triple excéntrica — DN80 a DN1200, liner FEP/PFA o caucho</p></div>
+  <div class="card"><h4>CVP2000 — posicionador inteligente</h4><p>±0,5% FS, dos hilos 4-20 mA, display OLED, bajo consumo de aire.
+  <b>No es una válvula:</b> es el accesorio que vuelve la válvula diagnosticable por PRIDE.</p></div>
+</div>
+<div class="bar"><p><strong>Dónde se gana:</strong> la VN de bola V tiene la rangeability más alta de la línea y acción
+de cizalla — pulpa, fibra, lodos. La triple excéntrica reduce el desgaste porque casi no hay fricción.</p></div>
+<div class="src">Fuente: skill supcon-valves. Fichas leídas por OCR del brief del fabricante.</div>
+""", "08")
+
+slide("navy", "09", "Software e IA", "PRIDE: el diagnóstico antes de la falla",
+      """
+<div class="grid4">
+  <div class="card hl"><div class="kpi">31.000+</div><div class="kpi-label">Estrategias de mantenimiento</div></div>
+  <div class="card hl"><div class="kpi">11.000+</div><div class="kpi-label">Casos de falla</div></div>
+  <div class="card"><div class="kpi">1.566</div><div class="kpi-label">Tipos de falla en rotativos</div></div>
+  <div class="card"><div class="kpi">≤5 s</div><div class="kpi-label">Refresco de datos</div></div>
+</div>
+<div class="grid2" style="margin-top:16px">
+  <div class="card"><h4>Qué detecta</h4><p>Válvulas pegándose (stiction, 4 métodos en inteligentes y 3 en convencionales) ·
+  transmisores con línea de presión obstruida · flujómetros con deriva de cero · equipos rotativos ·
+  fuga en ductos · salud de módulos de control.</p></div>
+  <div class="card"><h4>Caso documentado</h4><p><b>Refinería petroquímica, 2023:</b> 2.800+ válvulas y transmisores
+  monitoreados. De 454 válvulas de control, <b>38 con excepción</b> detectada antes de fallar.</p></div>
+</div>
+<div class="src">Fuente: skill supcon-pride y one-pager del fabricante</div>
+""", "09")
+
+slide("dark", "10", "Software e IA", "supOS, APC y UCS Nyx",
+      """
+<div class="grid3">
+  <div class="card"><h4>supOS</h4><p>Sistema operativo industrial. Modelo unificado de datos sobre equipos de
+  distintas marcas y generaciones. Es lo que permite que PRIDE y APC funcionen sobre un DCS que no es SUPCON.</p></div>
+  <div class="card"><h4>APC</h4><p>Control avanzado sobre el DCS existente. Según el fabricante: 10-30% menos CAPEX,
+  3-8% más producción, 3-5% menos energía. <b>Cifras del proveedor</b>, se citan como tales.</p></div>
+  <div class="card"><h4>UCS Nyx</h4><p>Control definido por software en contenedores. Periodo de 1 ms,
+  redundancia N:1, 20K I/O y 5K lazos por pod, hardware COTS de cualquier marca.</p></div>
+</div>
+<div class="bar"><p><strong>La jugada comercial:</strong> PRIDE y APC se venden sobre el DCS que el cliente ya tiene.
+No hay que reemplazar el control para empezar a capturar valor — eso baja enorme la barrera de entrada.</p></div>
+""", "10")
+
+slide("navy", "11", "Casos de uso", "De la frase del cliente al equipo",
+      """
+<table>
+<thead><tr><th>Lo que el cliente dice</th><th>Lo que se ofrece</th></tr></thead>
+<tbody>
+<tr><td>"Mi DCS es un Yokogawa viejo y no consigo repuestos"</td><td><b>ECS-700</b> — reemplazo con 16 casos documentados vs Yokogawa</td></tr>
+<tr><td>"Tengo que ser SIL 3 o no paso la auditoría"</td><td><b>TCS-500</b> — SIS certificado, no un DCS con enclavamientos</td></tr>
+<tr><td>"Necesito avisar antes de que un equipo falle"</td><td><b>PRIDE</b> sobre supOS — predictivo sobre el control existente</td></tr>
+<tr><td>"Tengo válvulas pegándose y nadie sabe cuáles"</td><td><b>PRIDE</b> módulo válvulas — stiction con 7 métodos según tipo</td></tr>
+<tr><td>"Se me paran bombas sin aviso"</td><td><b>WS300</b> + gateway GW + <b>PRIDE</b> rotativos</td></tr>
+<tr><td>"Necesito 0,035% de exactitud en presión"</td><td><b>CXT</b> — silicio monocristalino, estabilidad 10 años</td></tr>
+<tr><td>"Necesito nivel en un silo con polvo"</td><td><b>SL90</b> — radar 80 GHz, donde el ultrasonido falla</td></tr>
+<tr><td>"Quiero mover la operación sin cambiar los lazos"</td><td><b>APC</b> — control avanzado sobre el DCS actual</td></tr>
+</tbody></table>
+<div class="src">Fuente: capítulos de casos de uso del Manual Técnico Comercial CONECTA</div>
+""", "11")
+
+slide("dark", "12", "Casos reales", "Referencias que se pueden nombrar",
+      """
+<div class="grid2">
+  <div class="case"><div class="who">CODELCO · CHILE</div><h4>RT Sulfuros Fase II</h4>
+    <p>14 fichas de proyecto activas en Chile. Ojo: Codelco adjudicó su contrato marco de automatización a un
+    pool cerrado donde SUPCON no está. La vía son los integradores locales del pool.</p></div>
+  <div class="case"><div class="who">CNOOC · CHINA</div><h4>Compresores Huizhou</h4>
+    <p>Monitoreo de estado de compresores de aire y circuladores con PRIDE rotativos.</p></div>
+  <div class="case"><div class="who">Jiangsu Oji Paper · CHINA</div><h4>Bombas en línea</h4>
+    <p>Monitorización inteligente de bombas. El caso que mejor se traslada a celulosa en Chile.</p></div>
+  <div class="case"><div class="who">PetroChina Daqing · CHINA</div><h4>Desplazamiento de Honeywell</h4>
+    <p>Reemplazo de TPS por ECS-700. Uno de los 16 casos contra Honeywell documentados.</p></div>
+</div>
+<div class="bar"><p><strong>Cómo usarlos:</strong> no como argumento de autoridad ("lo usa X, entonces es bueno")
+sino como prueba de que el reemplazo se hizo antes, en condiciones comparables, y funcionó.</p></div>
+<div class="src">Fuente: skills supcon-mining-chile y supcon-dcs-ecs700</div>
+""", "12")
+
+slide("navy", "13", "La conversación", "Cuatro preguntas antes de nombrar una marca",
+      """
+<ol style="margin-left:24px;margin-top:8px">
+  <li style="margin-bottom:14px;color:#cbd5e1;font-size:16px;line-height:1.6"><b style="color:#fff">¿Qué tiene que gobernar el sistema?</b><br>
+  Si gobierna proceso, es SUPCON. Si solo mide, no.</li>
+  <li style="margin-bottom:14px;color:#cbd5e1;font-size:16px;line-height:1.6"><b style="color:#fff">¿Qué tiene que certificar?</b><br>
+  Seguridad funcional SIL apunta a TCS-500. Calidad de energía apunta a otro partner.</li>
+  <li style="margin-bottom:14px;color:#cbd5e1;font-size:16px;line-height:1.6"><b style="color:#fff">¿Qué equipos ya existen?</b><br>
+  El portafolio se elige por lo que hay instalado, no por lo que se quiere vender.</li>
+  <li style="color:#cbd5e1;font-size:16px;line-height:1.6"><b style="color:#fff">¿Quién hace la ingeniería?</b><br>
+  Si hay un contrato marco con marcas homologadas, verificar antes de proponer.</li>
+</ol>
+<div class="bar" style="margin-top:22px"><p><strong>El error de novato:</strong> abrir con el portafolio completo
+cuando el problema era de instrumentación. El cliente concluye que no lo escuchamos.</p></div>
+""", "13")
+
+slide("dark", "14", "CONECTA", "Por qué con nosotros",
+      """
+<div class="grid3">
+  <div class="card hl"><h4>Un solo responsable</h4><p>SUPCON no vende directo en Chile. CONECTA integra,
+  pone en marcha y responde ante el cliente y ante el Coordinador.</p></div>
+  <div class="card"><h4>Ingeniería, no caja</h4><p>El valor no está en el equipo. Está en el diseño, la configuración,
+  la puesta en servicio y la responsabilidad de que funcione.</p></div>
+  <div class="card"><h4>Portafolio completo</h4><p>Control, instrumentación, válvulas, software, medición,
+  sincronización y red OT. La planta entera, no una pieza.</p></div>
+</div>
+<div class="quote" style="margin-top:26px">No vendemos productos. Vendemos que la planta no se detenga
+y que el dato esté antes de que lo necesites.</div>
+<div class="src">CONECTA Ingeniería · victor@conecta.cl</div>
+""", "14")
+
+slide("navy", "15", "Cierre", "Siguiente paso",
+      """
+<h1 style="font-size:46px">Hablemos de tu planta.</h1>
+<p class="subtitle">Dos caminos, según lo que necesites hoy:</p>
+<div class="grid2" style="max-width:820px;margin-top:24px">
+  <div class="card hl"><h4>Cotizar equipo</h4><p>Si ya sabes qué necesitas y quieres el alcance y el plazo.</p></div>
+  <div class="card"><h4>Agendar reunión</h4><p>Si el problema existe pero todavía no está claro qué lo resuelve.</p></div>
+</div>
+<div class="bar" style="margin-top:26px;max-width:820px"><p>Traer a la reunión: unilineal o P&amp;ID, listado de equipos
+existentes y qué pasó en la planta en los últimos doce meses. Con eso la conversación es técnica desde el minuto uno.</p></div>
+""", "15")
+
+
+# ---------------------------------------------------------------- render
+def render():
+    partes = []
+    total = len(SLIDES)
+    for i, (cls, num, h3_, h2_, body, big) in enumerate(SLIDES):
+        active = " active" if i == 0 else ""
+        bightml = f'<div class="big-num">{big}</div>' if big else ""
+        partes.append(
+            f'<div class="slide {cls}{active}">{bightml}'
+            f'<div class="logo">CONECTA</div>'
+            f'<h3>{h3_}</h3><h2>{h2_}</h2>{body}'
+            f'<div class="page-num">{i+1} / {total}</div></div>'
+        )
+
+    return f"""<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SUPCON — Automatización Industrial · CONECTA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>{CSS}</style></head><body>
+
+{"".join(partes)}
+
+<div class="nav-hint">← → navegar · ESC índice</div>
+<script>
+let c = 0;
+const slides = document.querySelectorAll('.slide');
+function show(n){{
+  slides[c].classList.remove('active');
+  c = (n + slides.length) % slides.length;
+  slides[c].classList.add('active');
+  slides[c].scrollTop = 0;
+}}
+document.addEventListener('keydown', function(e){{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') {{ e.preventDefault(); show(c+1); }}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') {{ e.preventDefault(); show(c-1); }}
+  if(e.key==='Home') {{ e.preventDefault(); show(0); }}
+  if(e.key==='End') {{ e.preventDefault(); show(slides.length-1); }}
+  if(e.key==='Escape') {{ e.preventDefault(); toggleIndex(); }}
+}});
+document.addEventListener('click', function(e){{
+  if(e.target.closest('a') || e.target.closest('.index')) return;
+  if(e.clientX > window.innerWidth/2) show(c+1); else show(c-1);
+}});
+function toggleIndex(){{
+  var idx = document.getElementById('indice');
+  if(idx){{ idx.remove(); return; }}
+  idx = document.createElement('div');
+  idx.id = 'indice';
+  idx.className = 'index';
+  var h = '<div class="index-box"><h3>Índice</h3><ol>';
+  slides.forEach(function(s,i){{
+    var t = s.querySelector('h2');
+    h += '<li><a href="#" data-i="'+i+'">'+(t?t.textContent:'Slide '+(i+1))+'</a></li>';
+  }});
+  h += '</ol></div>';
+  idx.innerHTML = h;
+  idx.addEventListener('click', function(ev){{
+    var a = ev.target.closest('a');
+    if(a){{ ev.preventDefault(); show(parseInt(a.dataset.i,10)); idx.remove(); }}
+  }});
+  document.body.appendChild(idx);
+}}
+</script>
+</body></html>"""
+
+
+if __name__ == "__main__":
+    html = render()
+    SALIDA.write_text(html, encoding="utf-8")
+    print(f"OK: {SALIDA}")
+    print(f"   slides={len(SLIDES)} bytes={len(html)}")
